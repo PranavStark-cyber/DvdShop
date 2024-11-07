@@ -1,70 +1,156 @@
-<div class="container-fluid" style="background-image:url(../../../../../Img/movie-collection.jpg); background-repeat: no-repeat; background-size: 100% 100%; ">
-    <div class="container d-flex justify-content-center align-items-center vh-100 " >
-        <div class="card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh; ">
+<div class="container-fluid"
+    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./Img/movie-collection-2k1.jpg); background-size: cover; background-attachment: fixed; background-position: center;">
+    <div class="container d-flex justify-content-center align-items-center vh-100 ">
+        <div class="card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "
+            style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37) ">
             <div class="d-flex gap-3">
                 <div style="width:100%;">
-                    <h4 class="mb-3 " style="text-align: center;">Sign up</h4>        
-                    <form >
+                    <h4 class="mb-3 " style="text-align: center;">Sign up</h4>
+                    <form [formGroup]="signupForm" (ngSubmit)="Registeruser()">
                         <div class="d-flex gap-3">
                             <div class="form-group mb-3" style="width: 50%;">
-                                <div class="input-group" >
+                                <div class="input-group">
                                     <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person"></i></div>
-                                    <input  type="text" class="form-control" placeholder="Enter your First Name" aria-label="Input group example" aria-describedby="btnGroupAddon" formControlName="fullName">
+                                    <input type="text" class="form-control" placeholder="Enter your First Name"
+                                        aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                        formControlName="FirstName">
+                                </div>
+                                <div *ngIf="signupForm.get('FirstName')?.touched && signupForm.get('FirstName')?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="signupForm.get('FirstName')?.errors?.['required']">First name is
+                                        required.</small>
                                 </div>
                             </div>
+
                             <div class="form-group mb-3" style="width: 50%;">
-                                <div class="input-group" >
+                                <div class="input-group">
                                     <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person"></i></div>
-                                    <input type="text" class="form-control" placeholder="Enter your Last Name" aria-label="Input group example" aria-describedby="btnGroupAddon" formControlName="fullName">
+                                    <input type="text" class="form-control" placeholder="Enter your Last Name"
+                                        aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                        formControlName="LastName">
+                                </div>
+                                <div *ngIf="signupForm.get('LastName')?.touched && signupForm.get('LastName')?.invalid"
+                                    class="text-danger">
+                                    <small *ngIf="signupForm.get('LastName')?.errors?.['required']">Last name is
+                                        required.</small>
                                 </div>
                             </div>
                         </div>
-                       
-        
+
+
                         <div class="form-group mb-3">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i></div>
-                                <input type="email" class="form-control" placeholder="Your Email" aria-label="Input group example" aria-describedby="btnGroupAddon" formControlName="email">
+                                <input type="email" class="form-control" placeholder="Your Email"
+                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                    formControlName="email">
+                            </div>
+                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                                class="text-danger">
+                                <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+                                <small *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email
+                                    address.</small>
                             </div>
                         </div>
-        
+                        <div class="form-group mb-3">
+                            <div class="input-group">
+                              <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i></div>
+                              <input type="text" 
+                                     class="form-control" 
+                                     placeholder="Your NIC"
+                                     aria-label="Input group example" 
+                                     aria-describedby="btnGroupAddon"
+                                     formControlName="Nic">
+                            </div>
+                            <div *ngIf="signupForm.get('Nic')?.touched && signupForm.get('Nic')?.invalid" class="text-danger">
+                              <small *ngIf="signupForm.get('Nic')?.errors?.['required']">NIC is required.</small>
+                              <small *ngIf="signupForm.get('Nic')?.errors?.['pattern']">Please enter a valid NIC number.</small>
+                            </div>
+                          </div>
+                          
                         <div class="form-group mb-3">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
-                                <input type="password" class="form-control" placeholder="Password" aria-label="Input group example" aria-describedby="btnGroupAddon" formControlName="password">
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                                    placeholder="Password" aria-label="Input group example"
+                                    aria-describedby="btnGroupAddon" formControlName="password">
+                                <button type="button" class="btn btn-outline-secondary"
+                                    (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
+                                    Password must be at least 8 characters long.
+                                </div>
+
+                                <div *ngIf="signupForm.get('password')?.errors?.['uppercase']">
+                                    Password must include at least one uppercase letter.
+                                </div>
+
+                                <div *ngIf="signupForm.get('password')?.errors?.['lowercase']">
+                                    Password must include at least one lowercase letter.
+                                </div>
+
+                                <div *ngIf="signupForm.get('password')?.errors?.['number']">
+                                    Password must include at least one number.
+                                </div>
+
+                                <div *ngIf="signupForm.get('password')?.errors?.['specialCharacter']">
+                                    Password must include at least one special character.
+                                </div>
                             </div>
                         </div>
-        
+
                         <div class="form-group mb-3">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock-fill"></i></div>
-                                <input type="password" class="form-control" placeholder="Confirm password" aria-label="Input group example" aria-describedby="btnGroupAddon" formControlName="confirmPassword">
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm password"
+                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
+                                    formControlName="confirmPassword">
+                                    <button type="button"
+                                    class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
+                                class="text-danger">
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']">
+                                    Password must be at least 8 characters long.
+                                </div>
+
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['uppercase']">
+                                    Password must include at least one uppercase letter.
+                                </div>
+
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['lowercase']">
+                                    Password must include at least one lowercase letter.
+                                </div>
+
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['number']">
+                                    Password must include at least one number.
+                                </div>
+
+                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['specialCharacter']">
+                                    Password must include at least one special character.
+                                </div>
                             </div>
                         </div>
-        
-                        <div class="form-group mb-3">
-                            <div class="input-group">
-                                <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person-badge"></i></div>
-                                <select id="role" formControlName="role" class="form-select" aria-label="Input group example" aria-describedby="btnGroupAddon">
-                                    <option value="">Select Role</option>
-                                    <option value="0">Admin</option>
-                                    <option value="1">Editor</option>
-                                    <option value="2">Viewer</option>
-                                </select>
-                            </div>
-                        </div>
-        
+
+
                         <div class="form-check mb-3">
                             <input type="checkbox" id="terms" formControlName="terms" class="form-check-input">
                             <label for="terms" class="form-check-label">
                                 I agree to all statements in <a href="#">Terms of service</a>
                             </label>
                         </div>
-        
-                        <button type="submit" class="btn btn-primary w-100">Register</button>
-        
+
+                        <button type="submit" class="btn btn-primary w-100" [disabled]="!signupForm.valid">Register</button>
+
+
                         <p class="text-center  mt-3">
-                            <a href="#"  class="text-white"  routerLink="/">I am already a member</a>
+                            <a href="#" class="text-white" routerLink="/Dvd/Login">I am already a member</a>
                         </p>
                     </form>
                 </div>
