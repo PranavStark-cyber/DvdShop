@@ -1,0 +1,26 @@
+.password-strength-meter {
+  height: 5px;
+  width: 100%;
+  border-radius: 5px;
+  transition: width 0.3s ease-in-out;
+}
+
+.weak {
+  background-color: red;
+  width: 25%; /* Weak meter width */
+}
+
+.medium {
+  background-color: orange;
+  width: 50%; /* Medium meter width */
+}
+
+.strong {
+  background-color: rgb(6, 255, 6);
+  width: 75%; /* Strong meter width */
+}
+
+.strongest {
+  background-color: rgb(2, 129, 2);
+  width: 100%; /* Strong meter width */
+}

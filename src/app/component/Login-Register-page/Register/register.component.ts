@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink, RouterLinkActive } from '@angular/router';
-import { customValidator } from '../../Validators/custom-validator';
 import { LoginandregisterService } from '../../../Services/Loginandregister/loginandregister.service';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../modals/customer';
@@ -29,8 +28,8 @@ export class RegisterComponent {
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, customValidator()]],
-      confirmPassword: ['', [Validators.required, customValidator()]],
+      password: ['', [Validators.required]],
+      confirmPassword: ['', [Validators.required]],
       Nic: ['', [Validators.required, Validators.pattern(/[0-9]{9}[Vv]|[0-9]{12}/)]],
       terms: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator })
