@@ -5,9 +5,11 @@
             style="border-radius: 12px;backdrop-filter: blur(13px); width: 70vh;height: 70vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37) ">
             <div class="d-flex gap-3">
                 <div style="width:100%;">
-                    <h4 class="mb-3 h1 " style="text-align: center;">Sign up</h4>
-                    <form [formGroup]="signinForm" (ngSubmit)="Loginuser()">
-                        <div class="form-group mb-3">
+                    <h1 class="mb-3 h1 " style="text-align: center;font-weight: 700;">Log in</h1>
+                    <h4 class="mb-3  mt-4 " style="text-align: start;">Welcome Back, <Span class="h5">Watcher</Span>
+                    </h4>
+                    <form [formGroup]="signinForm" (ngSubmit)="Loginuser()" class=" mt-4">
+                        <div class="form-group mb-3 mt-4">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i></div>
                                 <input type="text" class="form-control" placeholder="Your NIC"
@@ -22,28 +24,32 @@
                             </div>
                         </div>
 
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 mt-4">
                             <div class="input-group">
-                              <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
-                              <input [type]="showPassword ? 'text' : 'password'" class="form-control" style="box-shadow: none; border: none;"
-                                     placeholder="Password" aria-label="Password input"
-                                     aria-describedby="btnGroupAddon" formControlName="password" (input)="onPasswordChange()">
-                              <button type="button" class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
-                                <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                              </button>
+                                <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                                    style="box-shadow: none; border: none;" placeholder="Password"
+                                    aria-label="Password input" aria-describedby="btnGroupAddon"
+                                    formControlName="password" (input)="onPasswordChange()">
+                                <button type="button" class="btn btn-outline-secondary"
+                                    (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                </button>
                             </div>
                             <div *ngIf="passwordStrength">
                                 <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
                                 <small>{{ passwordStrength.message }}</small>
-                              </div>
-                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid" class="text-danger">
-                              <small>Password must be at least 8 characters long, contain an uppercase letter, a number, and a special character.</small>
                             </div>
-                          
-                            
-                          </div>
-                          
-                          
+                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
+                                class="text-danger">
+                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
+                                    number, and a special character.</small>
+                            </div>
+
+
+                        </div>
+
+
 
                         <div class="form-check mb-3">
                             <input type="checkbox" id="rememberMe" formControlName="rememberMe"
@@ -53,12 +59,57 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100"
-                            [disabled]="!signinForm.valid">Register</button>
+                        <button type="submit" class="btn btn-primary w-100" [disabled]="!signinForm.valid">Log In</button>
                         <p class="text-center  mt-3">
                             <a href="#" class="text-white" routerLink="/Dvd/Register">Create an account</a>
                         </p>
                     </form>
+                    <div class="social-icons">
+                        <div class="icon-container facebook">
+                            <div class="tooltip">Facebook</div>
+                            <div class="icon"><i class="fab fa-facebook-f"></i></div>
+                        </div>
+                        <div class="icon-container twitter">
+                            <div class="tooltip">Twitter</div>
+                            <div class="icon"><i class="fab fa-twitter"></i></div>
+                        </div>
+                        <div class="icon-container instagram">
+                            <div class="tooltip">Instagram</div>
+                            <div class="icon"><i class="fab fa-instagram"></i></div>
+                        </div>
+                        <div class="icon-container github">
+                            <div class="tooltip">GitHub</div>
+                            <div class="icon"><i class="fab fa-github"></i></div>
+                        </div>
+                        <div class="icon-container youtube">
+                            <div class="tooltip">YouTube</div>
+                            <div class="icon"><i class="fab fa-youtube"></i></div>
+                        </div>
+                    </div>
+                    
+                    <!-- <div class="d-flex" style="margin-left: 8vh;">
+                        <div class="me-5 fs-2"
+                            style="background: linear-gradient(45deg, #833AB4, #FD1D1D, #F56040, #FFDC80); border-radius: 5px; display: inline-block;">
+                            <i class="bi bi-instagram" style="color: white; padding: 0 5px 0 5px;"></i>
+                        </div>
+
+                        <div class="me-5 fs-3"
+                            style="background-color: rgb(255, 255, 255); border-radius: 5px; padding: 5px; display: inline-block;">
+                            <i class="bi bi-envelope" style="color: rgb(215, 9, 9);padding: 0 5px 0 5px;"></i>
+                        </div>
+                        
+
+                        <div class="me-5 fs-3"
+                            style="background-color: #1877F2; border-radius: 5px; padding: 5px; display: inline-block;">
+                            <i class="bi bi-facebook" style="color: white;padding: 0 5px 0 5px;"></i>
+                        </div>
+
+                        <div class="me-5 fs-3"
+                            style="background-color: #0A66C2; border-radius: 5px; padding: 5px; display: inline-block;">
+                            <i class="bi bi-linkedin" style="color: white; padding: 0 5px 0 5px;"></i>
+                        </div>
+
+                    </div> -->
                 </div>
             </div>
         </div>

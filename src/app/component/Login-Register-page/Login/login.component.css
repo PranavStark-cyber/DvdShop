@@ -24,3 +24,98 @@
   background-color: rgb(2, 129, 2);
   width: 100%; /* Strong meter width */
 }
+
+
+.social-icons {
+  display: flex;
+  gap: 30px;
+  position: relative;
+  justify-content: center;
+}
+
+.icon-container {
+  position: relative;
+  display: inline-block;
+}
+
+.icon {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  box-shadow:0 8px 32px 0 rgba(0,0,0,0.37);
+  transition: background-color 0.3s;
+  backdrop-filter: blur(100px)
+}
+
+
+.icon-container.facebook .icon {
+  color: #1877F2;
+}
+.icon-container.facebook .icon:hover {
+  background-color: #1877F2;
+  color: white;
+  scale: 1.1;
+}
+
+.icon-container.twitter .icon {
+  color: #1DA1F2;
+}
+.icon-container.twitter .icon:hover {
+  background-color: #1DA1F2;
+  color: white;
+  scale: 1.1;
+
+}
+
+.icon-container.instagram .icon {
+  color:rgb(228, 65, 92);
+}
+.icon-container.instagram .icon:hover {
+  background: linear-gradient(45deg, #833AB4, #FD1D1D, #F56040, #FFDC80);
+  color: white;
+  scale: 1.1;
+
+}
+
+.icon-container.github .icon {
+  color: #333;
+}
+.icon-container.github .icon:hover {
+  background-color: #333;
+  color: white;
+  scale: 1.1;
+
+}
+
+.icon-container.youtube .icon {
+  color: #FF0000;
+}
+.icon-container.youtube .icon:hover {
+  background-color: #FF0000;
+  color: white;
+  scale: 1.1;
+
+}
+
+.tooltip {
+  display: none;
+  position: absolute;
+  top: -30px;
+  left: 100%;
+  transform: translateX(-50%);
+  background-color: #000;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 10px;
+  white-space: nowrap;
+}
+
+.icon-container:hover .tooltip {
+  display: block;
+}
