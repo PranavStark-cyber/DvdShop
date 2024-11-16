@@ -1,8 +1,8 @@
 <div class="container-fluid"
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./Img/movie-collection-2k1.jpg); background-size: cover; background-attachment: fixed; background-position: center;">
-    <div class="container d-flex justify-content-center align-items-center vh-100 ">
-        <div class="card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "
-            style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37) ">
+    <div class="container d-flex justify-content-center align-items-center vh-100 " >
+        <div class="col-lg-6  card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "
+            style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37);height:max-content; width: max-content;">
             <div class="d-flex gap-3">
                 <div style="width:100%;">
                     <h4 class="mb-3 " style="text-align: center;">Sign up</h4>
@@ -68,74 +68,54 @@
                             </div>
                           </div>
                           
-                        <div class="form-group mb-3">
+                          <div class="form-group mb-3 mt-4">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
                                 <input [type]="showPassword ? 'text' : 'password'" class="form-control"
-                                    placeholder="Password" aria-label="Input group example"
-                                    aria-describedby="btnGroupAddon" formControlName="password">
+                                    style="box-shadow: none; border: none;" placeholder="Password"
+                                    aria-label="Password input" aria-describedby="btnGroupAddon"
+                                    formControlName="password" (input)="onPasswordChange()">
                                 <button type="button" class="btn btn-outline-secondary"
                                     (click)="togglePasswordVisibility()">
                                     <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                 </button>
                             </div>
-                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
-                                class="text-danger">
-                                <div *ngIf="signupForm.get('password')?.errors?.['minlength']">
-                                    Password must be at least 8 characters long.
-                                </div>
-
-                                <div *ngIf="signupForm.get('password')?.errors?.['uppercase']">
-                                    Password must include at least one uppercase letter.
-                                </div>
-
-                                <div *ngIf="signupForm.get('password')?.errors?.['lowercase']">
-                                    Password must include at least one lowercase letter.
-                                </div>
-
-                                <div *ngIf="signupForm.get('password')?.errors?.['number']">
-                                    Password must include at least one number.
-                                </div>
-
-                                <div *ngIf="signupForm.get('password')?.errors?.['specialCharacter']">
-                                    Password must include at least one special character.
-                                </div>
+                            <div *ngIf="passwordStrength">
+                                <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
+                                <small>{{ passwordStrength.message }}</small>
                             </div>
+                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
+                                class="text-danger">
+                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
+                                    number, and a special character.</small>
+                            </div>
+
+
                         </div>
 
-                        <div class="form-group mb-3">
+                        <div class="form-group mb-3 mt-4">
                             <div class="input-group">
-                                <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock-fill"></i></div>
-                                <input [type]="showPassword ? 'text' : 'password'" class="form-control" placeholder="Confirm password"
-                                    aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                    formControlName="confirmPassword">
-                                    <button type="button"
-                                    class="btn btn-outline-secondary" (click)="togglePasswordVisibility()">
+                                <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
+                                <input [type]="showPassword ? 'text' : 'password'" class="form-control"
+                                    style="box-shadow: none; border: none;" placeholder="Password"
+                                    aria-label="Password input" aria-describedby="btnGroupAddon"
+                                    formControlName="password" (input)="onPasswordChange()">
+                                <button type="button" class="btn btn-outline-secondary"
+                                    (click)="togglePasswordVisibility()">
                                     <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                 </button>
                             </div>
-                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
-                                class="text-danger">
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['minlength']">
-                                    Password must be at least 8 characters long.
-                                </div>
-
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['uppercase']">
-                                    Password must include at least one uppercase letter.
-                                </div>
-
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['lowercase']">
-                                    Password must include at least one lowercase letter.
-                                </div>
-
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['number']">
-                                    Password must include at least one number.
-                                </div>
-
-                                <div *ngIf="signupForm.get('confirmPassword')?.errors?.['specialCharacter']">
-                                    Password must include at least one special character.
-                                </div>
+                            <div *ngIf="passwordStrength">
+                                <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
+                                <small>{{ passwordStrength.message }}</small>
                             </div>
+                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
+                                class="text-danger">
+                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
+                                    number, and a special character.</small>
+                            </div>
+
+
                         </div>
 
 

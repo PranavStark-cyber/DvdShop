@@ -5,6 +5,7 @@ import { Router, RouterLink, RouterLinkActive } from '@angular/router';
 import { LoginandregisterService } from '../../../Services/Loginandregister/loginandregister.service';
 import { ToastrService } from 'ngx-toastr';
 import { User } from '../../modals/customer';
+import { PasswordStrengthService } from '../../../Services/password-strength.service';
 
 @Component({
   selector: 'app-register',
@@ -18,18 +19,25 @@ export class RegisterComponent {
   submitted = false;
 
   public showPassword: boolean = false;
+  passwordStrength: { level: string, message: string } | null = null;
 
-  togglePasswordVisibility(): void {
-    this.showPassword = !this.showPassword;
-  }
 
-  constructor(private formBuilder: FormBuilder, private rout: Router ,private loginregister:LoginandregisterService,private toastr:ToastrService) {
+
+  constructor(private formBuilder: FormBuilder, private rout: Router ,private loginregister:LoginandregisterService,private toastr:ToastrService,    private passwordStrengthService: PasswordStrengthService) {
     this.signupForm = this.formBuilder.group({
       FirstName: ['', Validators.required],
       LastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
-      confirmPassword: ['', [Validators.required]],
+      password: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
+        Validators.minLength(8)
+      ]],
+      confirmPassword: ['', [
+        Validators.required,
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
+        Validators.minLength(8)
+      ]],
       Nic: ['', [Validators.required, Validators.pattern(/[0-9]{9}[Vv]|[0-9]{12}/)]],
       terms: [false, Validators.requiredTrue]
     }, { validators: this.passwordMatchValidator })
@@ -38,6 +46,14 @@ export class RegisterComponent {
   passwordMatchValidator(form: FormGroup) {
     return form.get('password')?.value === form.get('confirmPassword')?.value
       ? null : { mismatch: true };
+  }
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
+  }
+
+  onPasswordChange() {
+    const password = this.signupForm.get('password')?.value;
+    this.passwordStrength = this.passwordStrengthService.calculatePasswordStrength(password);
   }
 
   Registeruser(){
