@@ -1,36 +1,69 @@
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="#">Navbar</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="#">Home</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#">Link</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Dropdown
-          </a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Action</a></li>
-            <li><a class="dropdown-item" href="#">Another action</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Something else here</a></li>
-          </ul>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
+<!-- <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">iMovies</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" href="#">Adults</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Kids</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Trend</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My List</a>
+          </li>
+        </ul>
+      
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
     </div>
-  </div>
-</nav>
+  </nav>
+   -->
+
+<div class="main-container text-light p-5 " [ngStyle]="{'background-image': 'url(' + selectedBackground + ')'}"
+    style="background-size: cover; background-attachment: fixed;background-position: center; min-height: 100vh;">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h1 class="text-light">iMovies</h1>
+        <div>
+            <a href="#" class="text-light me-3">Adults</a>
+            <a href="#" class="text-light me-3">Kids</a>
+            <a href="#" class="text-light me-3">Trending</a>
+            <a href="#" class="text-light">My List</a>
+        </div>
+    </div>
+
+    <div class="row mb-5 d-flex  justify-content-start">
+        <div class="col-md-6">
+            <h2>The Black Demon</h2>
+            <p>2023 | <span class="badge bg-danger">16+</span> | 1h 40min | Thriller</p>
+            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis...</p>
+            <button class="btn btn-danger me-2">+ WATCH</button>
+            <button class="btn btn-outline-light">+ MY LIST</button>
+        </div>
+
+    </div>
+
+    <div class="container">
+        <h3>Trending Movies</h3>
+        <div class="row d-flex justify-content-end" style="top: 50%!important;padding-right: 0;padding-left: 0%;">
+            <div class="col-md-2 mb-3" *ngFor="let movie of trendingMovies"
+                (mouseover)="changeBackground(movie.background)" (mouseleave)="resetBackground()" >
+                <div class="card h-100 text-light" style="background: rgba(0, 0, 0, 0.6); border: none;">
+                    <img [src]="movie.image" class="card-img-top rounded-top" alt="{{ movie.title }}">
+                    <div class="card-body">
+                        <h5 class="card-title">{{ movie.title }}</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
