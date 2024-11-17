@@ -2,7 +2,7 @@
     style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./Img/movie-collection-2k1.jpg); background-size: cover; background-attachment: fixed; background-position: center;">
     <div class="container d-flex justify-content-center align-items-center vh-100 " >
         <div class="col-lg-6  card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "
-            style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37);height:max-content; width: max-content;">
+            style="border-radius: 12px;backdrop-filter: blur(13px); width: 55vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37);height:max-content;">
             <div class="d-flex gap-3">
                 <div style="width:100%;">
                     <h4 class="mb-3 " style="text-align: center;">Sign up</h4>
@@ -84,7 +84,7 @@
                                 <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
                                 <small>{{ passwordStrength.message }}</small>
                             </div>
-                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
                                 class="text-danger">
                                 <small>Password must be at least 8 characters long, contain an uppercase letter, a
                                     number, and a special character.</small>
@@ -109,7 +109,7 @@
                                 <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
                                 <small>{{ passwordStrength.message }}</small>
                             </div>
-                            <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
                                 class="text-danger">
                                 <small>Password must be at least 8 characters long, contain an uppercase letter, a
                                     number, and a special character.</small>
@@ -117,6 +117,7 @@
 
 
                         </div>
+
 
 
                         <div class="form-check mb-3">
