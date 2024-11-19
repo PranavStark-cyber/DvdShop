@@ -36,14 +36,10 @@
                                     <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                 </button>
                             </div>
-                            <div *ngIf="passwordStrength">
-                                <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
-                                <small>{{ passwordStrength.message }}</small>
-                            </div>
+
                             <div *ngIf="signinForm.get('password')?.touched && signinForm.get('password')?.invalid"
                                 class="text-danger">
-                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
-                                    number, and a special character.</small>
+                                <small>Enter valid password.</small>
                             </div>
 
 

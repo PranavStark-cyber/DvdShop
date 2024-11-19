@@ -15,7 +15,7 @@
           <li class="nav-item">
             <a class="nav-link" href="#">Trend</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item"> 
             <a class="nav-link" href="#">My List</a>
           </li>
         </ul>
@@ -28,200 +28,106 @@
     </div>
   </nav>
    -->
+
+
+
+
 <!-- 
-<div class="main-container text-light p-5 " [ngStyle]="{'background-image': 'url(' + selectedBackground + ')'}"
-    style="background-size: cover; background-attachment: fixed;background-position: center; min-height: 100vh;">
-    <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1 class="text-light">iMovies</h1>
-        <div>
-            <a href="#" class="text-light me-3">Adults</a>
-            <a href="#" class="text-light me-3">Kids</a>
-            <a href="#" class="text-light me-3">Trending</a>
-            <a href="#" class="text-light">My List</a>
-        </div>
-    </div>
 
-    <div class="row mb-5 d-flex  justify-content-start">
-        <div class="col-md-6">
-            <h2>The Black Demon</h2>
-            <p>2023 | <span class="badge bg-danger">16+</span> | 1h 40min | Thriller</p>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi commodo felis...</p>
-            <button class="btn btn-danger me-2">+ WATCH</button>
-            <button class="btn btn-outline-light">+ MY LIST</button>
-        </div>
-
-    </div>
-
+   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
-        <h3>Trending Movies</h3>
-        <div class="row d-flex justify-content-end" style="top: 50%!important;padding-right: 0;padding-left: 0%;">
-            <div class="col-md-2 mb-3" *ngFor="let movie of trendingMovies"
-                 >
-                <div class="card h-100 text-light" style="background: rgba(0, 0, 0, 0.6); border: none;">
-                    <img [src]="movie.image" class="card-img-top rounded-top" alt="{{ movie.title }}">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ movie.title }}</h5>
-                    </div>
-                </div>
+      <a class="navbar-brand" href="#">Movies <span class="text-white">World</span></a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#"><i class="bi bi-house"></i> Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">TV Shows</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">My List</a>
+          </li>
+        </ul>
+        <form class="d-flex">
+          <input class="form-control me-2" type="search" placeholder="Search movies...">
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+      </div>
+    </div>
+  </nav>
+  
+  <div class="container-fluid p-0">
+    <div class="hero-section position-relative" *ngIf="selectedDVD" 
+         [style.background-image]="'url(' + selectedDVD.ImageUrl + ')'">
+      <div class="overlay"></div>
+      <div class="container position-relative py-5">
+        <div class="row min-vh-75 align-items-center">
+          <div class="col-md-6">
+            <h1 class="display-4 text-white">{{selectedDVD.Title}}</h1>
+            <p class="lead text-white-50">{{selectedDVD.Genre}} | {{selectedDVD.Director}}</p>
+            <p class="text-white">{{selectedDVD.Description}}</p>
+            <div class="d-flex gap-3">
+              <button class="btn btn-primary">
+                <i class="bi bi-play-fill"></i> Watch Now
+              </button>
+              <button class="btn btn-outline-light">
+                <i class="bi bi-plus"></i> Add to List
+              </button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-</div> -->
+  
+    <div class="container py-5">
+      <h2 class="text-white mb-4">Featured Movies</h2>
+      <div class="row g-4">
+        <div class="col-md-4 col-lg-3" *ngFor="let dvd of DVDs" (click)="selectDVD(dvd)">
+          <div class="card movie-card bg-dark text-white">
+            <img [src]="dvd.ImageUrl" class="card-img-top" [alt]="dvd.Title">
+            <div class="card-body">
+              <h5 class="card-title">{{dvd.Title}}</h5>
+              <p class="card-text">{{dvd.Genre}}</p>
+              <p class="card-text"><small class="text-muted">${{dvd.Price}}</small></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
 
-<header>
 
-  <a href="#" class="logo">PRANAV<span>STARK</span></a>
 
-  <ul class="nav">
-    <li><a href=""><i class='bx bx-home'></i></a></li>
-    <li><a href="">Animation</a></li>
-    <li><a href="">Hollywood</a></li>
-    <li><a href="">Bollywood</a></li>
-    <li><a href="">My List</a></li>
-  </ul>
-
-  <div class="search">
-    <input type="text" placeholder="Search">
-    <i class='bx bx-search-alt-2'></i>
+  <div class="slider">
+    <div class="list">
+      <div class="item" *ngFor="let dvd of DVDs; let i = index" [class.active]="i === currentIndex">
+        <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title">
+        <div class="content">
+          <div class="title">{{dvd.Title}}</div>
+          <div class="type">{{dvd.Genre}}</div>
+          <div class="description">{{dvd.Description}}</div>
+          <div class="button">
+            <button class="btn btn-light">SEE MORE</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class="thumbnail">
+      <div  class="item" *ngFor="let dvd of DVDs| slice:0:4; let i = index" [class.active]="i === currentIndex">
+        <img  [src]="dvd.ImageUrl" [alt]="dvd.Title">
+      </div>
+    </div>
+  
+    <div class="nextPrevArrows">
+      <button class="prev" (click)="moveSlider('prev')">&#60;</button>
+      <button class="next" (click)="moveSlider('next')">&#62;</button>
+    </div>
   </div>
-
-</header>
-
-
-<div class="banner">
-
-  <div class="content_box">
-
-    <div class="content active madagascar">
-      <h1 class="movie_title">Madagascar 2</h1>
-      <h4>
-        <span class="release">2008</span>
-        <span>1h 29min</span>
-        <span>Animation</span>
-      </h4>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vitae reprehenderit repellat officiis consequuntur
-        iure error tempora labore ducimus asperiores eius inventore, quis repellendus aliquam iste nam libero tenetur
-        beatae accusantium!</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content kungFuPanda">
-      <h1 class="movie_title">Kung Fu Punda 4</h1>
-      <h4>
-        <span class="release">2024</span> <span>1h 34min</span> <span>Animation</span>
-      </h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Quo, quaerat nihil debitis minima, corrupti libero
-        animi possimus amet aliquam exercitationem ipsam ullam deleniti quibusdam quia enim accusantium fuga
-        perspiciatis deserunt?</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content Pink">
-      <h1 class="movie_title">Pink</h1>
-      <h4>
-        <span class="release">2016</span> <span>2h 16min</span> <span>Bollywood</span>
-      </h4>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Error, minus? Sit recusandae animi rem quam voluptatum
-        dolores eum, a ab adipisci nisi explicabo inventore quia cumque iste laborum repudiandae similique.</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content dangal">
-      <h1 class="movie_title">Dangal</h1>
-      <h4>
-        <span class="release">2016</span> <span>2h 41min</span> <span>Bollywood</span>
-      </h4>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis eius nisi necessitatibus possimus saepe quo ut
-        ex maiores reiciendis. Nulla corporis eaque dolorem inventore ipsa doloremque aliquid tempora excepturi cumque.
-      </p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content gijoe">
-      <h1 class="movie_title">G I Joe</h1>
-      <h4>
-        <span class="release">2009</span> <span>1h 58min</span> <span>Hollywood</span>
-      </h4>
-      <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. In adipisci aperiam, aspernatur nisi cupiditate itaque
-        praesentium aut ea reprehenderit culpa voluptas atque odit, inventore animi accusamus quod saepe aliquid
-        aliquam!</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content jhonwick">
-      <h1 class="movie_title">Jhon Wick 2</h1>
-      <h4>
-        <span class="release">2017</span> <span>2h 2min</span> <span>Hollywood</span>
-      </h4>
-      <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aperiam sint eum non? Nobis error eaque dolores
-        tempora totam animi aut, eius consequuntur sit vero nulla, illum voluptatum, ut quod dicta.</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-    <div class="content harrypotter">
-      <h1 class="movie_title">Harry Potter 2</h1>
-      <h4>
-        <span class="release">2002</span> <span>2h 38min</span> <span>Hollywood</span>
-      </h4>
-      <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Dolorum, pariatur nisi. Est eius, dolorum rem maiores
-        numquam rerum deserunt eaque odio deleniti, consequatur quas porro quam reiciendis nostrum, ullam excepturi.</p>
-      <div class="button">
-        <a href="#"><i class='bx bx-play'></i> Watch</a>
-        <a href="#"><i class='bx bx-plus'></i> My List</a>
-      </div>
-    </div>
-
-  </div>
-
-  <div class="carousel">
-    <a class="carousel-item" href="#one!" onclick="changeBgImg('madagascar.jpg', 'madagascar')"><img
-        src="./image/portrait/madagascar.jpg"></a>
-    <a class="carousel-item" href="#two!" onclick="changeBgImg('kungFuPanda.jpg', 'kungFuPanda')"><img
-        src="./image/portrait/kung fu panda.jpg"></a>
-    <a class="carousel-item" href="#three!" onclick="changeBgImg('pink.jpg', 'Pink')"><img
-        src="./image/portrait/pink.jpg"></a>
-    <a class="carousel-item" href="#four!" onclick="changeBgImg('dangal.jpg', 'dangal')"><img
-        src="./image/portrait/dangal.jpg"></a>
-    <a class="carousel-item" href="#five!" onclick="changeBgImg('GIGoe.jpg', 'gijoe')"><img
-        src="./image/portrait/G I Goe.jpg"></a>
-    <a class="carousel-item" href="#five!" onclick="changeBgImg('johnWick.jpg', 'jhonwick')"><img
-        src="./image/portrait/Jhon wick.jpg"></a>
-    <a class="carousel-item" href="#five!" onclick="changeBgImg('harryPotter.jpg', 'harrypotter')"><img
-        src="./image/portrait/harry potter.jpg"></a>
-  </div>
-
-  <div class="footer">
-    <a class="play" onclick="toggleVideo()"><i class='bx bx-play-circle'></i> Watch Trailer</a>
-
-    <ul class="social">
-      <li><a href=""><i class='bx bxl-facebook'></i></a></li>
-      <li><a href=""><i class='bx bxl-youtube'></i></a></li>
-      <li><a href=""><i class='bx bxl-twitter'></i></a></li>
-    </ul>
-  </div>
-
-</div>
-
-
-<div class="trailer">
-  <video src="./trailer/harrypotter.mp4" muted controls="true" autoplay="true"></video>
-  <p class="close" onclick="toggleVideo()">X</p>
-</div>
