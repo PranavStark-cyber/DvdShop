@@ -30,12 +30,12 @@ export class RegisterComponent {
       email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), 
         Validators.minLength(8)
       ]],
       confirmPassword: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), 
         Validators.minLength(8)
       ]],
       Nic: ['', [Validators.required, Validators.pattern(/[0-9]{9}[Vv]|[0-9]{12}/)]],
