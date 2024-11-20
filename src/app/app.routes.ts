@@ -4,10 +4,12 @@ import { LoginComponent } from './component/Login-Register-page/Login/login.comp
 import { LandingpageComponent } from './component/landingpage/landingpage.component';
 
 export const routes: Routes = [
+    {path:'' , component:LandingpageComponent},
+    {path:'home' , component:LandingpageComponent},
     {path:'Dvd/Register' , component:RegisterComponent},
     {path:'Dvd/Login' , component:LoginComponent},
 
-    {
-        path:'home',component:LandingpageComponent,children:[]
-    }
+    // {
+    //    ,children:[]
+    // }
 ];

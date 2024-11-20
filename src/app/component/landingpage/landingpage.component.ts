@@ -1,91 +1,108 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-landingpage',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLinkActive,RouterLink],
   templateUrl: './landingpage.component.html',
   styleUrl: './landingpage.component.css'
 })
 export class LandingpageComponent {
 
-  DVDs =[
+  DVDs = [
     {
-      "Id": "3d6fa3c5-4d54-42f7-9e3d-1d7f7e6f6b12",
-      "Title": "Inception",
-      "Genre": "Science Fiction",
-      "Director": "Christopher Nolan",
-      "ReleaseDate": "2010-07-16T00:00:00",
-      "Price": 12.99,
-      "Description": "A skilled thief is given a chance at redemption if he can successfully plant an idea in someone's mind.",
-      "ImageUrl": "/Background image/Kanguva (1).jpg",
-      "BackgroundUrl": "/Background image/Mufasa.jpg"
-    },
-    {
-      "Id": "914b0e67-7a71-4539-bd6e-0bb0f3df0d9a",
-      "Title": "The Dark Knight",
+      "Id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
+      "Title": "Kanguva",
       "Genre": "Action",
-      "Director": "Christopher Nolan",
-      "ReleaseDate": "2008-07-18T00:00:00",
+      "Director": "Siva",
+      "ReleaseDate": "2024-07-20T00:00:00",
+      "Price": 19.99,
+      "Description": "A fierce warrior embarks on a mission to defeat an ancient evil that threatens the survival of his kingdom.",
+      "ImageUrl": "/movie/movie 35.jpg",
+      "BackgroundUrl": "/Background image/Kanguva backgground.png"
+    },
+    {
+      "Id": "2a3b4c5d-6e7f-8g9h-0i1j-2k3l4m5n6o7p",
+      "Title": "Avengers: Infinity War",
+      "Genre": "Action",
+      "Director": "Anthony Russo, Joe Russo",
+      "ReleaseDate": "2018-04-27T00:00:00",
       "Price": 14.99,
-      "Description": "Batman faces the Joker, a criminal mastermind who wants to plunge Gotham City into anarchy.",
-      "ImageUrl": "/Background image/Mufasa.jpg",
-      "BackgroundUrl": "/Background image/Kanguva (1).jpg"
+      "Description": "The Avengers must fight Thanos, a powerful villain who seeks to control the universe by collecting all the Infinity Stones.",
+      "ImageUrl": "/movie/movie 34.jpg",
+      "BackgroundUrl": "/Background image/Avengers background.jpg"
     },
     {
-      "Id": "ed0a6a9e-63a7-4a3f-b52f-7e7d7e2b82b3",
-      "Title": "Interstellar",
-      "Genre": "Adventure",
-      "Director": "Christopher Nolan",
-      "ReleaseDate": "2014-11-07T00:00:00",
-      "Price": 15.99,
-      "Description": "A team of explorers travels through a wormhole in space in an attempt to ensure humanity's survival.",
-      "ImageUrl": "/Background image/StrabgerThing.jpg"
+      "Id": "3b4c5d6e-7f8g-9h0i-1j2k-3l4m5n6o7p8q",
+      "Title": "Stranger Things",
+      "Genre": "Horror",
+      "Director": "The Duffer Brothers",
+      "ReleaseDate": "2016-07-15T00:00:00",
+      "Price": 12.99,
+      "Description": "A group of kids uncover a dark and dangerous secret in their small town, leading them to face supernatural forces.",
+      "ImageUrl": "/movie/movie 5.jpg",
+      "BackgroundUrl": "/Background image/stranger thongs full.jpg"
     },
     {
-      "Id": "abc12345-6789-4abc-def0-1234567890ab",
-      "Title": "The Matrix",
-      "Genre": "Science Fiction",
-      "Director": "The Wachowskis",
-      "ReleaseDate": "1999-03-31T00:00:00",
-      "Price": 11.99,
-      "Description": "A computer hacker learns about the true nature of his reality and his role in the war against its controllers.",
-      "ImageUrl": "/Background image/wenesday.jpg"
-    },
-    {
-      "Id": "456def78-9abc-4def-0123-456789abcdef",
-      "Title": "The Shawshank Redemption",
-      "Genre": "Drama",
-      "Director": "Frank Darabont",
-      "ReleaseDate": "1994-09-22T00:00:00",
-      "Price": 9.99,
-      "Description": "Two imprisoned men bond over several years, finding solace and eventual redemption through acts of decency.",
-      "ImageUrl": "/Background image/The Batman.jpg"
-    },
-    {
-      "Id": "789abc12-3def-4567-890a-bcdef0123456",
-      "Title": "The Godfather",
-      "Genre": "Crime",
-      "Director": "Francis Ford Coppola",
-      "ReleaseDate": "1972-03-24T00:00:00",
+      "Id": "4c5d6e7f-8g9h-0i1j-2k3l-4m5n6o7p8q9r",
+      "Title": "Wednesday",
+      "Genre": "Mystery",
+      "Director": "Tim Burton",
+      "ReleaseDate": "2022-11-23T00:00:00",
       "Price": 13.99,
-      "Description": "The aging patriarch of an organized crime dynasty transfers control of his clandestine empire to his reluctant son.",
-      "ImageUrl": "/Background image/Uncharted.jpg"
+      "Description": "The daughter of the Addams Family, Wednesday Addams, embarks on a new adventure at Nevermore Academy, solving mysteries and discovering secrets.",
+      "ImageUrl": "/movie/movie 27.jpg",
+      "BackgroundUrl": "/Background image/Wenesday1.jpg"
+    },
+    {
+      "Id": "5d6e7f8g-9h0i-1j2k-3l4m-5n6o7p8q9r0s",
+      "Title": "The Batman",
+      "Genre": "Action",
+      "Director": "Matt Reeves",
+      "ReleaseDate": "2022-03-04T00:00:00",
+      "Price": 15.99,
+      "Description": "Bruce Wayne becomes the vigilante known as Batman, trying to stop a masked serial killer while uncovering corruption within Gotham City.",
+      "ImageUrl": "/movie/movie 10.png",
+      "BackgroundUrl": "/Background image/The Batman.jpg"
+    },
+    {
+      "Id": "6e7f8g9h-0i1j-2k3l-4m5n-6o7p8q9r0s1t",
+      "Title": "Mufasa: The Lion King",
+      "Genre": "Animation",
+      "Director": "Barry Jenkins",
+      "ReleaseDate": "2024-07-25T00:00:00",
+      "Price": 18.99,
+      "Description": "A prequel to The Lion King, Mufasa's story is told as he rises to become king of the Pride Lands.",
+      "ImageUrl": "/movie/movie 14.jpg",
+      "BackgroundUrl": "/Background image/Mufasa.jpg"
     }
-  ]
+  ];
+  
 
   currentIndex = 0;
 
-  ngOnInit(): void {}
+  ngOnInit(): void { this.autoSlide(); }
 
   moveSlider(direction: 'next' | 'prev'): void {
     if (direction === 'next') {
-      this.currentIndex = (this.currentIndex + 1) % this.DVDs.length;
+      const firstItem = this.DVDs.shift();
+      if (firstItem) this.DVDs.push(firstItem);
     } else {
-      this.currentIndex = this.currentIndex === 0 ? this.DVDs.length - 1 : this.currentIndex - 1;
+
+      const lastItem = this.DVDs.pop();
+      if (lastItem) this.DVDs.unshift(lastItem);
     }
   }
+
+  autoSlide(): void {
+    setInterval(() => {
+      this.moveSlider('next');
+    }, 3000); 
+  }
+
+  
   // selectedDVD: DVD | null = null;
 
   // selectDVD(dvd: DVD): void {
