@@ -1,76 +1,46 @@
 
-<div class="container z-3" style="width: 100%;">
-    <div class="content-container row " >
+<div class="collection z-3 p-0" style="width: 100%; ">
+    <div class="content-container row p-0 m-0 g-0" >
         <!-- Featured Content -->
-        <div class="col-12 featured-content"
+        <div class="col-12 featured-content p-0"
             style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('/Background image/Mufasa.jpg');">
-            <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.</p>
-            <button class="featured-button">WATCH</button>
+            <div class="m-5">
+                <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.</p>
+                <button class="featured-button">WATCH</button>
+            </div>
+
         </div>
 
         <!-- Movie List 1 -->
-        <div class="col-12 movie-list-container">
+        <div class="movie-list-container">
             <h1 class="movie-list-title">NEW RELEASES</h1>
             <div class="movie-list-wrapper">
-                <div class="movie-list row">
-                    <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let movie of movies">
-                        <img class="movie-list-item-img" [src]="movie.img" alt="">
-                        <span class="movie-list-item-title">{{ movie.title }}</span>
-                        <p class="movie-list-item-desc">{{ movie.desc }}</p>
-                        <button class="movie-list-item-button">Watch</button>
-                    </div>
+              <div class="movie-list row flex-nowrap">
+                <div
+                  class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3"
+                  *ngFor="let dvd of DVDs"
+                >
+                  <img class="movie-list-item-img" [src]="dvd.ImageUrl" alt="Movie Image">
+                  <span class="movie-list-item-title">{{ dvd.Title }}</span>
+                  <p class="movie-list-item-desc">{{ dvd.Description }}</p>
+                  <button class="movie-list-item-button">Watch</button>
                 </div>
-                <i class="fas fa-chevron-right arrow"></i>
+              </div>
+              <i class="fas fa-chevron-left arrow arrow-left" (click)="slide('left')"></i>
+              <i class="fas fa-chevron-right arrow arrow-right" (click)="slide('right')"></i>
             </div>
-        </div>
+          </div>
+          
+          
+          
 
         <!-- Featured Content 2 -->
         <div class="col-12 featured-content"
             style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('/Background image/Uncharted.jpg');">
-            <img class="featured-title" src="/movie/movie 1.jpg" alt="">
             <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.</p>
             <button class="featured-button">WATCH</button>
         </div>
 
-        <!-- Movie List 2 -->
-        <div class="col-12 movie-list-container">
-            <h1 class="movie-list-title">NEW RELEASES</h1>
-            <div class="movie-list-wrapper">
-                <div class="movie-list row">
-                    <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let movie of movies">
-                        <img class="movie-list-item-img" [src]="movie.img" alt="">
-                        <span class="movie-list-item-title">{{ movie.title }}</span>
-                        <p class="movie-list-item-desc">{{ movie.desc }}</p>
-                        <button class="movie-list-item-button">Watch</button>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-right arrow"></i>
-            </div>
-        </div>
-
-        <!-- Movie List 3 -->
-        <div class="col-12 movie-list-container">
-            <h1 class="movie-list-title">NEW RELEASES</h1>
-            <div class="movie-list-wrapper">
-                <div class="movie-list row">
-                    <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let movie of movies">
-                        <img class="movie-list-item-img" [src]="movie.img" alt="">
-                        <span class="movie-list-item-title">{{ movie.title }}</span>
-                        <p class="movie-list-item-desc">{{ movie.desc }}</p>
-                        <button class="movie-list-item-button">Watch</button>
-                    </div>
-                </div>
-                <i class="fas fa-chevron-right arrow"></i>
-            </div>
-        </div>
-
-        <!-- Featured Content 3 -->
-        <div class="col-12 featured-content"
-            style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('img/f-3.jpg');">
-            <img class="featured-title" src="img/f-t-3.png" alt="">
-            <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima voluptatibus incidunt. Accusamus, provident.</p>
-            <button class="featured-button">WATCH</button>
-        </div>
 
     </div>
 </div>
