@@ -1,0 +1,100 @@
+/* .toggle {
+    width: 50px;
+    height: 24px;
+    background-color: white;
+    border: 2px solid #ddd;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 5px; 
+  }
+  
+  .toggle-icon {
+    color: goldenrod;
+    font-size: 14px;
+  }
+  
+  .toggle-ball {
+    width: 20px;
+    height: 20px;
+    background-color: black;
+    position: absolute;
+    top: 2px;
+    right: 2px; 
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.4s ease, background-color 0.4s ease;
+  }
+  
+  .toggle-active .toggle-ball {
+    transform: translateX(-26px); 
+    background-color: goldenrod;
+  }
+   */
+
+   /* Navbar */
+.navbar-brand {
+    font-family: "Sen", sans-serif;
+  }
+  
+  .nav-link {
+    margin-right: 30px;
+    transition: color 0.3s;
+  }
+  
+  .nav-link:hover,
+  .nav-link.active {
+    font-weight: bold;
+    color: #4dbf00 !important;
+  }
+  
+  /* Toggle Switch */
+  .toggle {
+    width: 40px;
+    height: 20px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    position: relative;
+  }
+  
+  .toggle-icon {
+    color: goldenrod;
+  }
+  
+  .toggle-ball {
+    width: 18px;
+    height: 18px;
+    background-color: black;
+    position: absolute;
+    right: 1px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: transform 0.4s ease, background-color 0.4s ease;
+  }
+  
+  .toggle-active .toggle-ball {
+    transform: translateX(-20px);
+    background-color: goldenrod;
+  }
+  
+  /* Sidebar */
+  .sidebar {
+    width: 50px;
+    height: 89vh;
+    background-color: black;
+  }
+  
+  .sidebar i {
+    cursor: pointer;
+    transition: color 0.3s;
+  }
+  
+  .sidebar i:hover {
+    color: #4dbf00;
+  }
+  
