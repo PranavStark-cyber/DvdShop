@@ -126,8 +126,8 @@ export class MovieListComponent implements AfterViewInit  {
   }
 
 
-  currentIndex = 0; // Keeps track of the current slide position
-  cardWidth = 270; // Approximate width of each card including margin
+  currentIndex = 0;
+  cardWidth = 340;
   visibleCards = Math.floor(window.innerWidth / this.cardWidth);
 
   slide(direction: 'left' | 'right') {
