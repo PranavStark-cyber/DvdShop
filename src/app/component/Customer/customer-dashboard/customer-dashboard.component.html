@@ -1,4 +1,3 @@
-
 <!-- 
 <div class="container-fluid p-0">
   <nav class="navbar navbar-expand-lg sticky-top bg-body-tertiary border-bottom border-body" data-bs-theme="dark"
@@ -62,13 +61,16 @@
 </div> -->
 
 
-<div class="container-fluid p-0">
+
+
+<!-- <div class="container-fluid p-0">
   <nav class="navbar navbar-expand-lg bg-body-dark" style="background-color: rgb(0, 0, 0)!important;">
     <div class="container-fluid">
       <a class="navbar-brand text-white" href="#">Navbar</a>
 
-      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler ms-auto" type="button" data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+        aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
@@ -118,19 +120,113 @@
     </div>
   </nav>
 
-  <div class="d-flex row">
-    <div class="sidebar bg-dark d-flex flex-column align-items-center pt-4 col-3 ps-4  "
-      style="background-color: rgb(0, 0, 0)!important;height: 200vh;">
-      <div class="mt-3"  routerLinkActive="active" routerLink="/Customer/Moviecollection" ><i class="bi bi-house text-white fs-5 mb-3"></i> </div>
-      
-      <!-- <i class="bi bi-search text-white fs-5 mb-3"></i> -->
-      
-     <div class="mt-5"><i class="bi bi-people text-white fs-5 mb-3"></i></div> 
-     <div class="mt-5"><i class="bi bi-hourglass-split text-white fs-5 mb-3"></i></div>
-     <div class="mt-5"><i class="bi bi-cart text-white fs-5 mb-3"></i></div> 
+
+  
+  <div class="d-flex">
+
+    <div id="sidebar" class="sidebar bg-dark d-flex flex-column align-items-center pt-4 p-3 col-md-3 col-12" style="background-color: rgb(0, 0, 0) !important; height: auto;">
+
+      <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#sidebar-content" aria-controls="sidebar-content" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+  
+
+      <div id="sidebar-content" class="collapse d-md-flex flex-column align-items-center w-100">
+        <div class="mt-3" routerLinkActive="active" routerLink="/Customer/Moviecollection">
+          <i class="bi bi-house text-white fs-5 mb-3"></i>
+          <span class="d-none d-md-inline text-white fs-6">Home</span>
+        </div>
+  
+        <div class="mt-5">
+          <i class="bi bi-people text-white fs-5 mb-3"></i>
+          <span class="d-none d-md-inline text-white fs-6">Users</span>
+        </div>
+  
+        <div class="mt-5">
+          <i class="bi bi-hourglass-split text-white fs-5 mb-3"></i>
+          <span class="d-none d-md-inline text-white fs-6">Tasks</span>
+        </div>
+  
+        <div class="mt-5">
+          <i class="bi bi-cart text-white fs-5 mb-3"></i>
+          <span class="d-none d-md-inline text-white fs-6">Cart</span>
+        </div>
+      </div>
     </div>
+  
+
     <div class="col p-0">
       <router-outlet></router-outlet>
+    </div>
   </div>
+   -->
+
+
+<div class="container-fluid p-0">
+  <!-- Navbar -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="background-color: rgb(0, 0, 0) !important;">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="#">Navbar</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link active" aria-current="page" href="#">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Movies</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Series</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Popular</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#">Trends</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  
+
+  <div class="d-flex">
+    <!-- Sidebar -->
+    <div id="sidebar" [class.expanded]="isSidebarExpanded" class="sidebar bg-dark d-flex flex-column align-items-center pt-4 p-3" style="background-color: rgb(0, 0, 0) !important;">
+      <!-- Toggle Button -->
+      <button class="btn btn-light mb-3 d-flex justify-content-end" (click)="toggleSidebar()">☰</button>
+
+      <!-- Sidebar Content -->
+      <div id="sidebar-content">
+        <div class="mt-3 d-flex align-items-center" routerLinkActive="active" routerLink="/Customer/Moviecollection">
+          <i class="bi bi-house text-white fs-5"></i>
+          <span *ngIf="isSidebarExpanded" class="text-white ms-3">Home</span>
+        </div>
+
+        <div class="mt-4 d-flex align-items-center" routerLinkActive="active" routerLink="/users">
+          <i class="bi bi-people text-white fs-5"></i>
+          <span *ngIf="isSidebarExpanded" class="text-white ms-3">Users</span>
+        </div>
+
+        <div class="mt-4 d-flex align-items-center" routerLinkActive="active" routerLink="/tasks">
+          <i class="bi bi-hourglass-split text-white fs-5"></i>
+          <span *ngIf="isSidebarExpanded" class="text-white ms-3">Tasks</span>
+        </div>
+
+        <div class="mt-4 d-flex align-items-center" routerLinkActive="active" routerLink="/cart">
+          <i class="bi bi-cart text-white fs-5"></i>
+          <span *ngIf="isSidebarExpanded" class="text-white ms-3">Cart</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <div class="col p-0">
+      <router-outlet></router-outlet>
+    </div>
   </div>
 </div>

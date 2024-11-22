@@ -1,14 +1,21 @@
 import { CommonModule } from '@angular/common';
-import { AfterViewInit, Component, ElementRef, HostListener, Renderer2 } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, EventEmitter, HostListener, Output, Renderer2 } from '@angular/core';
+import { TruncatePipe } from '../../../pipe/truncate.pipe';
+import { SlideTransformPipe } from '../../../pipe/slide-transform-pipe.pipe';
+import { MovieDetailsComponent } from '../movie-details/movie-details.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-movie-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,TruncatePipe,SlideTransformPipe],
   templateUrl: './movie-list.component.html',
   styleUrl: './movie-list.component.css'
 })
-export class MovieListComponent implements AfterViewInit  {
+export class MovieListComponent {
+
+  constructor(private rout:Router){}
+
   DVDs = [
     {
       "Id": "1a2b3c4d-5e6f-7g8h-9i0j-1k2l3m4n5o6p",
@@ -78,78 +85,52 @@ export class MovieListComponent implements AfterViewInit  {
     }
   ];
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {}
-
-  ngAfterViewInit(): void {
-    this.initializeArrows();
-    this.initializeToggle();
-  }
-
-  private initializeArrows(): void {
-    const arrows = this.el.nativeElement.querySelectorAll('.arrow');
-    const movieLists = this.el.nativeElement.querySelectorAll('.movie-list');
-
-    arrows.forEach((arrow: HTMLElement, i: number) => {
-      const itemNumber = movieLists[i].querySelectorAll('img').length;
-      let clickCounter = 0;
-
-      this.renderer.listen(arrow, 'click', () => {
-        const ratio = Math.floor(window.innerWidth / 270);
-        clickCounter++;
-
-        if (itemNumber - (4 + clickCounter) + (4 - ratio) >= 0) {
-          const currentTransform = parseFloat(
-            getComputedStyle(movieLists[i]).transform.split(',')[4] || '0'
-          );
-
-          movieLists[i].style.transform = `translateX(${currentTransform - 300}px)`;
-        } else {
-          movieLists[i].style.transform = 'translateX(0)';
-          clickCounter = 0;
-        }
-      });
-    });
-  }
-
-  private initializeToggle(): void {
-    const ball = this.el.nativeElement.querySelector('.toggle-ball');
-    const items = this.el.nativeElement.querySelectorAll(
-      '.container,.movie-list-title,.navbar-container,.sidebar,.left-menu-icon,.toggle'
-    );
-
-    this.renderer.listen(ball, 'click', () => {
-      items.forEach((item: HTMLElement) => {
-        item.classList.toggle('active');
-      });
-      ball.classList.toggle('active');
-    });
-  }
-
-
-  currentIndex = 0;
-  cardWidth = 340;
+  cardWidth = 340; // Width of each card
   visibleCards = Math.floor(window.innerWidth / this.cardWidth);
 
-  slide(direction: 'left' | 'right') {
-    const totalCards = this.DVDs.length;
+  // Separate states for each section
+  sections = [
+    { currentIndex: 0, direction: 'right' as 'left' | 'right' },
+    { currentIndex: 0, direction: 'right' as 'left' | 'right' },
+  ];
 
+  slide(sectionIndex: number, direction: 'left' | 'right') {
+    const section = this.sections[sectionIndex]; 
+    const totalCards = this.DVDs.length;
+    const visibleCards = this.visibleCards;
+  
+    section.direction = direction;
+  
     if (direction === 'right') {
-      if (this.currentIndex < totalCards - this.visibleCards) {
-        this.currentIndex++;
+      if (section.currentIndex < totalCards - visibleCards) {
+        section.currentIndex++;
+      } else {
+        section.currentIndex = 0; 
       }
-    } else {
-      if (this.currentIndex > 0) {
-        this.currentIndex--;
+    } else if (direction === 'left') {
+      if (section.currentIndex > 0) {
+        section.currentIndex--;
+      } else {
+        section.currentIndex = totalCards - visibleCards; 
       }
     }
   }
-
-  getTransform() {
-    return `translateX(-${this.currentIndex * this.cardWidth}px)`;
-  }
+  
 
   @HostListener('window:resize')
   onResize() {
     this.visibleCards = Math.floor(window.innerWidth / this.cardWidth);
   }
+  public selectedDVD:any = null;
+
+  @Output() Dvd = new EventEmitter();
+
+  AddProduct(Dvd:any){
+    this.Dvd.emit(Dvd)
+  }
+
+  gotoDetails(id:string){
+    this.rout.navigate(['/Customer/Moviedetails' , id])
+  }
+
 }

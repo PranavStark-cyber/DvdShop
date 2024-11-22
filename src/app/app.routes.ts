@@ -4,6 +4,7 @@ import { LoginComponent } from './component/Login-Register-page/Login/login.comp
 import { LandingpageComponent } from './component/landingpage/landingpage.component';
 import { CustomerDashboardComponent } from './component/Customer/customer-dashboard/customer-dashboard.component';
 import { MovieListComponent } from './component/Customer/movie-list/movie-list.component';
+import { MovieDetailsComponent } from './component/Customer/movie-details/movie-details.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -13,7 +14,8 @@ export const routes: Routes = [
 
     {
        path:'Customer',component:CustomerDashboardComponent,children:[
-         {path:'Moviecollection' , component:MovieListComponent}
+         {path:'Moviecollection' , component:MovieListComponent},
+         {path:'Moviedetails/:id' , component:MovieDetailsComponent}
        ]
     },
     {

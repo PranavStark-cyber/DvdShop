@@ -1,10 +1,11 @@
+import { CommonModule } from '@angular/common';
 import { AfterViewInit, Component, ElementRef, Renderer2 } from '@angular/core';
 import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
 
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [RouterLink,RouterLinkActive,RouterOutlet],
+  imports: [RouterLink,RouterLinkActive,RouterOutlet,CommonModule],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.css'
 })
@@ -16,7 +17,11 @@ export class CustomerDashboardComponent implements AfterViewInit {
 ngAfterViewInit(): void {
   this.initializeToggle();
 }
+isSidebarExpanded = false;
 
+toggleSidebar(): void {
+  this.isSidebarExpanded = !this.isSidebarExpanded;
+}
 
 private initializeToggle(): void {
   const ball = this.el.nativeElement.querySelector('.toggle-ball');

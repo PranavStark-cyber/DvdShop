@@ -7,34 +7,59 @@
                 <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor
                     deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis
                     minima voluptatibus incidunt. Accusamus, provident.</p>
-                <button class="featured-button">WATCH</button>
+                <button class="featured-button" >RENT</button>
             </div>
 
         </div>
 
-        <!-- Movie List 1 -->
-        <div class="movie-list-container">
-            <h1 class="movie-list-title" style="font-family:'Roboto', sans-serif;">NEW RELEASES</h1>
-            <div class="movie-list-wrapper">
-              <div class="movie-list row flex-nowrap">
-                <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let dvd of DVDs">
-                  <div class="position-relative">
-                    <img class="movie-list-item-img" [src]="dvd.ImageUrl" alt="Movie Image">
-                    <div class="position-absolute top-50 start-50">
-                      <span class="movie-list-item-title">{{ dvd.Title }}</span>
-                      <button class="movie-list-item-button">Watch</button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <i class="fas fa-chevron-left arrow arrow-left" (click)="slide('left')"></i>
-              <i class="fas fa-chevron-right arrow arrow-right" (click)="slide('right')"></i>
+       <!-- Trending collection -->
+<div class="movie-list-container">
+    <h1 class="movie-list-title mt-0" style="font-family:'Roboto', sans-serif;">Trending Movies</h1>
+    <div class="movie-list-wrapper">
+      <div
+        class="movie-list row flex-nowrap"
+        [style.transform]="sections[0].currentIndex | slideTransformPipe: cardWidth : sections[0].direction : DVDs.length : visibleCards"
+      >
+        <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let dvd of DVDs">
+          <div class="position-relative">
+            <img class="movie-list-item-img" [src]="dvd.ImageUrl" alt="Movie Image">
+            <div class="position-absolute" style="top: 20%; left: 10%;">
+              <span class="movie-list-item-title">{{ dvd.Title }}</span>
+              <p class="movie-list-item-desc">{{ dvd.Description | truncate: 50 }}</p>
+              <button class="movie-list-item-button" (click)="gotoDetails(dvd.Id)">RENT</button>
             </div>
           </div>
-          
-
-
-
+        </div>
+      </div>
+      <i class="fas fa-chevron-left arrow arrow-left" (click)="slide(0, 'left')"></i>
+      <i class="fas fa-chevron-right arrow arrow-right" (click)="slide(0, 'right')"></i>
+    </div>
+  </div>
+  
+  <!-- New Releases -->
+  <div class="movie-list-container">
+    <h1 class="movie-list-title mt-0" style="font-family:'Roboto', sans-serif;">New Releases Movies</h1>
+    <div class="movie-list-wrapper">
+      <div
+        class="movie-list row flex-nowrap"
+        [style.transform]="sections[1].currentIndex | slideTransformPipe: cardWidth : sections[1].direction : DVDs.length : visibleCards"
+      >
+        <div class="movie-list-item col-12 col-sm-6 col-md-4 col-lg-3" *ngFor="let dvd of DVDs">
+          <div class="position-relative">
+            <img class="movie-list-item-img" [src]="dvd.ImageUrl" alt="Movie Image">
+            <div class="position-absolute" style="top: 20%; left: 10%;">
+              <span class="movie-list-item-title">{{ dvd.Title }}</span>
+              <p class="movie-list-item-desc">{{ dvd.Description | truncate: 50 }}</p>
+              <button class="movie-list-item-button">RENT</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <i class="fas fa-chevron-left arrow arrow-left" (click)="slide(1, 'left')"></i>
+      <i class="fas fa-chevron-right arrow arrow-right" (click)="slide(1, 'right')"></i>
+    </div>
+  </div>
+  
 
         <!-- Featured Content 2 -->
         <div class="col-12 featured-content"
@@ -42,9 +67,15 @@
             <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor deserunt
                 nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis minima
                 voluptatibus incidunt. Accusamus, provident.</p>
-            <button class="featured-button">WATCH</button>
+            <button class="featured-button">RENT</button>
         </div>
 
 
     </div>
 </div>
+
+
+
+<!-- <div>
+    <app-movie-details [Dvd] ="selectedDVD"></app-movie-details>
+</div> -->
