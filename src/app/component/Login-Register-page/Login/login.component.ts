@@ -6,6 +6,7 @@ import { LoginandregisterService } from '../../../Services/Loginandregister/logi
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { PasswordStrengthService } from '../../../Services/password-strength.service';
+import { jwtDecode } from 'jwt-decode';
 
 @Component({
   selector: 'app-login',
@@ -28,7 +29,7 @@ export class LoginComponent {
     private toastr: ToastrService,
     private passwordStrengthService: PasswordStrengthService) {
     this.signinForm = this.formBuilder.group({
-      Nic: ['', [Validators.required, Validators.pattern(/[0-9]{9}[Vv]|[0-9]{12}/)]],
+      Email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
         Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
@@ -54,15 +55,24 @@ export class LoginComponent {
     }
 
     this.loginregister.Loginuser(this.signinForm.value).subscribe({
-      next: (res: any) => {
+      next: (response: any) => {
+        localStorage.setItem("token",response);
+        const token:string = localStorage.getItem('token')!;
+        const decode:any = jwtDecode(token);
+        localStorage.setItem("Role",decode.Role)
         this.toastr.success("User Login Successfully..", "", {
           positionClass: "toast-top-right",
           progressBar: true,
           timeOut: 4000
         });
+        if(decode.Role == "Admin"){
+          this.rout.navigate(['/manager']);
+        }else if(decode.Role == "Customer"){
+          this.rout.navigate(['/Customer']);
+        }
       },
       complete: () => {
-        this.rout.navigate(['/home']);
+        
       },
       error: (error: any) => {
         this.toastr.warning(error.error, "", {

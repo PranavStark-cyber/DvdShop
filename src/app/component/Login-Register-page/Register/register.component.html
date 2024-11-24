@@ -97,22 +97,18 @@
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
                                 <input [type]="showPassword ? 'text' : 'password'" class="form-control"
-                                    style="box-shadow: none; border: none;" placeholder="Password"
+                                    style="box-shadow: none; border: none;" placeholder="confirmPassword"
                                     aria-label="Password input" aria-describedby="btnGroupAddon"
-                                    formControlName="password" (input)="onPasswordChange()">
+                                    formControlName="confirmPassword">
                                 <button type="button" class="btn btn-outline-secondary"
                                     (click)="togglePasswordVisibility()">
                                     <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
                                 </button>
                             </div>
-                            <div *ngIf="passwordStrength">
-                                <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
-                                <small>{{ passwordStrength.message }}</small>
-                            </div>
-                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                      
+                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
                                 class="text-danger">
-                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
-                                    number, and a special character.</small>
+                                <small>Password mis match</small>
                             </div>
 
 
@@ -127,7 +123,7 @@
                             </label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary w-100" [disabled]="!signupForm.valid">Register</button>
+                        <button type="submit" class="btn btn-primary w-100" [disabled]="signupForm.invalid">Register</button>
 
 
                         <p class="text-center  mt-3">

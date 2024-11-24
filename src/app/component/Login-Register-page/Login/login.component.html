@@ -12,15 +12,15 @@
                         <div class="form-group mb-3 mt-4">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i></div>
-                                <input type="text" class="form-control" placeholder="Your NIC"
+                                <input type="text" class="form-control" placeholder="Your Email Address"
                                     aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                    formControlName="Nic">
+                                    formControlName="Email">
                             </div>
-                            <div *ngIf="signinForm.get('Nic')?.touched && signinForm.get('Nic')?.invalid"
+                            <div *ngIf="signinForm.get('Email')?.touched && signinForm.get('Email')?.invalid"
                                 class="text-danger">
-                                <small *ngIf="signinForm.get('Nic')?.errors?.['required']">NIC is required.</small>
-                                <small *ngIf="signinForm.get('Nic')?.errors?.['pattern']">Please enter a valid NIC
-                                    number.</small>
+                                <small *ngIf="signinForm.get('Email')?.errors?.['required']">Email is required.</small>
+                                <small *ngIf="signinForm.get('Email')?.errors?.['email']">Please enter a valid Email
+                                    Address.</small>
                             </div>
                         </div>
 
