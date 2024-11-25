@@ -12,3 +12,10 @@ export interface Login{
 }
 
 
+export interface Verifyemail{
+    email:string;
+    otp:number;   
+}
+
+
+

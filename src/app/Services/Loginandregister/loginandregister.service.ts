@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Login, User } from '../../component/modals/customer';
+import { Login, User, Verifyemail } from '../../component/modals/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -9,7 +9,7 @@ export class LoginandregisterService {
 
   constructor(private http:HttpClient) { }
 
-  useurl:string ="https://z9j6jhqq-7067.asse.devtunnels.ms/api/User";
+  useurl:string ="https://localhost:7067/api/User";
 
   register(user:User){
     return this.http.post<User>(this.useurl+"/register",user)
@@ -20,6 +20,9 @@ export class LoginandregisterService {
       responseType:'text' as 'json'
       
     });
+  }
+  verifyEmail(Verifyemail:Verifyemail){
+    return this.http.post(this.useurl+"/verify",Verifyemail);
   }
   isLoggedin():boolean{
     const token:string= localStorage.getItem("token")!;

@@ -1,0 +1,28 @@
+<div class="row d-flex ">
+    <div class="col-2 sidebar bg-light">
+        <div class="text-start mb-4">
+            <img class=" d-flex justify-content-start" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(23).jpg" alt="avatar"
+                class="rounded-circle mb-2" style="width: 50px;" />
+            <h5>Ann Smith</h5>
+            <p>ann_.com</p>
+            <hr />
+        </div>
+        <a routerLink="/home" class="d-flex align-items-center">
+            <i class="fas fa-home me-2"></i> Home
+        </a>
+        <hr />
+        <a href="#" class="d-flex align-items-center">
+            <i class="fas fa-cogs me-2"></i> Settings
+        </a>
+        <a href="#" class="d-flex align-items-center">
+            <i class="fas fa-user me-2"></i> Profile
+        </a>
+        <a href="#" class="d-flex align-items-center">
+            <i class="fas fa-user-astronaut me-2"></i> Log Out
+        </a>
+    </div>
+
+    <div class="col-10content flex-grow-1">
+        <router-outlet></router-outlet>
+    </div>
+</div>

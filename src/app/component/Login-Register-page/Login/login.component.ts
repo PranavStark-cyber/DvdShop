@@ -68,7 +68,7 @@ export class LoginComponent {
         if(decode.Role == "Admin"){
           this.rout.navigate(['/manager']);
         }else if(decode.Role == "Customer"){
-          this.rout.navigate(['/Customer']);
+          this.rout.navigate(['/Customer/Moviecollection']);
         }
       },
       complete: () => {

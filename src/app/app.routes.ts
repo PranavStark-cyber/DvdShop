@@ -5,6 +5,7 @@ import { LandingpageComponent } from './component/landingpage/landingpage.compon
 import { CustomerDashboardComponent } from './component/Customer/customer-dashboard/customer-dashboard.component';
 import { MovieListComponent } from './component/Customer/movie-list/movie-list.component';
 import { MovieDetailsComponent } from './component/Customer/movie-details/movie-details.component';
+import { ManagerDashboardComponent } from './component/Manager/manager-dashboard/manager-dashboard.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -19,7 +20,7 @@ export const routes: Routes = [
        ]
     },
     {
-        path:'Manager/:id',component:CustomerDashboardComponent,children:[
+        path:'Manager',component:ManagerDashboardComponent,children:[
          
         ]
      }
