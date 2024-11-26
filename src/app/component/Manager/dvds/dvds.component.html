@@ -1,0 +1,150 @@
+<div class="row m-0">
+    <div class="col-md-6 col-lg-10 mx-auto">
+      <div class="card shadow p-3 mb-5 bg-body-tertiary rounded">
+        <div class="card-header text-white">
+          <h5 class="m-0">Add DVD</h5>
+        </div>
+        <div class="card-body">
+          <form [formGroup]="dvdForm" (ngSubmit)="Dvdadd()">
+            <div class="row">
+              <!-- Image Upload Section -->
+              <div class="col-md-4 d-flex flex-column align-items-center">
+                <label for="imageUpload" class="form-label w-100 text-center">DVD Cover</label>
+                <div class="image-upload-box d-flex justify-content-center align-items-center">
+                  <input
+                    type="file"
+                    id="imageUpload"
+                    class="form-control visually-hidden"
+                    (change)="onFileChange($event)"
+                    accept="image/*"
+                  />
+                  <div class="image-preview border rounded position-relative" style="width: 150px; height: 200px;">
+                    <img
+                      *ngIf="imagePreview"
+                      [src]="imagePreview"
+                      alt="Preview"
+                      class="img-fluid border rounded p-0 m-0"
+                      style="max-width: 100%; max-height: 100%;"
+                    />
+                    <button type="button" class="btn-outline-dark btn btn-sm btn-white border border-black mt-2 position-absolute top-100 start-100 translate-middle pt-2 border border-light rounded" (click)="triggerFileInput()"><i class="bi bi-upload"></i></button>
+                  </div>
+                </div>
+              </div>
+  
+              <!-- Form Fields Section -->
+              <div class="col-md-8">
+                <div class="mb-3">
+                  <label for="dvdTitle" class="form-label">DVD Title</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="dvdTitle"
+                    formControlName="title"
+                    placeholder="Enter DVD title"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="directorName" class="form-label">Director</label>
+                  <div class="d-flex align-items-center">
+                    <select
+                      class="form-control"
+                      formControlName="directorId"
+                      (change)="onDirectorSelect($event)">
+                      <option *ngFor="let director of directors" [value]="director.id">{{ director.name }}</option>
+                    </select>
+                    <button type="button" class="btn btn-link ms-2" (click)="toggleAddDirector()">
+                      <i class="bi bi-plus-circle text-dark"></i>
+                    </button>
+                  </div>
+                  <div *ngIf="showAddDirector" class="mt-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="directorName"
+                      placeholder="Enter new director name"
+                    />
+                    <textarea
+                      class="form-control mt-2"
+                      formControlName="directorDescription"
+                      rows="3"
+                      placeholder="Enter new director description"
+                    ></textarea>
+                  </div>
+                </div>
+  
+                <div class="mb-3">
+                  <label for="genreName" class="form-label">Genre</label>
+                  <div class="d-flex align-items-center">
+                    <select
+                      class="form-control"
+                      formControlName="genreId"
+                      (change)="onGenreSelect($event)"
+                    >
+                      <option *ngFor="let genre of genres" [value]="genre.id">{{ genre.name }}</option>
+                    </select>
+                    <button type="button" class="btn btn-link ms-2" (click)="toggleAddGenre()">
+                      <i class="bi bi-plus-circle text-dark"></i>
+                    </button>
+                  </div>
+                  <div *ngIf="showAddGenre" class="mt-2">
+                    <input
+                      type="text"
+                      class="form-control"
+                      formControlName="genreName"
+                      placeholder="Enter new genre name"
+                    />
+                  </div>
+                </div>
+  
+                <div class="mb-3">
+                  <label for="releaseDate" class="form-label">Release Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    id="releaseDate"
+                    formControlName="releaseDate"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="price" class="form-label">Price</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="price"
+                    formControlName="price"
+                    placeholder="Enter price"
+                  />
+                </div>
+                <div class="mb-3">
+                  <label for="dvdDescription" class="form-label">Description</label>
+                  <textarea
+                    class="form-control"
+                    id="dvdDescription"
+                    formControlName="description"
+                    rows="3"
+                    placeholder="Enter a brief description"
+                  ></textarea>
+                </div>
+                <div class="mb-3">
+                  <label for="totalCopies" class="form-label">Total Copies</label>
+                  <input
+                    type="number"
+                    class="form-control"
+                    id="totalCopies"
+                    formControlName="totalCopies"
+                    placeholder="Enter total copies"
+                  />
+                </div>
+              </div>
+            </div>
+  
+            <div class="text-end mt-3">
+              <button type="submit" class="btn btn-success me-4" [disabled]="dvdForm.invalid">Submit</button>
+              <button type="reset" class="btn btn-danger" (click)="resetForm()">Reset</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,28 +1,61 @@
-<div class="row d-flex ">
-    <div class="col-2 sidebar bg-light">
-        <div class="text-start mb-4">
-            <img class=" d-flex justify-content-start" src="https://mdbootstrap.com/img/Photos/Avatars/img%20(23).jpg" alt="avatar"
-                class="rounded-circle mb-2" style="width: 50px;" />
-            <h5>Ann Smith</h5>
-            <p>ann_.com</p>
-            <hr />
-        </div>
-        <a routerLink="/home" class="d-flex align-items-center">
-            <i class="fas fa-home me-2"></i> Home
-        </a>
-        <hr />
-        <a href="#" class="d-flex align-items-center">
-            <i class="fas fa-cogs me-2"></i> Settings
-        </a>
-        <a href="#" class="d-flex align-items-center">
-            <i class="fas fa-user me-2"></i> Profile
-        </a>
-        <a href="#" class="d-flex align-items-center">
-            <i class="fas fa-user-astronaut me-2"></i> Log Out
-        </a>
-    </div>
 
-    <div class="col-10content flex-grow-1">
-        <router-outlet></router-outlet>
+<div class="container-fluid">
+    <div class="row">
+        <!-- Sidebar -->
+      <div class="col-auto sidebar bg-light p-3 d-flex flex-column shadow p-3 mb-5 bg-body-tertiary rounded" [class.collapsed]="isSidebarCollapsed">
+            <div class="text-start mb-4">
+                <img 
+                    src="https://mdbootstrap.com/img/Photos/Avatars/img%20(23).jpg"
+                    alt="avatar"
+                    class="rounded-circle mb-2"
+                    style="width: 50px;"
+                />
+                <h5 *ngIf="!isSidebarCollapsed">Pranav Stark</h5>
+                <p *ngIf="!isSidebarCollapsed"> Admin</p>
+                <hr *ngIf="!isSidebarCollapsed" />
+            </div>
+            <a routerLink="/home" class="d-flex align-items-center mb-3">
+                <i class="fas fa-home me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Dashboard</span>
+            </a>
+            <a routerLink="/Manager/Dvd" class="d-flex align-items-center mb-3">
+                <i class="fa-solid fa-film me-2"></i> 
+                <span *ngIf="!isSidebarCollapsed">DVD</span>
+            </a>
+            <a routerLink="/Manager/Customer" class="d-flex align-items-center mb-3">
+                <i class="fas fa-users me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Customer</span>
+            </a>
+            <a routerLink="/Manager/Rental" class="d-flex align-items-center mb-3">
+                <i class="fa-solid fa-compact-disc me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Rental</span>
+            </a>
+            <hr *ngIf="!isSidebarCollapsed" />
+            <a href="#" class="d-flex align-items-center mb-3">
+                <i class="fas fa-cogs me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Settings</span>
+            </a>
+            <a href="#" class="d-flex align-items-center mb-3">
+                <i class="fas fa-user me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Profile</span>
+            </a>
+            <a href="#" class="d-flex align-items-center mb-3">
+                <i class="fas fa-sign-out-alt me-2"></i>
+                <span *ngIf="!isSidebarCollapsed">Log Out</span>
+            </a>
+        </div>
+
+        <!-- Main Content -->
+        <div class="col">
+            <nav class="navbar navbar-light bg-light ps-3 rounded">
+                <button class="btn btn-outline-dark" (click)="toggleSidebar()"> 
+                    <i class="fas fa-bars"></i>
+                </button>
+            </nav>
+            <div class="p-2">
+              <router-outlet></router-outlet>
+            </div>
+        </div>
     </div>
 </div>
+

@@ -1,0 +1,22 @@
+.image-upload-box {
+    position: relative;
+    width: 100%;
+  }
+  
+  .image-preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f8f9fa;
+    cursor: pointer;
+  }
+  
+  .image-preview img {
+    object-fit: cover;
+  }
+  
+  button:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+  
