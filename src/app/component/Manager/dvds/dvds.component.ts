@@ -3,7 +3,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ManagerService } from '../../../Services/Manager/manager.service';
 import { CloudinaryServiceService } from '../../../Services/Storecloud/cloudinary-service.service';
-import { DvdRequest } from '../../modals/customer';
+import { Dvd, DvdRequest } from '../../modals/customer';
+import { ToastrService } from 'ngx-toastr';
+import { DVD } from '../../landingpage/landingpage.component';
 
 @Component({
   selector: 'app-dvds',
@@ -15,14 +17,17 @@ import { DvdRequest } from '../../modals/customer';
 export class DvdsComponent implements OnInit {
   dvdForm: FormGroup;
   imagePreview: string | null = null;
-  genres: any = [];
-  directors: any = [];
+  dvds: Dvd[] = [];
+  genres: any[] = [];
+  directors: any[] = [];
+  showAddModal = false;
   showAddGenre = false;
   showAddDirector = false;
-  
+
   constructor(
     private fb: FormBuilder,
-    private managerservices: ManagerService,
+    private toastr: ToastrService, // Inject ToastrService
+    private managerService: ManagerService,
     private cloudinaryService: CloudinaryServiceService
   ) {
     this.dvdForm = this.fb.group({
@@ -39,67 +44,61 @@ export class DvdsComponent implements OnInit {
       totalCopies: [0, Validators.required]
     });
   }
-  
+
   ngOnInit(): void {
-    this.fetchGenres();
-    this.fetchDirectors();
+    this.loadDvds();
+    this.loadGenres();
+    this.loadDirectors();
   }
-  
-  fetchGenres() {
-    this.managerservices.GetAllGenare().subscribe({
-      next: (data: any) => {
-        this.genres = data;
-      },
-      error: (err) => {
-        console.error('Error fetching genres:', err);
-      }
-    });
+
+  loadDvds(): void {
+    this.managerService.GetAllDvds().subscribe(
+      (data) => (this.dvds = data),
+      (error) => this.toastr.error('Failed to load DVDs.', 'Error')
+
+    );
+    console.log(this.dvds);
+
   }
-  
-  fetchDirectors() {
-    this.managerservices.GetAllDirector().subscribe({
-      next: (data: any) => {
-        this.directors = data; 
-      },
-      error: (err) => {
-        console.error('Error fetching directors:', err);
-      }
-    });
+
+  loadGenres(): void {
+    this.managerService.GetAllGenare().subscribe(
+      (data) => (this.genres = data),
+      (error) => this.toastr.error('Failed to load genres.', 'Error')
+    );
   }
-  
-  toggleAddGenre() {
+
+  loadDirectors(): void {
+    this.managerService.GetAllDirector().subscribe(
+      (data) => (this.directors = data),
+      (error) => this.toastr.error('Failed to load directors.', 'Error')
+    );
+  }
+
+  toggleAddDvdModal(): void {
+    this.showAddModal = !this.showAddModal;
+  }
+
+  toggleAddGenre(): void {
     this.showAddGenre = !this.showAddGenre;
-    this.dvdForm.patchValue({ genreId: null }); 
   }
-  
-  toggleAddDirector() {
+
+  toggleAddDirector(): void {
     this.showAddDirector = !this.showAddDirector;
-    this.dvdForm.patchValue({ directorId: null }); 
   }
-  
-  onGenreSelect(event: any) {
-    const selectedGenreId = event.target.value;
-    if (selectedGenreId) {
-      this.showAddGenre = false;
-      this.dvdForm.patchValue({ genreName: null }); 
-    }
+
+  onGenreSelect(event: any): void {
+    if (event.target.value) this.showAddGenre = false;
   }
-  
-  onDirectorSelect(event: any) {
-    const selectedDirectorId = event.target.value;
-    if (selectedDirectorId) {
-      this.showAddDirector = false;  
-      this.dvdForm.patchValue({ directorName: null, directorDescription: null }); 
-    }
+
+  onDirectorSelect(event: any): void {
+    if (event.target.value) this.showAddDirector = false;
   }
-  
+
   triggerFileInput(): void {
-    const fileInput = document.getElementById('imageUpload') as HTMLInputElement;
-    if (fileInput) {
-      fileInput.click(); 
-    }
+    document.getElementById('imageUpload')?.click();
   }
-  
+
   onFileChange(event: Event): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
@@ -120,10 +119,11 @@ export class DvdsComponent implements OnInit {
       });
     }
   }
-  
   Dvdadd(): void {
     if (this.dvdForm.valid) {
       const formData = this.dvdForm.value;
+      console.log(formData);
+      
   
       // Prepare payload for backend
       const payload: DvdRequest = {
@@ -137,20 +137,22 @@ export class DvdsComponent implements OnInit {
         imageUrl: formData.imageUrl,
         totalCopies: formData.totalCopies,
       };
-  
-      this.managerservices.AddDvd(payload).subscribe({
-        next: (response) => {
-          console.log('DVD submitted successfully:', response);
-          this.resetForm();
+      
+      this.managerService.AddDvd(payload).subscribe(
+        () => {
+          this.toastr.success('DVD added successfully!', 'Success');
+          
+          this.loadDvds();
+          this.toggleAddDvdModal();
         },
-        error: (err) => {
-          console.error('Error submitting DVD:', err);
-        },
-      });
+        (error) => this.toastr.error('Failed to add DVD.', 'Error')
+      );
+    } else {
+      this.toastr.warning('Please fill out all required fields.', 'Warning');
     }
   }
-  
-  
+
+    
   resetForm(): void {
     this.dvdForm.reset();
     this.imagePreview = null;

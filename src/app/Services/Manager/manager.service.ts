@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Dvd, DvdRequest, genres } from '../../component/modals/customer';
+import { Director, Dvd, DvdRequest, genres } from '../../component/modals/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -8,13 +8,17 @@ import { Dvd, DvdRequest, genres } from '../../component/modals/customer';
 export class ManagerService {
   constructor(private http:HttpClient) { }
 
-  useurl:string ="https://w89278w3-7067.asse.devtunnels.ms/api/Manager";
+  useurl:string ="https://localhost:7067/api/Manager";
 
   GetAllGenare(){
-    return this.http.get(this.useurl+"/GetAllGenare")
+    return this.http.get<genres[]>(this.useurl+"/GetAllGenare")
   }
   GetAllDirector(){
-    return this.http.get(this.useurl+"/GetAllDirector")
+    return this.http.get<Director[]>(this.useurl+"/GetAllDirector")
+  }
+
+  GetAllDvds(){
+    return this.http.get<Dvd[]>(this.useurl+"/GetAllDvds")
   }
 
   AddDvd(dvd:DvdRequest){
