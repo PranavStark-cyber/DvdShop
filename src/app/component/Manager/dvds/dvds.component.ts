@@ -15,6 +15,12 @@ import { DVD } from '../../landingpage/landingpage.component';
   styleUrls: ['./dvds.component.css']
 })
 export class DvdsComponent implements OnInit {
+deleteDvd(arg0: string) {
+throw new Error('Method not implemented.');
+}
+editDvd(_t16: Dvd) {
+throw new Error('Method not implemented.');
+}
   dvdForm: FormGroup;
   imagePreview: string | null = null;
   dvds: Dvd[] = [];

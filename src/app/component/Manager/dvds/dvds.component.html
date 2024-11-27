@@ -1,8 +1,8 @@
 <!-- Button to toggle Add DVD Modal -->
 <!-- <button class="btn btn-primary mb-3" (click)="toggleAddDvdModal()">Add DVD</button> -->
 <div class="d-flex justify-content-end">
-  <button type="button mt-5 d-flex justify-content-end" style="width: 30vh;" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
-    Add dvd
+  <button type="button mt-5 d-flex justify-content-end" style="width: 30vh;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+    Add dvd <i class="bi bi-file-earmark-plus"></i>
   </button>
 </div>
 
@@ -10,29 +10,34 @@
 
 <!-- DVDs Table -->
 <table class="col-auto table table-bordered mt-4 shadow p-3 mb-5 bg-body-tertiary rounded">
-  <thead class="table-dark">
+  <thead class="table-dark rounded-top">
     <tr>
       <th>DVD Image</th>
       <th>Title</th>
       <th>Genre</th>
       <th>Director</th>
       <th>Release Date</th>
-      <th>Review Rating</th>
+      <th>Action</th>
     </tr>
   </thead>
-  <tbody>
+  <tbody class="rounded-bottom">
     <tr *ngFor="let dvd of dvds">
       <td>
-        <img [src]="dvd.imageUrl" alt="DVD Cover" style="width:90px; height: 100px;" />
-
+        <img [src]="dvd.imageUrl" alt="DVD Cover" style="width:80px; height: 100px;" />
       </td>
       <td>{{ dvd.title }}</td>
       <td>{{ dvd.genre.name }}</td>
       <td>{{ dvd.director.name }}</td>
       <td>{{ dvd.releaseDate | date: 'mediumDate' }}</td>
+      <td >
+        <!-- Action Buttons -->
+        <button class="btn btn-warning btn-sm me-3 w-25 ms-3" (click)="editDvd(dvd)"><i class="fa-regular fa-pen-to-square text-white"></i></button>
+        <button class="btn btn-danger btn-sm w-25" (click)="deleteDvd(dvd.id)"><i class="bi bi-trash3"></i></button>
+      </td>
     </tr>
   </tbody>
 </table>
+
 
 
 
