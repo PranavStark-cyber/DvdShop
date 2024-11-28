@@ -1,4 +1,4 @@
-<!-- Button to toggle Add DVD Modal -->
+
 <!-- <button class="btn btn-primary mb-3" (click)="toggleAddDvdModal()">Add DVD</button> -->
 <div class="d-flex justify-content-end">
   <button type="button mt-5 d-flex justify-content-end" style="width: 30vh;" class="btn btn-outline-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -31,8 +31,8 @@
       <td>{{ dvd.releaseDate | date: 'mediumDate' }}</td>
       <td >
         <!-- Action Buttons -->
-        <button class="btn btn-warning btn-sm me-3 w-25 ms-3" (click)="editDvd(dvd)"><i class="fa-regular fa-pen-to-square text-white"></i></button>
-        <button class="btn btn-danger btn-sm w-25" (click)="deleteDvd(dvd.id)"><i class="bi bi-trash3"></i></button>
+        <button class="btn btn-warning btn-sm me-3 w-25 ms-3" data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="loadDvdForUpdate(dvd.id)"><i class="fa-regular fa-pen-to-square text-white"></i></button>
+        <button class="btn btn-danger btn-sm w-25"  (click)="openDeletePopup(dvd.id)"><i class="bi bi-trash3"></i></button>
       </td>
     </tr>
   </tbody>
@@ -47,11 +47,11 @@
   <div class="modal-dialog modal-lg">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Add DVD</h5>
+        <h5 class="modal-title" id="exampleModalLabel">{{ DID ? "Update Dvd" : "Add Dvd" }}</h5>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <form [formGroup]="dvdForm" (ngSubmit)="Dvdadd()">
+        <form [formGroup]="dvdForm"  (ngSubmit)="DID ? UpdateDvd() : Dvdadd()">
           <div class="row">
             <!-- Image Upload Section -->
             <div class="col-md-4 d-flex flex-column align-items-center">
@@ -139,5 +139,51 @@
         </form>
       </div>
     </div>
+  </div>
+</div>
+
+<!-- Delete Popup Modal -->
+<div 
+  *ngIf="showDeletePopup" 
+  style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.5); display: flex; justify-content: center; align-items: center; z-index: 1000;"
+>
+  <div class="mt-0"
+    style="background: #fff; padding: 20px; border-radius: 5px; max-width: 350px; height: 100%;"
+  >
+    <h3 style="font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">Delete DVDs</h3>
+
+    <!-- Centered DVD Title and Image -->
+    <div *ngIf="selectedDvd" style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;">
+      <h4 class="fw-bold" style="font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman'">{{ selectedDvd.title }}</h4>
+      <img *ngIf="selectedDvd.imageUrl" [src]="selectedDvd.imageUrl" alt="{{ selectedDvd.title }}" style="max-width: 80%; height: auto; margin-bottom: 10px;">
+    </div>
+
+    <form [formGroup]="deleteForm" (ngSubmit)="submitDelete()">
+      <label for="deleteCount">Number of DVDs to delete:</label>
+      <input
+        id="deleteCount"
+        type="number"
+        formControlName="deleteCount"
+        style="width: 100%; padding: 5px; margin: 10px 0; border: 1px solid #ccc; border-radius: 3px;"
+        required
+      />
+      <div 
+        style="display: flex; justify-content: flex-end; gap: 10px;"
+      >
+        <button 
+          type="button" 
+          (click)="closeDeletePopup()" 
+          style="padding: 5px 10px; background: #6c757d; color: #fff; border: none; border-radius: 3px; cursor: pointer;"
+        >
+          Cancel
+        </button>
+        <button 
+          type="submit" 
+          style="padding: 5px 10px; background: #dc3545; color: #fff; border: none; border-radius: 3px; cursor: pointer;"
+        >
+          Delete
+        </button>
+      </div>
+    </form>
   </div>
 </div>

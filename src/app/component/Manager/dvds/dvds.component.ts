@@ -29,13 +29,22 @@ throw new Error('Method not implemented.');
   showAddModal = false;
   showAddGenre = false;
   showAddDirector = false;
+  showDeletePopup: boolean = false;
+  selectedDvdId: string | null = null;
+  deleteForm: FormGroup;
+  selectedDvd: any = null;
+  DID?: string;
 
+  
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService, // Inject ToastrService
     private managerService: ManagerService,
     private cloudinaryService: CloudinaryServiceService
   ) {
+    this.deleteForm = this.fb.group({
+      deleteCount: [0, [Validators.required, Validators.min(1)]],
+    });
     this.dvdForm = this.fb.group({
       title: ['', Validators.required],
       genreId: [null],  
@@ -55,6 +64,20 @@ throw new Error('Method not implemented.');
     this.loadDvds();
     this.loadGenres();
     this.loadDirectors();
+
+    this.dvdForm = this.fb.group({
+      title: ['', Validators.required],
+      releaseDate: ['', Validators.required],
+      price: ['', [Validators.required, Validators.min(0)]],
+      description: ['', Validators.required],
+      imageUrl: ['', Validators.required],
+      totalCopies: ['', [Validators.required, Validators.min(1)]],
+      genreId: [''],
+      genreName: [''],
+      directorId: [''],
+      directorName: [''],
+      directorDescription: [''],
+    });
   }
 
   loadDvds(): void {
@@ -63,7 +86,7 @@ throw new Error('Method not implemented.');
       (error) => this.toastr.error('Failed to load DVDs.', 'Error')
 
     );
-    console.log(this.dvds);
+   
 
   }
 
@@ -125,43 +148,167 @@ throw new Error('Method not implemented.');
       });
     }
   }
-  Dvdadd(): void {
-    if (this.dvdForm.valid) {
-      const formData = this.dvdForm.value;
-      console.log(formData);
-      
-  
-      // Prepare payload for backend
-      const payload: DvdRequest = {
-        title: formData.title,
-        genreName: formData.genreId ? null : formData.genreName,
-        directorName: formData.directorId ? null : formData.directorName,
-        directorDescription: formData.directorDescription,
-        releaseDate: formData.releaseDate,
-        price: formData.price,
-        description: formData.description,
-        imageUrl: formData.imageUrl,
-        totalCopies: formData.totalCopies,
-      };
-      
-      this.managerService.AddDvd(payload).subscribe(
-        () => {
-          this.toastr.success('DVD added successfully!', 'Success');
-          
-          this.loadDvds();
-          this.toggleAddDvdModal();
-        },
-        (error) => this.toastr.error('Failed to add DVD.', 'Error')
-      );
-    } else {
-      this.toastr.warning('Please fill out all required fields.', 'Warning');
-    }
+
+
+ Dvdadd(): void {
+  if (this.dvdForm.valid) {
+    const formData = this.dvdForm.value;
+
+    console.log(formData);
+
+
+    const payload: DvdRequest = {
+      title: formData.title,
+      releaseDate: formData.releaseDate,
+      price: formData.price,
+      description: formData.description,
+      imageUrl: formData.imageUrl,
+      totalCopies: formData.totalCopies,
+      ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
+      ...(formData.directorId
+        ? { directorId: formData.directorId }
+        : {
+            directorName: formData.directorName,
+            directorDescription: formData.directorDescription,
+          }),
+    };
+
+    this.managerService.AddDvd(payload).subscribe(
+      () => {
+        this.toastr.success('DVD added successfully!', 'Success');
+        this.loadDvds();
+        this.toggleAddDvdModal();
+      },
+      (error) => this.toastr.error('Failed to add DVD.', 'Error')
+    );
+  } else {
+    this.toastr.warning('Please fill out all required fields.', 'Warning');
   }
+}
+
+
+UpdateDvd(): void {
+  if (this.dvdForm.valid) {
+    const formData = this.dvdForm.value;
+
+    
+    const payload: DvdRequest = {
+      title: formData.title,
+      releaseDate: formData.releaseDate,
+      price: formData.price,
+      description: formData.description,
+      imageUrl: formData.imageUrl,
+      totalCopies: formData.totalCopies,
+      ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
+      ...(formData.directorId
+        ? { directorId: formData.directorId }
+        : {
+            directorName: formData.directorName,
+            directorDescription: formData.directorDescription,
+          }),
+    };
+   
+
+    this.managerService.updateDvd(this.DID!,payload).subscribe(
+      () => {
+        this.toastr.success('DVD updated successfully!', 'Success');
+        this.loadDvds();
+        this.toggleAddDvdModal();
+      },
+      (error) => this.toastr.error('Failed to update DVD.', 'Error')
+    );
+  } else {
+    this.toastr.warning('Please fill out all required fields.', 'Warning');
+  }
+}
+
+
+loadDvdForUpdate(dvdId: string): void {
+  this.managerService.getDvdById(dvdId).subscribe(
+    (dvdData) => {
+      // Populate the form with the DVD data
+      this.imagePreview = dvdData.imageUrl
+      this.dvdForm.patchValue({
+        title: dvdData.title,
+        releaseDate: new Date(dvdData.releaseDate).toLocaleDateString('en-CA'),
+        price: dvdData.price,
+        description: dvdData.description,
+        imageUrl: dvdData.imageUrl,
+        genreId: dvdData.genreId,
+        genreName: dvdData.genre.name,
+        directorId: dvdData.directorId,
+        directorName: dvdData.director.name,
+        directorDescription: dvdData.director.decriptions,
+      });
+      // Set the DVD ID for updating
+      this.DID = dvdId;
+      this.toggleAddDvdModal();
+    },
+    (error) => {
+      this.toastr.error('Failed to fetch DVD data.', 'Error');
+    }
+  );
+}
 
     
   resetForm(): void {
     this.dvdForm.reset();
     this.imagePreview = null;
   }
+
+
+  openDeletePopup(dvdId: string): void {
+    this.selectedDvdId = dvdId;
+
+
+    this.managerService.getDvdById(this.selectedDvdId).subscribe(
+      (dvd) => {
+        this.selectedDvd = dvd;  // Set the selected DVD data
+        this.showDeletePopup = true;  // Show the popup
+      },
+      (error) => {
+        this.toastr.error('Error fetching DVD details.', 'Error');
+      }
+    );
+  }
+
+  closeDeletePopup(): void {
+    this.showDeletePopup = false;
+    this.selectedDvdId = null;
+    this.deleteForm.reset();
+
+    this.showDeletePopup = false;
+    this.selectedDvd = null;
+    this.selectedDvdId = null;
+  }
+
+submitDelete(): void {
+  if (this.deleteForm.valid && this.selectedDvdId) {
+    const deleteCount = this.deleteForm.value.deleteCount;
+    console.log(deleteCount);
+
+ 
+    if (deleteCount <= 0) {
+      this.toastr.warning('Please provide a valid quantity greater than zero.', 'Warning');
+      return;
+    }
+
+ 
+    this.managerService.deleteDvd(this.selectedDvdId, deleteCount).subscribe(
+      (response) => {
+        this.toastr.success('DVD(s) deleted successfully!', 'Success');
+        this.closeDeletePopup();
+      },
+      (error) => {
+        console.error('Error deleting DVD:', error);
+        this.toastr.error('Failed to delete DVD(s).', 'Error');
+      }
+    );
+  } else {
+    this.toastr.warning('Invalid form or no DVD selected.', 'Warning');
+  }
+}
+
+  
   
 }

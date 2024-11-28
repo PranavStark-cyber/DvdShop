@@ -51,7 +51,7 @@ export interface Dvd {
     genreName?: string;
     directorId?: number;
     directorName?: string;
-    directorDescription: string;
+    directorDescription?: string;
     releaseDate: string;  
     price: number;
     description: string;
