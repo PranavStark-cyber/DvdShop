@@ -42,6 +42,7 @@ throw new Error('Method not implemented.');
     private managerService: ManagerService,
     private cloudinaryService: CloudinaryServiceService
   ) {
+    
     this.deleteForm = this.fb.group({
       deleteCount: [0, [Validators.required, Validators.min(1)]],
     });

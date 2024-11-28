@@ -9,7 +9,7 @@ import { Observable } from 'rxjs';
 export class ManagerService {
   constructor(private http:HttpClient) { }
 
-  dvdurl:string ="https://1h2cdk26-7067.asse.devtunnels.ms/api/Manager";
+  dvdurl:string ="https://dbk4n8j8-7067.asse.devtunnels.ms/api/Manager";
 
   GetAllGenare(){
     return this.http.get<genres[]>(this.dvdurl+"/GetAllGenare")
