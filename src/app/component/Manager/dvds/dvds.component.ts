@@ -1,26 +1,22 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ManagerService } from '../../../Services/Manager/manager.service';
 import { CloudinaryServiceService } from '../../../Services/Storecloud/cloudinary-service.service';
 import { Dvd, DvdRequest } from '../../modals/customer';
 import { ToastrService } from 'ngx-toastr';
 import { DVD } from '../../landingpage/landingpage.component';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-dvds',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink],
   templateUrl: './dvds.component.html',
   styleUrls: ['./dvds.component.css']
 })
 export class DvdsComponent implements OnInit {
-deleteDvd(arg0: string) {
-throw new Error('Method not implemented.');
-}
-editDvd(_t16: Dvd) {
-throw new Error('Method not implemented.');
-}
+  // @ViewChild('modal', { static: false }) modal: ModalDirective;
   dvdForm: FormGroup;
   imagePreview: string | null = null;
   dvds: Dvd[] = [];
@@ -46,6 +42,7 @@ throw new Error('Method not implemented.');
     this.deleteForm = this.fb.group({
       deleteCount: [0, [Validators.required, Validators.min(1)]],
     });
+    
     this.dvdForm = this.fb.group({
       title: ['', Validators.required],
       genreId: [null],  
@@ -80,6 +77,12 @@ throw new Error('Method not implemented.');
       directorDescription: [''],
     });
   }
+  clearForm(): void {
+    this.dvdForm.reset();
+    this.imagePreview = null;
+    this.DID = undefined; 
+  }
+  
 
   loadDvds(): void {
     this.managerService.GetAllDvds().subscribe(
@@ -213,8 +216,7 @@ UpdateDvd(): void {
     this.managerService.updateDvd(this.DID!,payload).subscribe(
       () => {
         this.toastr.success('DVD updated successfully!', 'Success');
-        this.loadDvds();
-        this.toggleAddDvdModal();
+     
       },
       (error) => this.toastr.error('Failed to update DVD.', 'Error')
     );

@@ -2,7 +2,7 @@
 <div class="container-fluid">
     <div class="row ">
         <!-- Sidebar -->
-      <div class="col-auto sidebar ps-2 bg-light p-2 d-flex flex-column shadow p-3 mb-5 bg-body-tertiary rounded" [class.collapsed]="isSidebarCollapsed">
+      <div class="col-auto sidebar ps-2 bg-light p-2 d-flex flex-column shadow p-3 mb-5 bg-body-tertiary rounded" [class.collapsed]="isSidebarCollapsed" style="height:100vh;">
             <div class="text-start mb-3">
                 <img 
                     src="https://mdbootstrap.com/img/Photos/Avatars/img%20(23).jpg"
@@ -46,7 +46,7 @@
         </div>
 
         <!-- Main Content -->
-        <div class="col p-0">
+        <div class="col p-0 ps-2">
             <nav class="navbar navbar-light bg-dark ps-3 rounded-bottom">
                 <button class="btn btn-outline-light" (click)="toggleSidebar()"> 
                     <i class="fas fa-bars"></i>

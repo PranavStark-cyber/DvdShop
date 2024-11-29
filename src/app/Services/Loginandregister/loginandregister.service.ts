@@ -9,7 +9,7 @@ export class LoginandregisterService {
 
   constructor(private http:HttpClient) { }
 
-  useurl:string ="https://dbk4n8j8-7067.asse.devtunnels.ms//api/User";
+  useurl:string ="https://localhost:7067/api/User";
 
   register(user:User){
     return this.http.post<User>(this.useurl+"/register",user)
