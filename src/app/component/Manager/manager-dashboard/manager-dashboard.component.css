@@ -5,7 +5,8 @@
   background: #f8f9fa;
   border-right: 1px solid #dee2e6;
   padding: 15px;
-
+  height: 100vh;
+  margin-bottom: 0px !important;
 }
 
 .content {
@@ -28,7 +29,7 @@
 
 .sidebar.collapsed {
   width: 70px;
-  height: auto  ;
+  /* height: auto  ; */
 }
 
 .sidebar img {

@@ -1,1 +1,46 @@
-<p>dvd-details works!</p>
+<div *ngIf="dvd; else loading" class="card">
+    <div class="card-header">
+      <h1 class="card-title">{{ dvd.title }}</h1>
+    </div>
+  
+    <div class="card-body">
+      <div class="card-image">
+        <img [src]="dvd.imageUrl" alt="{{ dvd.title }}" class="dvd-image">
+      </div>
+  
+      <div class="card-details">
+        <div class="detail-item">
+          <strong>Genre:</strong> <span>{{ dvd.genre?.name }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Director:</strong> <span>{{ dvd.director?.name }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Release Date:</strong> <span>{{ dvd.releaseDate | date }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Price:</strong> <span class="price" style="color: green;">${{ dvd.price }}</span>
+        </div>
+        <div class="detail-item">
+          <strong>Description:</strong> <p>{{ dvd.description }}</p>
+        </div>
+  
+        <div class="counts">
+          <div class="count-item">
+            <i class="fas fa-random"></i> <strong>Rentals:</strong> <span>{{ dvd.rentals ? dvd.rentals.length : 0 }}</span>
+          </div>
+          <div class="count-item">
+            <i class="fas fa-calendar-check"></i> <strong>Reservations:</strong> <span>{{ dvd.reservations ? dvd.reservations.length : 0 }}</span>
+          </div>
+          <div class="count-item">
+            <i class="fas fa-cogs"></i> <strong>Inventory:</strong> <span>{{ dvd.inventory ? dvd.inventory.length : 0 }}</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <ng-template #loading>
+    <p class="loading-text">Loading DVD details...</p>
+  </ng-template>
+  

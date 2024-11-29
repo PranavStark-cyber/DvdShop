@@ -67,10 +67,9 @@ import { PasswordStrengthService } from '../../../Services/password-strength.ser
     const password = this.signupForm.get('password')?.value;
     this.passwordStrength = this.passwordStrengthService.calculatePasswordStrength(password);
   }
-
   Registeruser() {
     var user = this.signupForm.value;
-
+  
     const userregister: User = {
       firstName: user.FirstName,
       lastName: user.LastName,
@@ -78,22 +77,28 @@ import { PasswordStrengthService } from '../../../Services/password-strength.ser
       nic: user.Nic,
       password: user.password
     };
-
-    this.loginregister.register(userregister).subscribe(data => {
-      this.toastr.success("Registration successful! A verification code has been sent to your email.", "", {
-        positionClass: "toast-top-right",
-        progressBar: true,
-        timeOut: 4000
-      });
-      this.isVerificationMode = true; 
-    }, error => {
-      this.toastr.warning("User registration failed: " + error.error.title, "", {
-        positionClass: "toast-top-right",
-        progressBar: true,
-        timeOut: 4000
-      });
+  
+    this.loginregister.register(userregister).subscribe({
+      next: (data) => {
+        // Assuming the backend returns a success message
+        this.toastr.success("Registration successful! A verification code has been sent to your email.", "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 4000
+        });
+        this.isVerificationMode = true;
+      },
+      error: (error) => {
+        // Handle error message from backend
+        this.toastr.warning(error.error.message || "User registration failed", "", {
+          positionClass: "toast-top-right",
+          progressBar: true,
+          timeOut: 4000
+        });
+      }
     });
   }
+  
 
   verifyEmail() {
     const email = this.signupForm.get('email')?.value;
@@ -123,3 +128,56 @@ import { PasswordStrengthService } from '../../../Services/password-strength.ser
 
  
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Registeruser() {
+//   var user = this.signupForm.value;
+
+//   const userregister: User = {
+//     firstName: user.FirstName,
+//     lastName: user.LastName,
+//     email: user.email,
+//     nic: user.Nic,
+//     password: user.password
+//   };
+
+//   this.loginregister.register(userregister).subscribe(data => {
+//     this.toastr.success("Registration successful! A verification code has been sent to your email.", "", {
+//       positionClass: "toast-top-right",
+//       progressBar: true,
+//       timeOut: 4000
+//     });
+//     this.isVerificationMode = true; 
+//   }, error => {
+//     this.toastr.warning("User registration failed: " + error.error.title, "", {
+//       positionClass: "toast-top-right",
+//       progressBar: true,
+//       timeOut: 4000
+//     });
+//   });
+// }

@@ -12,7 +12,8 @@ export class LoginandregisterService {
   useurl:string ="https://localhost:7067/api/User";
 
   register(user:User){
-    return this.http.post<User>(this.useurl+"/register",user)
+    return this.http.post<User>(this.useurl+"/register",user
+    )
   }
 
   Loginuser(login:Login){

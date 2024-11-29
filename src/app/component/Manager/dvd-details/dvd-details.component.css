@@ -1,0 +1,128 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@300;500&display=swap');
+
+/* Global Card Styling */
+.card {
+    max-width: 900px;
+    margin: 40px auto;
+    border-radius: 10px;
+    background-color: #fff;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    font-family: 'Roboto', sans-serif;
+  }
+
+  .card-header {
+    background-color: #1f1f1f;
+    color: #fff;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card-title {
+    font-size: 2.5em;
+    font-weight: 600;
+    text-transform: capitalize;
+  }
+  
+  .card-body {
+    display: flex;
+    gap: 30px;
+    padding: 20px;
+  }
+  
+  .card-image {
+    flex: 1;
+    max-width: 35%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dvd-image {
+    width: 100%;
+    max-width: 320px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .dvd-image:hover {
+    transform: scale(1.05);
+  }
+  
+  .card-details {
+    flex: 2;
+    max-width: 60%;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .detail-item {
+    font-size: 1.2em;
+    color: #333;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .detail-item strong {
+    color: #555;
+    font-weight: 900;
+  }
+  
+  .detail-item span {
+    color: #555;
+    font-weight: 700;
+  }
+  
+  .price {
+    font-size: 1.3em;
+    color: #ff6347; /* Tomato color */
+  }
+  
+  .counts {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+  
+  .count-item {
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #333;
+  }
+  
+  .count-item i {
+    font-size: 1.4em;
+    color: #4caf50; /* Green color */
+  }
+  
+  .loading-text {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: 500;
+    color: #888;
+  }
+  
+  /* Responsive Layout */
+  @media (max-width: 768px) {
+    .card-body {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .card-image {
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+  
+    .card-details {
+      max-width: 100%;
+    }
+  }
+  
