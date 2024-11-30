@@ -1,1 +1,29 @@
-<p>customer works!</p>
+<div class="table-responsive">
+    <table class="table table">
+        <thead class="table-dark rounded-top">
+            <tr class="text-center">
+              <th>DVD Image</th>
+              <th>Title</th>
+              <th>Genre</th>
+              <th>Director</th>
+              <th>Release Date</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody class="rounded-bottom">
+            <tr *ngFor="let dvd of dvds" class="text-center">
+              <td style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;width:auto;">
+                <img [src]="dvd.imageUrl" alt="DVD Cover" style="width:80px; height: 100%;"  />
+              </td>
+              <td>{{ dvd.title }}</td>
+              <td>{{ dvd.genre.name }}</td>
+              <td>{{ dvd.director.name }}</td>
+              <td >
+                <!-- <button class="btn btn-sm " style="border-color:transparent ;"  (click)="openDeletePopup(dvd.id)"><i class="bi bi-trash3 text-danger  border border-danger p-2 rounded"></i></button> -->
+                <!-- <button class="btn btn-sm" style="border-color:transparent ;" [routerLink]="['/Manager/Dvd-Details',dvd.id]" data-bs-toggle="modal" data-bs-target="#Moredetails"><i class="bi bi-journal-text text-info border border-info p-2 rounded"></i>
+                </button> -->
+              </td>
+            </tr>
+          </tbody>
+    </table>
+  </div>
