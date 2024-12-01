@@ -7,11 +7,16 @@ import { Dvd, DvdRequest } from '../../modals/customer';
 import { ToastrService } from 'ngx-toastr';
 import { DVD } from '../../landingpage/landingpage.component';
 import { RouterLink } from '@angular/router';
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import {MatTableDataSource, MatTableModule} from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatSort, MatSortModule } from '@angular/material/sort';
+import {MatInputModule} from '@angular/material/input';
 
 @Component({
   selector: 'app-dvds',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,RouterLink],
+  imports: [ReactiveFormsModule, CommonModule,RouterLink,MatTableModule,MatPaginatorModule,MatSortModule,MatInputModule],
   templateUrl: './dvds.component.html',
   styleUrls: ['./dvds.component.css']
 })
@@ -31,7 +36,12 @@ export class DvdsComponent implements OnInit {
   selectedDvd: any = null;
   DID?: string;
 
-  
+  displayedColumns: string[] = ['image', 'title', 'genre', 'director', 'releaseDate', 'actions'];
+  dataSource: MatTableDataSource<any> = new MatTableDataSource();
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
   constructor(
     private fb: FormBuilder,
     private toastr: ToastrService, // Inject ToastrService
@@ -77,6 +87,22 @@ export class DvdsComponent implements OnInit {
       directorDescription: [''],
     });
   }
+
+
+  ngAfterViewInit() {
+    // Initialize paginator for the table after view is initialized
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
   clearForm(): void {
     this.dvdForm.reset();
     this.imagePreview = null;
@@ -86,7 +112,10 @@ export class DvdsComponent implements OnInit {
 
   loadDvds(): void {
     this.managerService.GetAllDvds().subscribe(
-      (data) => (this.dvds = data),
+      (data) => {
+        this.dvds = data;  // Set the dvds array to the fetched data
+        this.dataSource.data = this.dvds;  // Bind the fetched data to the table dataSource
+      },
       (error) => this.toastr.error('Failed to load DVDs.', 'Error')
 
     );
@@ -216,7 +245,7 @@ UpdateDvd(): void {
     this.managerService.updateDvd(this.DID!,payload).subscribe(
       () => {
         this.toastr.success('DVD updated successfully!', 'Success');
-     
+     this.loadDvds();
       },
       (error) => this.toastr.error('Failed to update DVD.', 'Error')
     );

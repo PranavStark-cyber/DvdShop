@@ -1,61 +1,76 @@
-export interface User{
-    firstName:string;
-    lastName:string;
-    email:string;
-    nic:string;
-    password:string;
+export interface User {
+    firstName: string;
+    lastName: string;
+    email: string;
+    nic: string;
+    password: string;
 }
 
-export interface Login{
-    nic:string;
-    password:string;
+export interface Login {
+    nic: string;
+    password: string;
 }
 
 
-export interface Verifyemail{
-    email:string;
-    otp:number;   
+export interface Verifyemail {
+    email: string;
+    otp: number;
 }
 
-export interface Director{
-    id:number,
-    name:string,
-    decriptions:number,
+export interface Director {
+    id: number,
+    name: string,
+    decriptions: number,
 }
 
-export interface genres{
-    id:number,
-    name:string
+export interface genres {
+    id: number,
+    name: string
 }
 
 export interface Dvd {
-    id: string;          
+    id: string;
     title: string;
     genreId: number;
     directorId: number;
-    releaseDate: string;  
+    releaseDate: string;
     price: number;
     description: string;
     imageUrl: string;
-    genre: genres;         
-    director: Director; 
+    genre: genres;
+    director: Director;
     // rentals: Rental[];    
     // reviews: Review[];    
     // inventory: Inventory; 
     // reservations: Reservation[]; 
-  }
+}
 
-  export interface DvdRequest {        
+export interface DvdRequest {
     title: string;
     genreId?: number;
     genreName?: string;
     directorId?: number;
     directorName?: string;
     directorDescription?: string;
-    releaseDate: string;  
+    releaseDate: string;
     price: number;
     description: string;
     imageUrl: string;
     totalCopies: number;
-  }
-  
+}
+
+
+export interface Customer {
+    id: string;
+    nic: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    joinDate: string; 
+    rentals: any[]; 
+    payments: any[]; 
+    reviews: any[]; 
+    reservations: any | null; 
+    notifications: any[]; 
+    address: any | null;
+}

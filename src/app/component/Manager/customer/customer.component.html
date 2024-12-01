@@ -1,32 +1,42 @@
-<!-- <div class="table-responsive">
-    <table class="table table">
-        <thead class="table-dark rounded-top">
-            <tr class="text-center">
-              <th>DVD Image</th>
-              <th>Title</th>
-              <th>Genre</th>
-              <th>Director</th>
-              <th>Release Date</th>
-              <th>Action</th>
-            </tr>
-          </thead>
-          <tbody class="rounded-bottom">
-            <tr *ngFor="let dvd of dvds" class="text-center">
-              <td style="display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center;width:auto;">
-                <img [src]="dvd.imageUrl" alt="DVD Cover" style="width:80px; height: 100%;"  />
-              </td>
-              <td>{{ dvd.title }}</td>
-              <td>{{ dvd.genre.name }}</td>
-              <td>{{ dvd.director.name }}</td>
-              <td > -->
-                <!-- <button class="btn btn-sm " style="border-color:transparent ;"  (click)="openDeletePopup(dvd.id)"><i class="bi bi-trash3 text-danger  border border-danger p-2 rounded"></i></button> -->
-                <!-- <button class="btn btn-sm" style="border-color:transparent ;" [routerLink]="['/Manager/Dvd-Details',dvd.id]" data-bs-toggle="modal" data-bs-target="#Moredetails"><i class="bi bi-journal-text text-info border border-info p-2 rounded"></i>
-                </button> -->
-              <!-- </td>
-            </tr>
-          </tbody>
-    </table>
-  </div> -->
+<mat-form-field>
+  <mat-label>Search Dvd</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. Raju" #input>
+</mat-form-field>
 
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" class="mat-table" style="border-radius: 50%;">
+  
+    <!-- NIC Column -->
+    <ng-container matColumnDef="nic">
+      <th mat-header-cell *matHeaderCellDef> NIC </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.nic }} </td>
+    </ng-container>
 
+    <!-- First Name Column -->
+    <ng-container matColumnDef="firstName">
+      <th mat-header-cell *matHeaderCellDef> First Name </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.firstName }} </td>
+    </ng-container>
 
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef> Phone Number </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.phoneNumber }} </td>
+    </ng-container>
+
+    <!-- Join Date Column -->
+    <ng-container matColumnDef="joinDate">
+      <th mat-header-cell *matHeaderCellDef> Join Date </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.joinDate | date: 'mediumDate' }} </td>
+    </ng-container>
+
+    <!-- Table Header Row -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <!-- Table Data Row -->
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <!-- MatPaginator -->
+  <mat-paginator [pageSizeOptions]="[5,10,15,20,25,30]" showFirstLastButtons aria-label="Select page of Customers">
+  </mat-paginator>
+</div>

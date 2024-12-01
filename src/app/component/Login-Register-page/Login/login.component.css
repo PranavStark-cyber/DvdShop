@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Lexend:wght@600..900&family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
+
 .password-strength-meter {
   height: 5px;
   width: 100%;
@@ -118,4 +120,11 @@
 
 .icon-container:hover .tooltip {
   display: block;
+}
+
+.lexand{
+  
+  font-family: "Ubuntu", serif;
+  font-weight: 600;
+  font-style: normal;
 }

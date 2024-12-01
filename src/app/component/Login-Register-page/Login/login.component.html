@@ -5,10 +5,10 @@
             style="border-radius: 12px;backdrop-filter: blur(13px); width: 55vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37); height: max-content;">
             <div class="d-flex gap-3">
                 <div style="width:100%;">
-                    <h1 class="mb-3 h1 " style="text-align: center;font-weight: 700;">Log in</h1>
-                    <h4 class="mb-3  mt-4 " style="text-align: start;">Welcome Back, <Span class="h5">Watcher</Span>
-                    </h4>
-                    <form [formGroup]="signinForm" (ngSubmit)="Loginuser()" class=" mt-4">
+                    <h2 class="mb-3 " style="text-align: center;font-weight: 550;font-family: Roboto Slab;">Login</h2>
+                    <h5 class="mb-3  mt-4 Lexand" style="text-align: start;font-family: Lexend;">Welcome Back, <Span class="h5" style="font-family: Kanit;">Watcher</Span>
+                    </h5>
+                    <form [formGroup]="signinForm" (ngSubmit)="Loginuser()" class=" mt-4" >
                         <div class="form-group mb-3 mt-4">
                             <div class="input-group">
                                 <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i></div>
@@ -54,8 +54,10 @@
                                 Remember me
                             </label>
                         </div>
+                         <div class="text-center">
+                        <button type="submit" class="btn btn-primary align-items-center w-75" [disabled]="!signinForm.valid">LogIn</button>
 
-                        <button type="submit" class="btn btn-primary w-100" [disabled]="!signinForm.valid">Log In</button>
+                         </div>
                         <p class="text-center  mt-3">
                             <a href="#" class="text-white" routerLink="/Dvd/Register">Create an account</a>
                         </p>
