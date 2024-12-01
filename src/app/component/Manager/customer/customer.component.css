@@ -10,4 +10,10 @@ table {
   
   td, th {
     width: 10%;
+    
+  }
+
+  .mat-mdc-header-row{
+    background-color: rgb(116, 116, 116);
+    border-radius: 50%;
   }

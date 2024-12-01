@@ -13,15 +13,14 @@ import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-customer',
   standalone: true,
-  imports: [CommonModule, MatProgressSpinnerModule, CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule],
+  imports: [RouterLink,CommonModule, MatProgressSpinnerModule, CommonModule, MatTableModule, MatPaginatorModule, MatSortModule, MatInputModule],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'
 })
 export class CustomerComponent implements OnInit {
 
-
   customers: any[] = [];
-  displayedColumns: string[] = ['nic', 'firstName', 'phoneNumber', 'joinDate'];
+  displayedColumns: string[] = ['nic', 'firstName', 'country', 'phoneNumber', 'joinDate', 'details'];
   dataSource: MatTableDataSource<any> = new MatTableDataSource();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -34,7 +33,6 @@ export class CustomerComponent implements OnInit {
   }
 
   ngAfterViewInit(): void {
-    // After the view initializes, set the paginator and sort properties
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
   }
@@ -51,15 +49,13 @@ export class CustomerComponent implements OnInit {
   loadCustomers(): void {
     this.customerService.GetAllCustomer().subscribe(
       (data) => {
-        this.customers = data; // Assuming `data` is an array of customers
-        this.dataSource.data = this.customers; // Bind data to table
+        this.customers = data;
+        this.dataSource.data = this.customers;
         console.log(this.customers);
-        
       },
       (error) => {
         this.toastr.error('Failed to load Customers.', 'Error');
       }
     );
   }
-
 }

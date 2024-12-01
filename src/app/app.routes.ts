@@ -11,6 +11,7 @@ import { RentalsComponent } from './component/Manager/rentals/rentals.component'
 import { CustomerComponent } from './component/Manager/customer/customer.component';
 import { DashboardComponent } from './component/Manager/dashboard/dashboard.component';
 import { DvdDetailsComponent } from './component/Manager/dvd-details/dvd-details.component';
+import { CustomerDetailsComponent } from './component/Manager/customer-details/customer-details.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -19,7 +20,7 @@ export const routes: Routes = [
     {path:'Dvd/Login' , component:LoginComponent},
 
     {
-       path:'Customer',component:CustomerDashboardComponent,children:[
+       path:'Customer/:id',component:CustomerDashboardComponent,children:[
          {path:'Moviecollection' , component:MovieListComponent},
          {path:'Moviedetails/:id' , component:MovieDetailsComponent}
        ]
@@ -28,8 +29,10 @@ export const routes: Routes = [
         path:'Manager',component:ManagerDashboardComponent,children:[
          {path:'Dvd' , component:DvdsComponent},
          {path:'Dvd-Details/:id' , component:DvdDetailsComponent},
-         {path:'Rental' , component:RentalsComponent},
-         {path:'Customer' , component:CustomerComponent}
+         {path:'Customer' , component:CustomerComponent},
+         {path:'Customer-Details/:id' , component:CustomerDetailsComponent},
+         {path:'Rental' , component:RentalsComponent}
+
    
         ]
      }

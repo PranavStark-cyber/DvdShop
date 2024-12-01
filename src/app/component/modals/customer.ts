@@ -65,6 +65,7 @@ export interface Customer {
     nic: string;
     firstName: string;
     lastName: string;
+    email:string;
     phoneNumber: string;
     joinDate: string; 
     rentals: any[]; 
@@ -72,5 +73,12 @@ export interface Customer {
     reviews: any[]; 
     reservations: any | null; 
     notifications: any[]; 
-    address: any | null;
+    address: Address;
+}
+
+export interface Address{
+    id:string;
+    street:string;
+    city:string;
+    country:string;
 }

@@ -4,8 +4,8 @@
 </mat-form-field>
 
 <div class="mat-elevation-z8">
-  <table mat-table [dataSource]="dataSource" class="mat-table" style="border-radius: 50%;">
-  
+  <table mat-table [dataSource]="dataSource" class="mat-table">
+
     <!-- NIC Column -->
     <ng-container matColumnDef="nic">
       <th mat-header-cell *matHeaderCellDef> NIC </th>
@@ -18,6 +18,12 @@
       <td mat-cell *matCellDef="let customer"> {{ customer.firstName }} </td>
     </ng-container>
 
+    <!-- Email Column -->
+    <ng-container matColumnDef="country">
+      <th mat-header-cell *matHeaderCellDef> Country </th>
+      <td mat-cell *matCellDef="let customer"> {{ customer.address.country }} </td>
+    </ng-container>
+
     <!-- Phone Number Column -->
     <ng-container matColumnDef="phoneNumber">
       <th mat-header-cell *matHeaderCellDef> Phone Number </th>
@@ -28,6 +34,16 @@
     <ng-container matColumnDef="joinDate">
       <th mat-header-cell *matHeaderCellDef> Join Date </th>
       <td mat-cell *matCellDef="let customer"> {{ customer.joinDate | date: 'mediumDate' }} </td>
+    </ng-container>
+
+    <!-- Actions Column -->
+    <ng-container matColumnDef="details">
+      <th mat-header-cell *matHeaderCellDef> Details </th>
+      <td mat-cell *matCellDef="let customer">
+        <button class="btn btn-sm" style="border-color:transparent;" [routerLink]="['/Manager/Customer-Details', customer.id]">
+          <i class="bi bi-journal-text text-info border border-info p-2 rounded"></i>
+        </button>
+      </td>
     </ng-container>
 
     <!-- Table Header Row -->
