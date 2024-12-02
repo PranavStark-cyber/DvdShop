@@ -2,7 +2,7 @@ import { Component, HostListener, OnInit } from '@angular/core';
 import { SidebarService } from '../../../../Services/Dasboard/sidebar.service';
 import { BreadcrumbService } from '../../../../Services/Dasboard/breadcrumb.service';
 import { CommonModule } from '@angular/common';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 interface MenuItem {
   path: string;
@@ -13,7 +13,7 @@ interface MenuItem {
 @Component({
   selector: 'app-sidebar',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,RouterLinkActive],
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.css'], // Fixed styleUrls typo
 })
@@ -23,8 +23,8 @@ export class SidebarComponent implements OnInit {
 
   menuItems: MenuItem[] = [
     { path: '/Manager/DashBoard', icon: 'bi-speedometer2', label: 'Dashboard' },
-    { path: '/employees', icon: 'bi-people', label: 'Employees' },
-    { path: '/projects', icon: 'bi-folder', label: 'Projects' },
+    { path: '/Manager/Dvd', icon: 'bi-people', label: 'Dvd' },
+    { path: '/Manager/Customer', icon: 'bi-folder', label: 'Projects' },
     { path: '/attendance', icon: 'bi-clock-history', label: 'Attendance' },
     { path: '/clients', icon: 'bi-person-badge', label: 'Clients' },
     { path: '/leave-management', icon: 'bi-calendar-check', label: 'Leave Management' },
