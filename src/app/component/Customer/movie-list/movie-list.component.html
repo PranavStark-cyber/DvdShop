@@ -1,9 +1,12 @@
-<div class="collection z-3 p-0" style="width: 100%; ">
+
+  <div class="collection z-3 p-0" style="width: 100%;  min-height: calc(100vh - 50px); ">
   <div class="content-container row p-0 m-0 g-0">
     <!-- Featured Content -->
-    <div class="col-12 featured-content p-0"
-      style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('/Background image/Mufasa.jpg');">
+    <div class="col-12 col-xl-12 featured-content p-0"
+      style="background: linear-gradient(to bottom, rgba(0,0,0,0), #151515), url('/Background image/back.jpg');  height: 50vh;object-fit: cover;  
+      padding: 50px;">
       <div class="m-5">
+        <img src="/Background image/back font.png" alt="" style="width: 200px;z-index: 100;">
         <p class="featured-desc">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Iusto illo dolor
           deserunt nam assumenda ipsa eligendi dolore, ipsum id fugiat quo enim impedit, laboriosam omnis
           minima voluptatibus incidunt. Accusamus, provident.</p>
@@ -14,7 +17,15 @@
 
     <!-- Trending collection -->
     <div class="movie-list-container">
-      <h1 class="movie-list-title mt-0" style="font-family:'Roboto', sans-serif;">Trending Movies</h1>
+      <h1 class="movie-list-title mt-0" style="font-family:'Roboto';display: block;
+      font-size: 2em;
+      margin-block-start: 0.67em;
+      margin-block-end: 0.67em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      font-weight: bold!important;
+      unicode-bidi: isolate;
+  " >TRENDING MOVIES</h1>
       <div class="movie-list-wrapper">
         <div class="movie-list row flex-nowrap"
           [style.transform]="sections[0].currentIndex | slideTransformPipe: cardWidth : sections[0].direction : DVDs.length : visibleCards">
@@ -36,7 +47,7 @@
 
     <!-- New Releases -->
     <div class="movie-list-container">
-      <h1 class="movie-list-title mt-0" style="font-family:'Roboto', sans-serif;">New Releases Movies</h1>
+      <h1 class="movie-list-title mt-0" style="font-family:'Roboto';font-size: 2em;font-weight: bold;" >New Releases Movies</h1>
       <div class="movie-list-wrapper">
         <div class="movie-list row flex-nowrap"
           [style.transform]="sections[1].currentIndex | slideTransformPipe: cardWidth : sections[1].direction : DVDs.length : visibleCards">
