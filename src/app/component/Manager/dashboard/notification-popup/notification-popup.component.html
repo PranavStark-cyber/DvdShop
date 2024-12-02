@@ -1,0 +1,20 @@
+<div class="notification-popup shadow-lg">
+    <div class="notification-header p-3 border-bottom">
+      <h6 class="mb-0">Notifications</h6>
+    </div>
+    <div class="notification-body">
+      <div *ngFor="let notification of notifications$ | async" 
+           class="notification-item p-3 border-bottom" 
+           [class.unread]="!notification.read"
+           (click)="markAsRead(notification.id)">
+        <div class="d-flex justify-content-between">
+          <h6 class="mb-1">{{ notification.title }}</h6>
+          <small class="text-muted">{{ notification.time }}</small>
+        </div>
+        <p class="mb-0 text-muted">{{ notification.message }}</p>
+      </div>
+    </div>
+    <div class="notification-footer p-2 text-center border-top">
+      <a href="#" class="text-decoration-none">View All Notifications</a>
+    </div>
+  </div>

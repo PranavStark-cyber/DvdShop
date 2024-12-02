@@ -1,0 +1,32 @@
+.notification-popup {
+    width: 320px;
+    background: white;
+    border-radius: 8px;
+    max-height: 400px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .notification-body {
+    overflow-y: auto;
+    max-height: 300px;
+  }
+
+  .notification-item {
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+
+  .notification-item:hover {
+    background-color: #f8f9fa;
+  }
+
+  .notification-item.unread {
+    background-color: #f0f7ff;
+  }
+
+  .notification-item.unread:hover {
+    background-color: #e5f1ff;
+  }
+
+  

@@ -1,0 +1,24 @@
+<div class="container-fluid py-4">
+    <h2 class="mb-4">Dashboard</h2>
+    
+    <div class="row g-4 mb-4">
+      <div class="col-md-3 " *ngFor="let card of statCards" style="height: 25vh;">
+        <app-stat-card [data]="card"></app-stat-card>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <div class="col-md-6">
+        <app-chart-card 
+          title="Products Chart" 
+          [data]="productsChartData">
+        </app-chart-card>
+      </div>
+      <div class="col-md-6">
+        <app-chart-card 
+          title="Profit Chart" 
+          [data]="profitChartData">
+        </app-chart-card>
+      </div>
+    </div>
+  </div>

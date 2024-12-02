@@ -1,0 +1,12 @@
+<div class="card stat-card" [ngClass]="'bg-' + data.color" style="height: 25vh;font-size: 1.25rem;font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
+    <div class="card-body text-white">
+      <h5 class="card-title" style="font-size: 1.25rem;font-weight: 500;line-height: 1.2;">{{ data.title }}</h5>
+      <h2 class="card-text"  style="font-size: 2rem;font-weight: 500;line-height: 1.2;">{{ data.value }}</h2>
+      <div class="mt-2">
+        <small style="font-size: .875em;">
+          <i [class]="data.percentage >= 0 ? 'bi bi-arrow-up' : 'bi bi-arrow-down'"></i>
+          {{ Math.abs(data.percentage) }}%
+        </small>
+      </div>
+    </div>
+  </div>

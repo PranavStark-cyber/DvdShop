@@ -9,9 +9,9 @@ import { ManagerDashboardComponent } from './component/Manager/manager-dashboard
 import { DvdsComponent } from './component/Manager/dvds/dvds.component';
 import { RentalsComponent } from './component/Manager/rentals/rentals.component';
 import { CustomerComponent } from './component/Manager/customer/customer.component';
-import { DashboardComponent } from './component/Manager/dashboard/dashboard.component';
 import { DvdDetailsComponent } from './component/Manager/dvd-details/dvd-details.component';
 import { CustomerDetailsComponent } from './component/Manager/customer-details/customer-details.component';
+import { DashboardDetailsComponent } from './component/Manager/dashboard-details/dashboard-details.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -27,6 +27,7 @@ export const routes: Routes = [
     },
     {
         path:'Manager',component:ManagerDashboardComponent,children:[
+         {path:'DashBoard' , component:DashboardDetailsComponent},
          {path:'Dvd' , component:DvdsComponent},
          {path:'Dvd-Details/:id' , component:DvdDetailsComponent},
          {path:'Customer' , component:CustomerComponent},

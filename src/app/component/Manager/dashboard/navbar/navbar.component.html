@@ -1,0 +1,59 @@
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+    <div class="container-fluid">
+      <div class="d-flex align-items-center">
+        <button class="btn btn-link text-dark me-3 d-flex align-items-center" 
+                (click)="toggleSidebar()"
+                [class.rotate]="isCollapsed$ | async">
+          <i class="bi bi-list fs-4"></i>
+        </button>
+        
+        <nav aria-label="breadcrumb" class="d-none d-sm-block">
+          <ol class="breadcrumb mb-0">
+            <li class="breadcrumb-item">
+              <a routerLink="/dashboard" class="text-decoration-none">
+                <i class="bi bi-house-door"></i>
+              </a>
+            </li>
+            <li class="breadcrumb-item active">{{ currentBreadcrumb$ | async }}</li>
+          </ol>
+        </nav>
+      </div>
+  
+      <div class="navbar-actions d-flex align-items-center gap-3">
+        <button class="btn btn-link text-dark d-none d-lg-block">
+          <i class="bi bi-arrows-fullscreen fs-5"></i>
+        </button>
+  
+        <div class="dropdown notification-dropdown">
+          <button class="btn btn-link text-dark position-relative" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false">
+            <i class="bi bi-bell fs-5"></i>
+            <span *ngIf="(unreadCount$ | async)"
+                  class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+              {{ unreadCount$ | async }}
+            </span>
+          </button>
+          <div class="dropdown-menu dropdown-menu-end p-0">
+            <app-notification-popup></app-notification-popup>
+          </div>
+        </div>
+  
+        <div class="dropdown profile-dropdown">
+          <button class="btn btn-link text-dark dropdown-toggle d-flex align-items-center gap-2" 
+                  type="button" 
+                  data-bs-toggle="dropdown" 
+                  aria-expanded="false">
+            <img src="https://via.placeholder.com/32" class="rounded-circle" alt="User">
+            <span class="d-none d-lg-block">Emily Smith</span>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end">
+            <li><a class="dropdown-item" href="#"><i class="bi bi-person me-2"></i>Profile</a></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-gear me-2"></i>Settings</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item" href="#"><i class="bi bi-box-arrow-right me-2"></i>Logout</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </nav>

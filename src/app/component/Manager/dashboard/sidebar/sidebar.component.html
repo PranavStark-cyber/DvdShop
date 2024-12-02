@@ -1,0 +1,39 @@
+<div class="sidebar bg-dark text-white" [class.collapsed]="isCollapsed$ | async" [class.mobile-collapsed]="isMobile">
+    <div class="logo-container p-3 d-flex align-items-center justify-content-between">
+      <div class="d-flex align-items-center">
+        <h4 class="mb-0 ms-2" [class.d-none]="(isCollapsed$ | async) || isMobile">AtrioHR</h4>
+      </div>
+      <button class="btn-close-sidebar d-block d-lg-none" (click)="toggleSidebar()">
+        <i class="bi bi-x fs-4 text-white"></i>
+      </button>
+    </div>
+  
+    <div class="user-info p-3 border-bottom text-center">
+      <div class="user-avatar-wrapper mb-2">
+        <img src="/manager.jpg" class="rounded-circle user-avatar" alt="User">
+      </div>
+      <div [class.d-none]="(isCollapsed$ | async) || isMobile">
+        <h6 class="mb-1">Emily Smith</h6>
+        <span class="badge bg-primary">Manager</span>
+      </div>
+    </div>
+  
+    <div class="menu-wrapper">
+      <ul class="nav flex-column p-3">
+        <li class="nav-item" *ngFor="let item of menuItems">
+          <a class="nav-link d-flex align-items-center"
+             [routerLink]="[item.path]"
+             routerLinkActive="active"
+             (click)="updateBreadcrumb(item.label)">
+            <i [class]="'bi ' + item.icon + ' menu-icon'"></i>
+            <span class="menu-text" [class.d-none]="(isCollapsed$ | async) || isMobile">
+              {{ item.label }}
+            </span>
+            <span class="menu-tooltip" *ngIf="(isCollapsed$ | async) || isMobile">
+              {{ item.label }}
+            </span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
