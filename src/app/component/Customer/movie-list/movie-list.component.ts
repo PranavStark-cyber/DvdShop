@@ -85,10 +85,10 @@ export class MovieListComponent {
     }
   ];
 
-  cardWidth = 340; // Width of each card
+  cardWidth = 340; 
   visibleCards = Math.floor(window.innerWidth / this.cardWidth);
 
-  // Separate states for each section
+
   sections = [
     { currentIndex: 0, direction: 'right' as 'left' | 'right' },
     { currentIndex: 0, direction: 'right' as 'left' | 'right' },
