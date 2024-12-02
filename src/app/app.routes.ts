@@ -20,7 +20,7 @@ export const routes: Routes = [
     {path:'Dvd/Login' , component:LoginComponent},
 
     {
-       path:'Customer/:id',component:CustomerDashboardComponent,children:[
+       path:'Customer',component:CustomerDashboardComponent,children:[
          {path:'Moviecollection' , component:MovieListComponent},
          {path:'Moviedetails/:id' , component:MovieDetailsComponent}
        ]

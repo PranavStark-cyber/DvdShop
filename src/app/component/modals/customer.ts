@@ -65,16 +65,48 @@ export interface Customer {
     nic: string;
     firstName: string;
     lastName: string;
-    email:string;
+    email: string;
     phoneNumber: string;
     joinDate: string; 
-    rentals: any[]; 
-    payments: any[]; 
-    reviews: any[]; 
-    reservations: any | null; 
-    notifications: any[]; 
-    address: Address;
-}
+    rentals: Rental[];  // You can include rental details like movie name, rental date, etc.
+    payments: Payment[]; // Include details like payment date, amount, status
+    reviews: Review[];   // Include review ratings, comments, etc.
+    reservations: Reservation | null; // If the customer has any active reservations
+    notifications: Notification[]; // Notifications for the customer
+    address: Address; // Include full address details
+  }
+
+  export interface Rental {
+    rentalId: string;
+    rentalDate: string;
+    rentalItem: string;  // e.g. "DVD", "Book"
+  }
+  
+  export interface Payment {
+    paymentId: string;
+    amount: number;
+    paymentDate: string;
+    paymentMethod: string;  // e.g. "Credit Card", "PayPal"
+  }
+  
+  export interface Review {
+    reviewId: string;
+    rating: number;
+    comment: string;
+    reviewDate: string;
+  }
+  
+  export interface Reservation {
+    reservationId: string;
+    reservationDate: string;
+    item: string;  // e.g. "DVD", "Book"
+  }
+  
+  export interface Notification {
+    notificationId: string;
+    message: string;
+    date: string;
+  }
 
 export interface Address{
     id:string;

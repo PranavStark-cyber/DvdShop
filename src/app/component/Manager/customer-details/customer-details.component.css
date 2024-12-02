@@ -1,0 +1,181 @@
+/* Base Styles for Containers */
+.customer-profile {
+    background-color: #f4f7fa;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  }
+  
+  .card {
+    border-radius: 12px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    padding: 20px;
+  }
+  
+  /* Profile Section */
+  .profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+  }
+  
+  .profile-picture {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+  }
+  
+  /* Text Styles for Profile */
+  .profile-header h3 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: #333;
+  }
+  
+  .profile-header p {
+    font-size: 1rem;
+    color: #777;
+  }
+  
+  /* Contact Section Flex */
+  .profile-header .d-flex {
+    display: flex;
+    gap: 15px;
+  }
+  
+  .profile-header .d-flex span {
+    font-size: 0.9rem;
+    color: #555;
+  }
+  
+  .profile-header .d-flex i {
+    font-size: 1.2rem;
+    color: #007bff;
+  }
+  
+  /* Form Inputs */
+  .customer-info label {
+    font-weight: 600;
+    margin-bottom: 8px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .customer-info .form-control {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+    font-size: 1rem;
+    color: #333;
+  }
+  
+  .customer-info .form-control[readonly] {
+    background-color: #e9ecef;
+  }
+  
+  /* Breaks in Horizontal Lines */
+  hr {
+    border: 1px solid #ddd;
+    margin: 20px 0;
+  }
+  
+  /* For Responsive Grid */
+  @media (max-width: 576px) {
+    .profile-header {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .profile-header h3 {
+      font-size: 1.25rem;
+      text-align: center;
+    }
+  
+    .profile-header .d-flex {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .profile-picture {
+      width: 100px;
+      height: 100px;
+    }
+  
+    .customer-info .col-md-6 {
+      width: 100%;
+      margin-bottom: 10px;
+    }
+  }
+  
+  @media (min-width: 576px) and (max-width: 768px) {
+    .profile-header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .profile-picture {
+      width: 110px;
+      height: 110px;
+    }
+  
+    .customer-info .col-md-6 {
+      width: 48%;
+    }
+  }
+  
+  @media (min-width: 768px) and (max-width: 1200px) {
+    .profile-header {
+      flex-direction: row;
+      justify-content: space-between;
+    }
+  
+    .profile-picture {
+      width: 120px;
+      height: 120px;
+    }
+  
+    .customer-info .col-md-6 {
+      width: 48%;
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .profile-header {
+      flex-direction: row;
+      justify-content: flex-start;
+    }
+  
+    .profile-picture {
+      width: 130px;
+      height: 130px;
+    }
+  
+    .customer-info .col-md-6 {
+      width: 48%;
+    }
+  }
+  
+  @media (min-width: 1400px) {
+    .customer-profile {
+      padding: 50px;
+    }
+  
+    .card {
+      padding: 40px;
+    }
+  
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+    }
+  
+    .profile-header h3 {
+      font-size: 1.75rem;
+    }
+  }
+  

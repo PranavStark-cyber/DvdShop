@@ -79,13 +79,15 @@
 
 
 :root {
-  --sidebar-width: 250px;
+  --sidebar-width: 180px;
   --sidebar-collapsed-width: 70px;
   --navbar-height: 60px;
 }
 
 body {
-  background-color: #f8f9fa;
+
+  background-color: #f1f2f7;
+  font-family: Roboto;
   margin: 0;
   padding: 0;
   overflow-x: hidden;

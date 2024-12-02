@@ -1,1 +1,53 @@
-<p>customer-details works!</p>
+<div class="customer-profile container mt-4">
+    <div class="card p-4">
+      <!-- Profile Section -->
+      <div class="profile-header">
+        <img src="/Tony.jpg" alt="Customer" class="profile-picture me-3" />
+        <div>
+          <h3>{{ customer.firstName }} {{ customer.lastName }}</h3>
+          <p class="text-muted">{{ customer.email }}</p>
+          <div class="d-flex flex-column flex-sm-row">
+            <span><i class="bi bi-geo-alt"></i> {{ customer.address.city }}</span>
+            <span><i class="bi bi-telephone"></i> {{ customer.phoneNumber }}</span>
+            <span><i class="bi bi-envelope"></i> {{ customer.email }}</span>
+          </div>
+        </div>
+      </div>
+  
+      <hr />
+  
+      <!-- Customer Information Section -->
+      <div class="customer-info mt-4">
+        <div class="row g-3">
+          <div class="col-sm-12 col-md-6">
+            <label for="firstName">First Name</label>
+            <input type="text" id="firstName" class="form-control" [value]="customer.firstName" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="lastName">Last Name</label>
+            <input type="text" id="lastName" class="form-control" [value]="customer.lastName" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="email">Email</label>
+            <input type="text" id="email" class="form-control" [value]="customer.email" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="joinDate">Join Date</label>
+            <input type="text" id="joinDate" class="form-control" [value]="customer.joinDate" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="nic">NIC</label>
+            <input type="text" id="nic" class="form-control" [value]="customer.nic" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="phoneNumber">Phone Number</label>
+            <input type="text" id="phoneNumber" class="form-control" [value]="customer.phoneNumber" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="country">Country</label>
+            <input type="text" id="country" class="form-control" [value]="customer.address.country" readonly />
+          </div>
+          <div class="col-sm-12 col-md-6">
+            <label for="rentals">Rentals</label>
+            <
+  

@@ -24,7 +24,7 @@ export class SidebarComponent implements OnInit {
   menuItems: MenuItem[] = [
     { path: '/Manager/DashBoard', icon: 'bi-speedometer2', label: 'Dashboard' },
     { path: '/Manager/Dvd', icon: 'bi-people', label: 'Dvd' },
-    { path: '/Manager/Customer', icon: 'bi-folder', label: 'Projects' },
+    { path: '/Manager/Customer', icon: 'bi-folder', label: 'Customer' },
     { path: '/attendance', icon: 'bi-clock-history', label: 'Attendance' },
     { path: '/clients', icon: 'bi-person-badge', label: 'Clients' },
     { path: '/leave-management', icon: 'bi-calendar-check', label: 'Leave Management' },

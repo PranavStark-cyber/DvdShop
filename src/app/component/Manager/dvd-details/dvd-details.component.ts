@@ -15,6 +15,7 @@ import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 export class DvdDetailsComponent implements OnInit {
   dvd: any = null;
   id: string | null = null;
+  
 
   constructor(
     private route: ActivatedRoute,

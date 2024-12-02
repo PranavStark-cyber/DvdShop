@@ -1,46 +1,66 @@
-<div *ngIf="dvd; else loading" class="card">
-    <div class="card-header">
-      <h1 class="card-title">{{ dvd.title }}</h1>
-    </div>
-  
-    <div class="card-body">
-      <div class="card-image">
-        <img [src]="dvd.imageUrl" alt="{{ dvd.title }}" class="dvd-image">
+<div class="dvd-details-container container mt-4">
+  <!-- DVD Card -->
+  <div class="dvd-card">
+    <div class="dvd-header">
+      <img src="{{ dvd.imageUrl }}" alt="DVD Image" />
+      <div class="dvd-info">
+        <h2>{{ dvd.title }}</h2>
+        <p class="text-muted">{{ dvd.genre.name }} | Directed by: {{ dvd.director.name }}</p>
+        <p class="dvd-price">$ {{ dvd.price | currency }}</p>
+        <p class="dvd-details-highlight"><span>Release Date:</span> {{ dvd.releaseDate |date }}</p>
+        <p class="dvd-details-highlight"><span>Description:</span> {{ dvd.description }}</p>
       </div>
-  
-      <div class="card-details">
-        <div class="detail-item">
-          <strong>Genre:</strong> <span>{{ dvd.genre?.name }}</span>
+    </div>
+
+    <!-- Image Gallery Section for Multiple Images -->
+    <div class="dvd-gallery">
+      <img *ngFor="let image of dvd.images" [src]="image" alt="DVD Image" />
+    </div>
+
+    <!-- Rentals Section -->
+    <div class="rentals-section">
+      <h4>Rentals</h4>
+      <div *ngFor="let rental of dvd.rentals" class="rental-card">
+        <p class="rental-date">{{ rental.rentalDate }}</p>
+        <div class="rental-details">
+          <p>Rental Type: {{ rental.type }}</p>
+          <p>Duration: {{ rental.duration }} days</p>
+          <p>Price: $ {{ rental.price }}</p>
+          <p>Availability: {{ rental.available ? 'Available' : 'Out of Stock' }}</p>
         </div>
-        <div class="detail-item">
-          <strong>Director:</strong> <span>{{ dvd.director?.name }}</span>
+      </div>
+    </div>
+
+    <!-- Reviews Section -->
+    <div class="reviews-section">
+      <h4>Customer Reviews</h4>
+      <div *ngFor="let review of dvd.reviews" class="review-card">
+        <p class="rating">{{ review.rating }} ⭐</p>
+        <div class="full-review">
+          <p class="reviewer-name">{{ review.reviewerName }}</p>
+          <p>{{ review.comment }}</p>
         </div>
-        <div class="detail-item">
-          <strong>Release Date:</strong> <span>{{ dvd.releaseDate | date }}</span>
-        </div>
-        <div class="detail-item">
-          <strong>Price:</strong> <span class="price" style="color: green;">${{ dvd.price }}</span>
-        </div>
-        <div class="detail-item">
-          <strong>Description:</strong> <p>{{ dvd.description }}</p>
-        </div>
-  
-        <div class="counts">
-          <div class="count-item">
-            <i class="fas fa-random"></i> <strong>Rentals:</strong> <span>{{ dvd.rentals ? dvd.rentals.length : 0 }}</span>
-          </div>
-          <div class="count-item">
-            <i class="fas fa-calendar-check"></i> <strong>Reservations:</strong> <span>{{ dvd.reservations ? dvd.reservations.length : 0 }}</span>
-          </div>
-          <div class="count-item">
-            <i class="fas fa-cogs"></i> <strong>Inventory:</strong> <span>{{ dvd.inventory ? dvd.inventory.length : 0 }}</span>
-          </div>
-        </div>
+      </div>
+    </div>
+
+    <!-- Stock Section -->
+    <div class="stock-section">
+      <div [ngClass]="{ 'available': dvd.availableStock > 0, 'rented': dvd.currentRentals > 0, 'total': true }">
+        <h5>Total Stock</h5>
+        <p>{{ dvd.totalStock }}</p>
+      </div>
+      <div [ngClass]="{ 'available': dvd.availableStock > 0, 'rented': dvd.currentRentals > 0 }">
+        <h5>Current Rentals</h5>
+        <p>{{ dvd.currentRentals }}</p>
+      </div>
+    </div>
+
+    <!-- Reservation Status Section -->
+    <div class="reservation-status">
+      <div [ngClass]="{ 'reserved': dvd.reservations?.status === 'Reserved', 'available': dvd.reservations?.status === 'Available' }">
+        <h5>Reservation Status</h5>
+        <p>{{ dvd.reservations?.status }}</p>
       </div>
     </div>
   </div>
-  
-  <ng-template #loading >
-    <mat-spinner style="top: 40vh;left: 35vw;"></mat-spinner>
-  </ng-template>
-  
+</div>

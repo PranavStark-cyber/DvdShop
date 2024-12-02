@@ -1,129 +1,298 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Quicksand:wght@300;500&display=swap');
 
-/* Global Card Styling */
-.card {
-    max-width: 900px;
-    margin: 40px auto;
-    border-radius: 10px;
-    background-color: #fff;
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
-    font-family: 'Roboto', sans-serif;
+/* General Layout for DVD Details */
+.dvd-details-container {
+  padding: 30px;
+  background-color: #f7f8fa;
+  font-family: 'Arial', sans-serif;
+}
+
+.dvd-card {
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  margin-bottom: 30px;
+  transition: all 0.3s ease-in-out;
+}
+
+.dvd-card:hover {
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.dvd-header {
+  display: flex;
+  gap: 25px;
+  margin-bottom: 20px;
+}
+
+.dvd-header img {
+  width: 200px;
+  height: 270px;
+  object-fit: cover;
+  border-radius: 8px;
+  transition: transform 0.3s ease;
+}
+
+.dvd-header img:hover {
+  transform: scale(1.05);
+}
+
+.dvd-header .dvd-info {
+  flex: 1;
+}
+
+.dvd-header h2 {
+  font-size: 2rem;
+  color: #333;
+  font-weight: bold;
+}
+
+.dvd-header p {
+  color: #777;
+  font-size: 1.1rem;
+  margin: 5px 0;
+}
+
+.dvd-price {
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #007bff;
+  margin-top: 12px;
+}
+
+/* Hover Effects for Reviews */
+.reviews-section .review-card {
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.reviews-section .review-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.reviews-section .review-card p {
+  margin: 0;
+  color: #555;
+}
+
+.reviews-section .reviewer-name {
+  font-weight: 600;
+  color: #333;
+}
+
+.reviews-section .review-card .full-review {
+  display: none;
+  font-size: 1rem;
+  color: #555;
+}
+
+.reviews-section .review-card:hover .full-review {
+  display: block;
+}
+
+.reviews-section .review-card .rating {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #FFD700; /* Gold for rating */
+}
+
+/* Hover Effects for Rentals */
+.rentals-section .rental-card {
+  background-color: #fff;
+  border: 1px solid #e1e1e1;
+  padding: 20px;
+  margin-bottom: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transition: all 0.3s ease-in-out;
+}
+
+.rentals-section .rental-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.rentals-section .rental-card .rental-details {
+  display: none;
+}
+
+.rentals-section .rental-card:hover .rental-details {
+  display: block;
+}
+
+/* Stock Section */
+.stock-section {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 40px;
+}
+
+.stock-section div {
+  background-color: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  flex: 1;
+  margin: 0 15px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stock-section div:hover {
+  background-color: #e1e1e1;
+}
+
+.stock-section div h5 {
+  margin: 0;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #333;
+}
+
+/* Inventory Stock Classes */
+.stock-section .available {
+  background-color: #28a745; /* Green for available stock */
+  color: white;
+}
+
+.stock-section .rented {
+  background-color: #dc3545; /* Red for rented stock */
+  color: white;
+}
+
+.stock-section .total {
+  background-color: #f1f1f1; /* Neutral color for total stock */
+}
+
+/* Reservation Status */
+.reservation-status {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.reservation-status div {
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.reservation-status .reserved {
+  background-color: #ffc107; /* Yellow for reserved */
+  color: white;
+}
+
+.reservation-status .available {
+  background-color: #28a745; /* Green for available */
+  color: white;
+}
+
+.dvd-gallery img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 10px;
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.dvd-gallery img:hover {
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  .dvd-header {
+    flex-direction: column;
+    align-items: center;
   }
 
-  .card-header {
-    background-color: #1f1f1f;
-    color: #fff;
-    padding: 5px;
-    text-align: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  .dvd-header img {
+    margin-bottom: 20px;
   }
-  
-  .card-title {
-    font-size: 2.5em;
-    font-weight: 600;
-    text-transform: capitalize;
-    margin-bottom: 0;
-  }
-  
-  .card-body {
-    display: flex;
-    gap: 30px;
-    padding: 20px;
-  }
-  
-  .card-image {
-    flex: 1;
-    max-width: 35%;
-    display: flex;
-    justify-content: center;
+
+  .stock-section {
+    flex-direction: column;
     align-items: center;
   }
-  
-  .dvd-image {
-    width: 100%;
-    max-width: 320px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
-    transition: transform 0.3s ease-in-out;
+
+  .stock-section div {
+    margin-bottom: 15px;
   }
-  
-  .dvd-image:hover {
-    transform: scale(1.05);
-  }
-  
-  .card-details {
-    flex: 2;
-    max-width: 60%;
-    display: flex;
+
+  .reservation-status {
     flex-direction: column;
-    gap: 15px;
   }
-  
-  .detail-item {
-    font-size: 1.2em;
-    color: #333;
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .detail-item strong {
-    color: #555;
-    font-weight: 900;
-  }
-  
-  .detail-item span {
-    color: #555;
-    font-weight: 700;
-  }
-  
-  .price {
-    font-size: 1.3em;
-    color: #ff6347; /* Tomato color */
-  }
-  
-  .counts {
-    margin-top: 20px;
-    display: flex;
+}
+
+/* 
+.stock-section div {
+  background-color: #f8f9fa;
+  padding: 15px; 
+  border-radius: 8px;
+  flex: 1;
+  margin: 0 10px;  
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.stock-section div h5 {
+  margin: 0;
+  font-size: 1.4rem;  
+  font-weight: 600; 
+  color: #333;
+}
+
+.stock-section div p {
+  font-size: 1rem;  
+  color: #555;
+}
+
+
+.reservation-status div {
+  padding: 15px;  
+  border-radius: 10px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.reservation-status h5 {
+  font-size: 1.4rem; 
+  font-weight: 600;
+  color: #333;
+}
+
+.reservation-status p {
+  font-size: 1rem; 
+  color: #555;
+}
+
+@media (max-width: 768px) {
+  .stock-section {
     flex-direction: column;
-    gap: 15px;
-  }
-  
-  .count-item {
-    font-size: 1.2em;
-    display: flex;
     align-items: center;
-    gap: 10px;
-    color: #333;
   }
-  
-  .count-item i {
-    font-size: 1.4em;
-    color: #4caf50; /* Green color */
+
+  .stock-section div {
+    margin-bottom: 10px;  
+    padding: 12px; 
   }
-  
-  .loading-text {
-    text-align: center;
-    font-size: 1.2em;
-    font-weight: 500;
-    color: #888;
+
+  .reservation-status {
+    flex-direction: column;
   }
-  
-  /* Responsive Layout */
-  @media (max-width: 768px) {
-    .card-body {
-      flex-direction: column;
-      text-align: center;
-    }
-  
-    .card-image {
-      max-width: 100%;
-      margin-bottom: 20px;
-    }
-  
-    .card-details {
-      max-width: 100%;
-    }
+
+  .reservation-status div {
+    margin-bottom: 10px;
+    padding: 12px;  
   }
-  
+} */

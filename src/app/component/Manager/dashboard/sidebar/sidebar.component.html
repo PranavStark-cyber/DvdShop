@@ -1,20 +1,17 @@
-<div class="sidebar bg-dark text-white" [class.collapsed]="isCollapsed$ | async" [class.mobile-collapsed]="isMobile">
-    <div class="logo-container p-3 d-flex align-items-center justify-content-between">
-      <div class="d-flex align-items-center">
-        <h4 class="mb-0 ms-2" [class.d-none]="(isCollapsed$ | async) || isMobile">AtrioHR</h4>
+<div class="sidebar bg-dark  text-dark" [class.collapsed]="isCollapsed$ | async" [class.mobile-collapsed]="isMobile">
+    <div class="logo-container p-3 d-flex align-items-center justify-content-center">
+      <div class="d-flex align-items-center justify-content-center text-center">
+        <h4 class="mb-0 ms-2 text-center " [class.d-none]="(isCollapsed$ | async) || isMobile" style="font-family: Roboto;font-size: 24px;font-weight: 400;color: #ffffff;">AtrioHR</h4>
       </div>
-      <button class="btn-close-sidebar d-block d-lg-none" (click)="toggleSidebar()">
-        <i class="bi bi-x fs-4 text-white"></i>
-      </button>
     </div>
   
     <div class="user-info p-3 border-bottom text-center">
       <div class="user-avatar-wrapper mb-2">
-        <img src="/manager.jpg" class="rounded-circle user-avatar" alt="User">
+        <img src="/manager.jpg" class="user-avatar" alt="User">
       </div>
-      <div [class.d-none]="(isCollapsed$ | async) || isMobile">
-        <h6 class="mb-1">Emily Smith</h6>
-        <span class="badge bg-primary">Manager</span>
+      <div class="g-0 m-0" [class.d-none]="(isCollapsed$ | async) || isMobile">
+        <h6 class="m-0 " style="color: #ffffff;font-size: 15px;font-weight: 600;">Pranav Stark</h6>
+        <small class="m-0" style="font-size: 10px;font-family: Roboto;color: #ffffff">Manager</small>
       </div>
     </div>
   
