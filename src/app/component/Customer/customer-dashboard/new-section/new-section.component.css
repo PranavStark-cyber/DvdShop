@@ -38,3 +38,16 @@
     font-size: 0.875rem;
     color: #777;
   }
+
+
+  .carousel-inner {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .news-card {
+    margin: 0 auto;
+    text-align: center;
+  }
+  
