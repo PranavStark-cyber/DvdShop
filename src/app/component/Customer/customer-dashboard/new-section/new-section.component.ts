@@ -77,4 +77,27 @@ export class NewSectionComponent {
       "BackgroundUrl": "/Background image/Mufasa.jpg"
     }
   ];
+
+  currentIndex = 0;
+
+  moveLeft() {
+    if (this.currentIndex > 0) {
+      this.currentIndex--;
+      this.scrollToCurrentIndex();
+    }
+  }
+
+  moveRight() {
+    if (this.currentIndex < this.DVDs.length - 1) {
+      this.currentIndex++;
+      this.scrollToCurrentIndex();
+    }
+  }
+
+  private scrollToCurrentIndex() {
+    const scrollContainer = document.querySelector('.scroll-container') as HTMLElement;
+    const cardWidth = document.querySelector('.news-card')?.clientWidth || 0;
+    const offset = this.currentIndex * (cardWidth + 20); // 20px margin between cards
+    scrollContainer.scrollTo({ left: offset, behavior: 'smooth' });
+  }
 }

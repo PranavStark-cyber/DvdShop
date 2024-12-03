@@ -17,4 +17,6 @@ export class CloudinaryServiceService {
     formData.append('upload_preset', this.uploadPreset);
     return this.http.post(this.cloudinaryUrl, formData);
   }
+
+  
 }

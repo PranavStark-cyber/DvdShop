@@ -1,14 +1,71 @@
 <section class="news-section">
-    <h2 class="section-title">Now day's Trending</h2>
+  <h2 class="section-title">Now day's Trending</h2>
+
+  <!-- Left Arrow -->
+  <button
+    class="arrow-btn left-arrow"
+    (click)="moveLeft()"
+    [disabled]="currentIndex === 0"
+  >
+    &lt;
+  </button>
+
+  <div class="scroll-container">
     <div class="row g-4">
-      <div class="col-12 col-sm-6 col-md-3" *ngFor="let dvd of DVDs">
+      <div *ngFor="let dvd of DVDs; let i = index" class="col-12 col-sm-6 col-md-3 col-lg-3">
         <div class="news-card">
-          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" style="width: 300px; height: 130px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;z-index: 500;">
+          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="card-image" />
           <div class="card-body">
-            <h3 class="news-title" style="margin: 0%;padding: 0% ;padding-left: 5px;font-weight: 700;">{{dvd.Title}}</h3>
-            <p class="news-meta"  style="margin-bottom: 20px;padding: 0% ;padding-left: 5px;">${{dvd.Price}}</p>
+            <h3 class="news-title">{{ dvd.Title }}</h3>
+            <p class="news-meta">${{ dvd.Price }}</p>
           </div>
         </div>
       </div>
     </div>
-  </section>
+  </div>
+
+  <!-- Right Arrow -->
+  <button
+    class="arrow-btn right-arrow"
+    (click)="moveRight()"
+    [disabled]="currentIndex === DVDs.length - 1"
+  >
+    &gt;
+  </button>
+</section>
+
+<section class="news-section">
+  <h2 class="section-title">Now Anime Trending</h2>
+
+  <!-- Left Arrow -->
+  <button
+    class="arrow-btn left-arrow"
+    (click)="moveLeft()"
+    [disabled]="currentIndex === 0"
+  >
+    &lt;
+  </button>
+
+  <div class="scroll-container">
+    <div class="row g-4">
+      <div *ngFor="let dvd of DVDs; let i = index" class="col-12 col-sm-6 col-md-3 col-lg-3">
+        <div class="news-card">
+          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="card-image" />
+          <div class="card-body">
+            <h3 class="news-title">{{ dvd.Title }}</h3>
+            <p class="news-meta">${{ dvd.Price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Right Arrow -->
+  <button
+    class="arrow-btn right-arrow"
+    (click)="moveRight()"
+    [disabled]="currentIndex === DVDs.length - 1"
+  >
+    &gt;
+  </button>
+</section>

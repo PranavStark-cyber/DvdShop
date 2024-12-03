@@ -11,7 +11,6 @@ import { CustomerComponent } from './component/Manager/customer/customer.compone
 import { DvdDetailsComponent } from './component/Manager/dvd-details/dvd-details.component';
 import { CustomerDetailsComponent } from './component/Manager/customer-details/customer-details.component';
 import { DashboardDetailsComponent } from './component/Manager/dashboard-details/dashboard-details.component';
-import { authGuard } from './Authguard/auth.guard';
 import { customerGuard } from './Authguard/customer.guard';
 
 export const routes: Routes = [
@@ -26,7 +25,9 @@ export const routes: Routes = [
        ]
     },
     {
-        path:'Manager',component:ManagerDashboardComponent,canActivate:[authGuard],children:[
+        path:'Manager',component:ManagerDashboardComponent,
+      //   canActivate:[authGuard],
+        children:[
          {path:'DashBoard' , component:DashboardDetailsComponent},
          {path:'Dvd' , component:DvdsComponent},
          {path:'Dvd-Details/:id' , component:DvdDetailsComponent},
