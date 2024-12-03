@@ -1,0 +1,14 @@
+<section class="news-section">
+    <h2 class="section-title">Now day's Trending</h2>
+    <div class="row g-4">
+      <div class="col-12 col-sm-6 col-md-3" *ngFor="let dvd of DVDs">
+        <div class="news-card">
+          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" style="width: 300px; height: 130px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;z-index: 500;">
+          <div class="card-body">
+            <h3 class="news-title" style="margin: 0%;padding: 0% ;padding-left: 5px;font-weight: 700;">{{dvd.Title}}</h3>
+            <p class="news-meta"  style="margin-bottom: 20px;padding: 0% ;padding-left: 5px;">{{dvd.Price}}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>

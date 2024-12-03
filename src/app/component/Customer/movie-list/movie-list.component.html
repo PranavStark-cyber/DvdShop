@@ -1,4 +1,4 @@
-
+<!-- 
   <div class="collection z-3 p-0" style="width: 100%;  min-height: calc(100vh - 50px); ">
   <div class="content-container row p-0 m-0 g-0">
     <div class="col-12 col-xl-12 featured-content p-0"
@@ -78,4 +78,46 @@
 </div>
 
 
+ -->
 
+ <section class="featured-section ms-4">
+  <div class="row g-4">
+    <div class="col-12 col-lg-7">
+      <div class="row g-4">
+        <div class="col-12 col-lg-7" *ngFor="let dvd of DVD">
+          <div class="game-card">
+            <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="img-fluid" style="height: 300px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;">
+            <div class="card-overlay">
+              <span class="news-badge">News</span>
+              <h2 class="game-title">{{ dvd.Title }}</h2>
+              <p class="game-meta">{{ dvd.ReleaseDate|date }} | {{ dvd.Description | truncate: 20 }}</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-lg-5" *ngFor="let dvd of DVD">
+          <div class="game-card">
+            <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="img-fluid" style=" height: 300px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;">
+            <div class="card-overlay">
+              <span class="news-badge">News</span>
+              <h2 class="game-title">{{ dvd.Title }}</h2>
+              <p class="game-meta">{{ dvd.ReleaseDate |date }} | {{ dvd.Description | truncate: 20 }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="col-12 col-lg-5">
+      <div class="row g-4">
+        <div class="col-6" *ngFor="let dvd of movies">
+          <div class="game-card">
+            <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="img-fluid" style="width: 400px; height: 140px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;">
+            <div class="card-overlay p-2 ps-3">
+              <h3 class="h5 game-title" style="font-size:1rem;margin-bottom: 0%;">{{ dvd.Title }}</h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

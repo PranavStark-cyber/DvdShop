@@ -9,19 +9,11 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrl: './navbar.component.css'
 })
 export class NavbarComponent {
-  @Output() themeToggled = new EventEmitter<void>();
-  isDarkTheme = true;
-
-  menuItems = [
-    { name: 'Home', active: true },
-    { name: 'Movies', active: false },
-    { name: 'Series', active: false },
-    { name: 'Popular', active: false },
-    { name: 'Trends', active: false }
+  navItems = [
+    { label: 'Home', link: '#', active: true },
+    { label: 'News', link: '#', active: false },
+    { label: 'Video', link: '#', active: false },
+    { label: 'Guide', link: '#', active: false },
+    { label: 'Games', link: '#', active: false }
   ];
-
-  toggleTheme() {
-    this.isDarkTheme = !this.isDarkTheme;
-    this.themeToggled.emit();
-  }
 }

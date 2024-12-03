@@ -1,23 +1,88 @@
-.toggle {
-    width: 40px;
-    height: 20px;
-    background-color: white;
-    border-radius: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    position: relative;
-    cursor: pointer;
+/* Navbar Styles */
+
+
+.navbar {
+  padding: 1rem 0;
+  background: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  font-family: 'Roboto', sans-serif;
+}
+
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  font-family: 'Poppins';
+  color: #ff4757;
+  gap: 0;
+}
+
+.nav-link {
+  font-weight: 700;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  margin-left: 10px;
+  color: #2f3542;
+  position: relative;
+  transition: color 0.3s ease, border-bottom 0.3s ease;
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 0;
+  height: 4px;
+  background-color: #ff4757;
+  border-radius: 2px; /* Adjust for roundness */
+  transition: width 0.3s ease, left 0.3s ease;
+  transform: translateX(-50%);
+}
+
+.nav-link.active {
+  color: #000 !important; /* Black for active link */
+}
+
+.nav-link.active::after {
+  width: 80%;
+  left: 10%;
+}
+
+.nav-link:hover::after,
+.nav-link.active::after {
+  width: 90%; /* Adjust the length of the underline */
+  left: 50%; /* Center align the underline */
+}
+
+
+.btn-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #f8f9fa;
+  border: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-circle:hover {
+  background: #ff4757;
+  color: white;
+}
+
+/* Responsive Alignment */
+@media (max-width: 992px) {
+  .btn-circle {
+    margin-left: 0.5rem;
   }
-  .toggle-ball {
-    width: 18px;
-    height: 18px;
-    background-color: black;
-    position: absolute;
-    right: 1px;
-    border-radius: 50%;
-    transition: transform 1s ease;
+
+  .navbar-nav {
+   justify-content: center;
+    margin-bottom: 1rem;
   }
-  .toggle-ball.active {
-    transform: translateX(-20px);
+
+  .navbar-buttons {
+   justify-content: end;
   }
+}

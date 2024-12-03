@@ -17,3 +17,47 @@ table {
     background-color: rgb(116, 116, 116);
     border-radius: 50%;
   }
+
+
+  /* Add border-radius to the table */
+.mat-table {
+  border-radius: 15px; /* Border radius for the table */
+  overflow: hidden; /* Prevent overflow outside the rounded corners */
+}
+
+/* Add padding and gap for table cells */
+th, td {
+  padding: 12px 15px; /* Adjust padding for table headers and cells */
+  border-radius: 8px; /* Border radius for individual cells */
+}
+
+/* Add border radius to images in the rows */
+.mat-cell img {
+  border-radius: 8px; /* Add border radius to the images */
+  margin-right: 15px; /* Add gap between images and text */
+  width: 60px; /* Adjust image size */
+  height: 60px; /* Adjust image size */
+  object-fit: cover; /* Ensure the image covers the area while maintaining aspect ratio */
+}
+
+/* Optional: Hover effect for table rows */
+.mat-row:hover {
+  background-color: #f9f9f9; /* Light gray background on hover */
+}
+
+/* Responsive styling for smaller screens */
+@media (max-width: 768px) {
+  .mat-table {
+    font-size: 14px; /* Adjust text size for smaller screens */
+  }
+
+  .mat-cell img {
+    width: 50px; /* Smaller image size on mobile */
+    height: 50px; /* Smaller image size on mobile */
+  }
+
+  /* Adjust padding on smaller screens */
+  th, td {
+    padding: 8px 10px;
+  }
+}

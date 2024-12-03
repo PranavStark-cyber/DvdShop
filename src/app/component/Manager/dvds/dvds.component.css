@@ -33,3 +33,50 @@
   td, th {
     width: 10%;
   }
+  
+
+  /* Styling for the table container to enable horizontal scroll */
+.table-responsive {
+  width: 100%;
+  overflow-x: auto; /* Enables horizontal scrolling */
+  -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS devices */
+}
+
+/* Styling for the table */
+.mat-elevation-z8 {
+  border-radius: 15px;
+  overflow: hidden; /* Ensures rounded corners */
+}
+
+/* Add border radius to table and cells */
+table {
+  border-radius: 15px;
+}
+
+/* Add margin around images to create space between them */
+.dvd-image-cell {
+  padding: 10px; /* Adds space around the image */
+}
+
+.dvd-image {
+  width: 80px;
+  height: auto;
+  border-radius: 8px;
+  margin-right: 10px; /* Creates gap between images */
+}
+
+/* Optional: Add border radius for table cells if needed */
+th, td {
+  border-radius: 8px;
+}
+
+/* Make table responsive on smaller screens */
+@media (max-width: 768px) {
+  .mat-elevation-z8 {
+    border-radius: 10px;
+  }
+
+  .dvd-image {
+    width: 60px; /* Adjust image size on smaller screens */
+  }
+}

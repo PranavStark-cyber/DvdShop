@@ -1,21 +1,35 @@
-<nav class="navbar navbar-expand-lg fixed-top" [class.dark-theme]="isDarkTheme">
-    <div class="container-fluid">
-      <a class="navbar-brand text-success">Flakes</a>
-      <div class="collapse navbar-collapse">
-        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-          <li class="nav-item" *ngFor="let item of menuItems">
-            <a class="nav-link" [class.active]="item.active">{{item.name}}</a>
-          </li>
-        </ul>
-        <div class="d-flex align-items-center">
-          <img src="assets/profile.jpg" class="rounded-circle me-2" style="width: 32px; height: 32px;">
-          <span class="me-3">Profile</span>
-          <div class="toggle" (click)="toggleTheme()">
-            <i class="fas fa-sun"></i>
-            <i class="fas fa-moon"></i>
-            <div class="toggle-ball" [class.active]="!isDarkTheme"></div>
-          </div>
-        </div>
+<nav class="navbar navbar-expand-lg navbar fixed-top bg-white shadow-sm">
+  <div class="container d-flex justify-content-between align-items-center">
+    <a class="navbar-brand m-0 p-0" href="#">DVD <span class="text-black m-0 p-0">CORES</span></a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarNav">
+      <ul class="navbar-nav justify-content-center flex-grow-1">
+        <li class="nav-item" *ngFor="let item of navItems">
+          <a class="nav-link text-secondary position-relative" [class.active]="item.active" [href]="item.link">
+            {{ item.label }}
+          </a>
+        </li>
+      </ul>
+      <div class="d-flex gap-3 navbar-buttons">
+        <button class="btn btn-circle" type="button">
+          <i class="bi bi-search"></i>
+        </button>
+        <button class="btn btn-circle" type="button">
+          <i class="bi bi-bell"></i>
+        </button>
+        <button class="btn btn-circle" type="button">
+          <i class="bi bi-person"></i>
+        </button>
       </div>
     </div>
-  </nav>
+  </div>
+</nav>

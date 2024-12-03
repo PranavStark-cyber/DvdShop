@@ -162,7 +162,7 @@
    -->
 
 
-<div class="container-fluid p-0">
+<!-- <div class="container-fluid p-0">
 
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-0 m-0" style="background-color: rgb(0, 0, 0) !important;">
     <div class="container-fluid">
@@ -229,4 +229,20 @@
       <router-outlet></router-outlet>
     </div>
   </div>
+</div> -->
+
+
+<div class="min-vh-100 bg-light">
+  <app-navbar></app-navbar>
+  <main class="container-fluid py-4" style="margin-top:70px;"> <!-- Adjust padding-top -->
+    <app-movie-list></app-movie-list>
+    <div class="row g-4">
+      <div class="col-12 col-lg-8">
+        <app-new-section></app-new-section>
+      </div>
+      <div class="col-12 col-lg-4">
+        <app-new-dvd-deals></app-new-dvd-deals>
+      </div>
+    </div>
+  </main>
 </div>

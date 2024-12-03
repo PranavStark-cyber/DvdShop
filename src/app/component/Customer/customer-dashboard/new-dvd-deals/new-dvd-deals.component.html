@@ -1,0 +1,18 @@
+<section class="deals-section">
+    <div class="section-header d-flex justify-content-between align-items-center">
+      <h2 class="section-title">Dvd Discount</h2>
+      <span class="coming-soon">Coming soon</span>
+    </div>
+    <div class="game-list">
+      <div class="game-item d-flex justify-content-between align-items-center" *ngFor="let dvd of DVDs">
+        <div class="d-flex align-items-center gap-3">
+          <img [src]="dvd.ImageUrl" [alt]="dvd.Title" class="dvd-image" style="width: 48px; height: 48px; object-fit: cover; border-radius: 8px; border: 2px solid #ddd;">
+          <span class="dvd-name">{{dvd.Title}}</span>
+        </div>
+        <div class="d-flex align-items-center gap-3">
+          <span class="dvd-price">${{dvd.Price}}</span>
+          <button class="btn-buy">Buy</button>
+        </div>
+      </div>
+    </div>
+  </section>
