@@ -11,9 +11,10 @@ import { Component, EventEmitter, Output } from '@angular/core';
 export class NavbarComponent {
   navItems = [
     { label: 'Home', link: '#', active: true },
-    { label: 'News', link: '#', active: false },
-    { label: 'Video', link: '#', active: false },
-    { label: 'Guide', link: '#', active: false },
-    { label: 'Games', link: '#', active: false }
+    { label: 'Movies', link: '#', active: false },
+    { label: 'Series', link: '#', active: false },
+    { label: 'Anime', link: '#', active: false },
+    { label: 'Rental', link: '#', active: false }
   ];
+  isSearchHovered = false;
 }

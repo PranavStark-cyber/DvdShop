@@ -14,7 +14,7 @@ table {
   }
 
   .mat-mdc-header-row{
-    background-color: rgb(116, 116, 116);
+    /* background-color: rgb(116, 116, 116); */
     border-radius: 50%;
   }
 

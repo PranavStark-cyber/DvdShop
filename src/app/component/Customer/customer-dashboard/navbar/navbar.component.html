@@ -20,15 +20,42 @@
         </li>
       </ul>
       <div class="d-flex gap-3 navbar-buttons">
-        <button class="btn btn-circle" type="button">
-          <i class="bi bi-search"></i>
-        </button>
-        <button class="btn btn-circle" type="button">
-          <i class="bi bi-bell"></i>
-        </button>
-        <button class="btn btn-circle" type="button">
-          <i class="bi bi-person"></i>
-        </button>
+         <!-- Expanding Search -->
+         <div class="search-container">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="form-control search-input"
+            [ngClass]="{ 'search-expanded': isSearchHovered }"
+            (mouseenter)="isSearchHovered = true"
+            (mouseleave)="isSearchHovered = false"
+          />
+          <button class="btn btn-circle search-btn" type="button">
+            <i class="bi bi-search"></i>
+          </button>
+        </div>
+        <!-- Bell Button with Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-circle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-bell"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li><a class="dropdown-item" href="#">Notification 1</a></li>
+            <li><a class="dropdown-item" href="#">Notification 2</a></li>
+            <li><a class="dropdown-item" href="#">Notification 3</a></li>
+          </ul>
+        </div>
+        
+        <!-- Person Button with Dropdown -->
+        <div class="dropdown">
+          <button class="btn btn-circle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <i class="bi bi-person"></i>
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end shadow">
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><a class="dropdown-item" href="#">Logout</a></li>
+          </ul>
+        </div>
       </div>
     </div>
   </div>
