@@ -1,71 +1,67 @@
-<section class="news-section">
-  <h2 class="section-title">Now day's Trending</h2>
-
-  <!-- Left Arrow -->
-  <button
-    class="arrow-btn left-arrow"
-    (click)="moveLeft()"
-    [disabled]="currentIndex === 0"
-  >
-    &lt;
-  </button>
-
-  <div class="scroll-container">
-    <div class="row g-4">
-      <div *ngFor="let dvd of DVDs; let i = index" class="col-12 col-sm-6 col-md-3 col-lg-3">
+<section class="news-section ps-4">
+  <!-- Now day's Trending Section -->
+  <div class="section-header">
+    <div style="display: flex;justify-content: space-between;">
+      <h2 class="section-title" style="font-size: 25px;font-weight: 800;">Trending</h2>
+      <h4 class="section-title text-secondary" style="cursor: pointer;" routerLink="/Customer/Movie">See more</h4>
+    </div>
+    <div class="arrows d-flex justify-content-end">
+      <button class="arrow-btn" (click)="scrollLeft(0)">&lt;</button>
+      <button class="arrow-btn" (click)="scrollRight(0)">&gt;</button>
+    </div>
+  </div>
+  
+  <div id="section-1" class="scroll-container">
+    <div class="row">
+      <div *ngFor="let dvd of rows[1]" [ngClass]="isLatestSection 
+        ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
+        : 'col-12 col-sm-6 col-md-4 col-lg-3'" 
+        (click)="onMovieClick(dvd.id)">
         <div class="news-card">
-          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="card-image" />
+          <img [src]="dvd.imageUrl" [ngStyle]="{ 'height': isLatestSection ? 'auto' : ' 150px' }" [alt]="dvd.title" style=" 
+          object-position: top;
+          ;
+         "
+            class="card-image" />
           <div class="card-body">
-            <h3 class="news-title">{{ dvd.Title }}</h3>
-            <p class="news-meta">${{ dvd.Price }}</p>
+            <h3 class="news-title">{{ dvd.title }}</h3>
+            <p class="news-meta">${{ dvd.price }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+
+  <!-- Trending Section -->
+  <div class="section-header">
+    <div style="display: flex;justify-content: space-between;">
+      <h2 class="section-title" style="font-size: 25px;font-weight: 800;">Trending</h2>
+      <h4 class="section-title text-secondary" style="cursor: pointer;" routerLink="/Customer/Movie">See more</h4>
+    </div>
+    <div class="arrows d-flex justify-content-end">
+      <button class="arrow-btn" (click)="scrollLeft(0)">&lt;</button>
+      <button class="arrow-btn" (click)="scrollRight(0)">&gt;</button>
+    </div>
+  </div>
+  <div id="section-1" class="scroll-container">
+    <div class="row">
+      <div *ngFor="let dvd of rows[0]" [ngClass]="isLatestSection 
+      ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
+      : 'col-12 col-sm-6 col-md-4 col-lg-3'"(click)="onMovieClick(dvd.id)">
+        <div class="news-card">
+          <img [src]="dvd.imageUrl" [alt]="dvd.title" [ngStyle]="{ 'height': isLatestSection ? 'auto' : ' 150px' }" class="card-image" style=" 
+          object-position: top;
+          ;
+         " />
+          <div class="card-body">
+            <h3 class="news-title">{{ dvd.title }}</h3>
+            <p class="news-meta">${{ dvd.price }}</p>
           </div>
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Right Arrow -->
-  <button
-    class="arrow-btn right-arrow"
-    (click)="moveRight()"
-    [disabled]="currentIndex === DVDs.length - 1"
-  >
-    &gt;
-  </button>
-</section>
-
-<section class="news-section">
-  <h2 class="section-title">Now Anime Trending</h2>
-
-  <!-- Left Arrow -->
-  <button
-    class="arrow-btn left-arrow"
-    (click)="moveLeft()"
-    [disabled]="currentIndex === 0"
-  >
-    &lt;
-  </button>
-
-  <div class="scroll-container">
-    <div class="row g-4">
-      <div *ngFor="let dvd of DVDs; let i = index" class="col-12 col-sm-6 col-md-3 col-lg-3">
-        <div class="news-card">
-          <img [src]="dvd.BackgroundUrl" [alt]="dvd.Title" class="card-image" />
-          <div class="card-body">
-            <h3 class="news-title">{{ dvd.Title }}</h3>
-            <p class="news-meta">${{ dvd.Price }}</p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- Right Arrow -->
-  <button
-    class="arrow-btn right-arrow"
-    (click)="moveRight()"
-    [disabled]="currentIndex === DVDs.length - 1"
-  >
-    &gt;
-  </button>
+  <!-- Add more sections as needed -->
 </section>

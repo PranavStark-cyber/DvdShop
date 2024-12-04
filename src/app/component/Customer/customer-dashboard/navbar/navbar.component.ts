@@ -10,8 +10,8 @@ import { Component, EventEmitter, Output } from '@angular/core';
 })
 export class NavbarComponent {
   navItems = [
-    { label: 'Home', link: '#', active: true },
-    { label: 'Movies', link: '#', active: false },
+    { label: 'Home', link: '/Customer/Home', active: false },
+    { label: 'Movies', link: '/Customer/Movie', active: false },
     { label: 'Series', link: '#', active: false },
     { label: 'Anime', link: '#', active: false },
     { label: 'Rental', link: '#', active: false }

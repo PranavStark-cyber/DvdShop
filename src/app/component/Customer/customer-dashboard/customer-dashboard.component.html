@@ -234,15 +234,7 @@
 
 <div class="min-vh-100 bg-light">
   <app-navbar></app-navbar>
-  <main class="container-fluid py-4" style="margin-top:70px;"> <!-- Adjust padding-top -->
-    <app-movie-list></app-movie-list>
-    <div class="row g-4">
-      <div class="col-12 col-lg-8">
-        <app-new-section></app-new-section>
-      </div>
-      <div class="col-12 col-lg-4">
-        <app-new-dvd-deals></app-new-dvd-deals>
-      </div>
-    </div>
+  <main class="container-fluid py-4 p-0" style="margin-top:50px;"> 
+ <router-outlet></router-outlet>
   </main>
 </div>

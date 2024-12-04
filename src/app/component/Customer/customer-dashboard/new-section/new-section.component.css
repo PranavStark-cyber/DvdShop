@@ -1,11 +1,11 @@
-.news-section {
+/* .news-section {
     margin-bottom: 2rem;
-  }
+  } */
   
   .section-title {
     font-size: 1.25rem;
     font-weight: 600;
-    margin-bottom: 1.5rem;
+    /* margin-bottom: 1.5rem; */
     color: #2f3542;
   }
   
@@ -80,23 +80,37 @@
     flex-wrap: nowrap;
   }
   
-  .news-card {
+  /* .news-card {
     flex: 0 0 auto;
     margin-right: 20px;
   }
   
   .card-image {
     width: 100%;
-    height: 130px;
-    object-fit: cover;
+
     border-radius: 8px;
     border: 2px solid #ddd;
   }
   
   .card-body {
     padding: 5px;
-  }
-  
+  } */
+  /* Ensure the images and their parent containers have a consistent height */
+.news-card {
+  height: 300px; /* Set a fixed height for the entire card */
+}
+
+.card-image {
+  height: 150px; /* Set a fixed height for the image */
+  object-fit: cover; /* Ensures the image fills the container and maintains aspect ratio */
+  width: 100%; /* Make the image fill the width of the container */
+}
+
+/* Optional: For consistent spacing between cards */
+.card-body {
+  padding-top: 10px; /* Add space between the image and the text */
+}
+
   .news-title {
     font-weight: 700;
   }
@@ -105,17 +119,31 @@
     margin-bottom: 20px;
   }
   
-  .arrow-btn {
+  /* .arrow-btn {
     position: absolute;
+    gap: 10;
     font-size: 30px;
     top: 50%;
     transform: translateY(-50%);
-    background-color: transparent;
-    color: white;
+    background-color: black;
+    padding: 5px;
+    color: rgb(255, 255, 255);
     border: none;
     padding: 5px;
     cursor: pointer;
-    z-index: 100;
+    z-index: 100;0
+  } */
+.arrow-btn{
+  background-color: black;
+  padding: 5px;
+  padding-left: 13px;
+  padding-right: 13px;
+  border-radius: 50%;
+  color: white;
+
+}
+  .arrow-btn:hover{
+background-color: green;
   }
   
   .left-arrow {
@@ -126,3 +154,11 @@
     right: 10px;
   }
   
+
+  
+.arrows {
+  display: flex;
+  gap: 10px;
+}
+
+

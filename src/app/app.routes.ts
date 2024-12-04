@@ -12,16 +12,21 @@ import { DvdDetailsComponent } from './component/Manager/dvd-details/dvd-details
 import { CustomerDetailsComponent } from './component/Manager/customer-details/customer-details.component';
 import { DashboardDetailsComponent } from './component/Manager/dashboard-details/dashboard-details.component';
 import { customerGuard } from './Authguard/customer.guard';
+import { MovieListComponent } from './component/Customer/movie-list/movie-list.component';
+import { CustomerhomeComponent } from './component/Customer/customerhome/customerhome.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
     {path:'home' , component:LandingpageComponent},
     {path:'Dvd/Register' , component:RegisterComponent},
-    {path:'Dvd/Login' , component:LoginComponent,canActivate:[customerGuard]},
+    {path:'Dvd/Login' , component:LoginComponent
+      // ,canActivate:[customerGuard]
+    },
 
     {
-       path:'Customer/:id',component:CustomerDashboardComponent,children:[
-         {path:'Moviedetails/:id' , component:MovieDetailsComponent}
+       path:'Customer',component:CustomerDashboardComponent,children:[
+         {path:'Home' , component:CustomerhomeComponent},
+         {path:'Movie' , component:MovieDetailsComponent}
        ]
     },
     {
