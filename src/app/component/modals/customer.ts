@@ -41,7 +41,7 @@ export interface Dvd {
     director: Director;
     // rentals: Rental[];    
     // reviews: Review[];    
-    // inventory: Inventory; 
+    inventory?: Inventory; 
     // reservations: Reservation[]; 
 }
 
@@ -81,6 +81,15 @@ export interface Customer {
     rentalDate: string;
     rentalItem: string;  // e.g. "DVD", "Book"
   }
+
+  export interface RentalRequestDTO {
+    dvdId: string;
+    customerId: string;
+    rentalDays: number;
+    requestDate: string; // Date string in ISO format
+    copySofDvd:number;
+  }
+  
   
   export interface Payment {
     paymentId: string;
@@ -113,4 +122,12 @@ export interface Address{
     street:string;
     city:string;
     country:string;
+}
+
+export interface Inventory{
+  id:string;
+  dvdId:string;
+  totalCopies:number;
+  availableCopies:number;
+  lastRestock:string;
 }

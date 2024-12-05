@@ -11,7 +11,7 @@ import { NewDvdDealsComponent } from "./new-dvd-deals/new-dvd-deals.component";
 @Component({
   selector: 'app-customer-dashboard',
   standalone: true,
-  imports: [RouterLink, RouterLinkActive, RouterOutlet, CommonModule, SlideTransformPipe, TruncatePipe, NavbarComponent, NewSectionComponent, MovieListComponent, NewDvdDealsComponent],
+  imports: [ RouterOutlet, CommonModule, NavbarComponent],
   templateUrl: './customer-dashboard.component.html',
   styleUrl: './customer-dashboard.component.css'
 })

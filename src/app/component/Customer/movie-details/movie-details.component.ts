@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { NewSectionComponent } from '../customer-dashboard/new-section/new-section.component';
 import { Dvd } from '../../modals/customer';
 import { ManagerService } from '../../../Services/Manager/manager.service';
@@ -9,7 +9,7 @@ import { ManagerService } from '../../../Services/Manager/manager.service';
 @Component({
   selector: 'app-movie-details',
   standalone: true,
-  imports: [CommonModule,NewSectionComponent],
+  imports: [CommonModule,NewSectionComponent,RouterLink],
   templateUrl: './movie-details.component.html',
   styleUrl: './movie-details.component.css'
 })

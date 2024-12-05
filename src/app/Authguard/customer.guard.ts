@@ -13,10 +13,10 @@ export const customerGuard: CanActivateFn = (route, state) => {
       
       if (role === 'Admin') {
         // Redirect to manager dashboard if the user is an admin
-        router.navigate(['/manager']);
+        router.navigate(['/Manager']);
       } else if (role === 'Customer') {
         // Redirect to customer dashboard if the user is a customer
-        router.navigate(['/customer']);
+        router.navigate(['/Customer/Home']);
       }
 
       return false;  // Block access to login page

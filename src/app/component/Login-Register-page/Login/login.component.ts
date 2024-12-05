@@ -11,7 +11,7 @@ import { jwtDecode } from 'jwt-decode';
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink, RouterLinkActive],
+  imports: [FormsModule, ReactiveFormsModule, CommonModule, RouterLink],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -66,9 +66,9 @@ export class LoginComponent {
           timeOut: 4000
         });
         if(decode.Role == "Admin"){
-          this.rout.navigate(['/manager']);
+          this.rout.navigate(['/Manager']);
         }else if(decode.Role == "Customer"){
-          this.rout.navigate(['/Customer/'+decode.Id]);
+          this.rout.navigate(['/Customer/Home']);
         }
       },
       complete: () => {
