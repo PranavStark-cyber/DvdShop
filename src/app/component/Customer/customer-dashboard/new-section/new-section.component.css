@@ -1,164 +1,91 @@
-/* .news-section {
-    margin-bottom: 2rem;
-  } */
-  
-  .section-title {
-    font-size: 1.25rem;
-    font-weight: 600;
-    /* margin-bottom: 1.5rem; */
-    color: #2f3542;
-  }
-  
-  .news-card {
-    border: none;
-    border-radius: 12px;
-    overflow: hidden;
-    transition: transform 0.3s ease;
-    height: 90%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
-  }
-  
-  .news-card:hover {
-    transform: translateY(-5px);
-  }
-  
-  .news-card img {
-    /* height: 160px; */
-    object-fit: cover;
-  }
-  
-  .news-title {
-    font-size: 1rem;
-    font-weight: 500;
-    /* margin-bottom: 0.5rem; */
-    color: #2f3542;
-  }
-  
-  .news-meta {
-    font-size: 0.875rem;
-    color: #777;
-  }
+/* General Section Styles */
+.news-section {
+  margin-bottom: 2rem;
+  position: relative;
+  height: auto;
+}
 
+.section-title {
+  font-size: 25px;
+  font-weight: 800;
+  color: #2f3542;
+}
 
-  .carousel-inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .news-card {
-    margin: 0 auto;
-    text-align: center;
-  }
-  
-  .carousel-inner {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    text-align: center;
-  }
-  
-  .news-card {
-    margin: auto;
-    width: 100%;
-  }
-  
-  .news-section {
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .scroll-container {
-    display: flex;
-    overflow-x: hidden; /* Hide the scrollbar */
-    padding: 10px 0;
-  }
-  
-  .row {
-    display: flex;
-    flex-wrap: nowrap;
-  }
-  
-  /* .news-card {
-    flex: 0 0 auto;
-    margin-right: 20px;
-  }
-  
-  .card-image {
-    width: 100%;
+.scroll-container {
+  display: flex;
+  overflow-x: hidden;
+  padding: 10px 0;
+  max-height: 100%;
+}
 
-    border-radius: 8px;
-    border: 2px solid #ddd;
-  }
-  
-  .card-body {
-    padding: 5px;
-  } */
-  /* Ensure the images and their parent containers have a consistent height */
+.row {
+  display: flex;
+  flex-wrap: nowrap;
+}
+
+/* Card Styles */
 .news-card {
-  height: 300px; /* Set a fixed height for the entire card */
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  cursor: pointer;
+  height: 300px; /* Fixed height for consistency */
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
 }
 
 .card-image {
-  height: 150px; /* Set a fixed height for the image */
-  object-fit: cover; /* Ensures the image fills the container and maintains aspect ratio */
-  width: 100%; /* Make the image fill the width of the container */
+  height: 150px; /* Consistent image height */
+  width: 100%;
+  object-fit: cover;
 }
 
-/* Optional: For consistent spacing between cards */
-.card-body {
-  padding-top: 10px; /* Add space between the image and the text */
+.hover-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  color: #fff;
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-  .news-title {
-    font-weight: 700;
-  }
-  
-  .news-meta {
-    margin-bottom: 20px;
-  }
-  
-  /* .arrow-btn {
-    position: absolute;
-    gap: 10;
-    font-size: 30px;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: black;
-    padding: 5px;
-    color: rgb(255, 255, 255);
-    border: none;
-    padding: 5px;
-    cursor: pointer;
-    z-index: 100;0
-  } */
-.arrow-btn{
+.news-card:hover .hover-content {
+  opacity: 1;
+}
+
+.hover-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 5px;
+}
+
+.hover-meta {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+/* Arrow Buttons */
+.arrow-btn {
   background-color: black;
-  padding: 5px;
-  padding-left: 13px;
-  padding-right: 13px;
-  border-radius: 50%;
   color: white;
-
+  padding: 5px 13px;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
 }
-  .arrow-btn:hover{
-background-color: green;
-  }
-  
-  .left-arrow {
-    left: 10px;
-  }
-  
-  .right-arrow {
-    right: 10px;
-  }
-  
 
-  
+.arrow-btn:hover {
+  background-color: green;
+}
+
 .arrows {
   display: flex;
   gap: 10px;
 }
-
-

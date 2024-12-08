@@ -1,0 +1,86 @@
+<div class="container my-4">
+
+
+  <!-- Buttons for Table Selection -->
+  <div class="d-flex justify-content-center gap-3 mb-4">
+    <button
+      class="btn btn-primary"
+      [class.active]="selectedTable === RentalStatus.Request"
+      (click)="selectTable(RentalStatus.Request)"
+    >
+      {{ getStatusLabel(RentalStatus.Request) }}
+    </button>
+    <button
+      class="btn btn-primary"
+      [class.active]="selectedTable === RentalStatus.Approved"
+      (click)="selectTable(RentalStatus.Approved)"
+    >
+      {{ getStatusLabel(RentalStatus.Approved) }}
+    </button>
+    <button
+      class="btn btn-primary"
+      [class.active]="selectedTable === RentalStatus.Collected"
+      (click)="selectTable(RentalStatus.Collected)"
+    >
+      {{ getStatusLabel(RentalStatus.Collected) }}
+    </button>
+    <button
+      class="btn btn-primary"
+      [class.active]="selectedTable === RentalStatus.Returned"
+      (click)="selectTable(RentalStatus.Returned)"
+    >
+      {{ getStatusLabel(RentalStatus.Returned) }}
+    </button>
+    <button
+      class="btn btn-primary"
+      [class.active]="selectedTable === RentalStatus.Rejected"
+      (click)="selectTable(RentalStatus.Rejected)"
+    >
+      {{ getStatusLabel(RentalStatus.Rejected) }}
+    </button>
+  </div>
+
+
+
+  <!-- Rentals Table -->
+  <div class="container my-5">
+    <h3 class="text-center">{{ getStatusLabel(selectedTable) }} Rentals</h3>
+    <div class="table-responsive">
+      <table class="table table-striped table-bordered">
+        <thead>
+          <tr>
+            <th scope="col">DVD Title</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Rental Days</th>
+            <th scope="col">Request Date</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rental of tableData">
+            <td>{{ rental.dvd?.title }}</td>
+            <td>{{ rental.customer?.firstName }} {{ rental.customer?.lastName }}</td>
+            <td>{{ rental.rentalDays }}</td>
+            <td>{{ rental.requestDate | date: 'yyyy-MM-dd' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+    <!-- Dropdown for Report Type -->
+  <div class="d-flex justify-content-center gap-3 mb-4">
+    <select class="form-select" (change)="onReportTypeChange($event)">
+      <option value="daily">Daily</option>
+      <option value="weekly">Weekly</option>
+      <option value="monthly">Monthly</option>
+      <option value="yearly">Yearly</option>
+    </select>
+  </div>
+
+    <!-- Rental Report -->
+    <div class="container my-5">
+      <h3 class="text-center">Rental Status Report</h3>
+      <div style="height: 400px;">
+        <canvas id="rentalChart"></canvas>
+      </div>
+    </div>
+</div>

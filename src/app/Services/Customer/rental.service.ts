@@ -27,7 +27,7 @@ export class RentalService {
     return this.http.put(this.rentalurl+"return/"+rentalid,'')
   }
 
-  getRentalById(id:string){
-    return this.http.get<Rental>(this.rentalurl+ 'customer/' +id);
+  getRentalBycustomerId(id:string){
+    return this.http.get<Rental[]>(this.rentalurl+ 'customer/' +id);
   }
 }

@@ -14,7 +14,7 @@ export class NavbarComponent {
     { label: 'Movies', link: '/Customer/Movie', active: false },
     { label: 'Series', link: '#', active: false },
     { label: 'Anime', link: '#', active: false },
-    { label: 'Rental', link: '#', active: false }
+    { label: 'Rental', link: '/Customer/RentalHistory', active: false }
   ];
   isSearchHovered = false;
 }

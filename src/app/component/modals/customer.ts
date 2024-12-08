@@ -68,18 +68,34 @@ export interface Customer {
     email: string;
     phoneNumber: string;
     joinDate: string; 
-    rentals: Rental[];  // You can include rental details like movie name, rental date, etc.
-    payments: Payment[]; // Include details like payment date, amount, status
-    reviews: Review[];   // Include review ratings, comments, etc.
-    reservations: Reservation | null; // If the customer has any active reservations
-    notifications: Notification[]; // Notifications for the customer
-    address: Address; // Include full address details
+    rentals: Rental[];  
+    payments: Payment[];
+    reviews: Review[]; 
+    reservations: Reservation | null;
+    notifications: Notification[]; 
+    address: Address; 
   }
 
   export interface Rental {
-    rentalId: string;
-    rentalDate: string;
-    rentalItem: string;  // e.g. "DVD", "Book"
+    id: string; 
+    dvdId: string;
+    customerId: string;
+    rentalDays: number;
+    status: RentalStatus; 
+    requestDate: Date;
+    approvedDate?: Date; 
+    collectedDate?: Date;
+    returnDate?: Date;
+    dvd?: Dvd; 
+    customer?: Customer; 
+  }
+  
+  export enum RentalStatus {
+    Request = 0,
+    Approved = 1,
+    Collected = 2,
+    Returned = 3,
+    Rejected = 4
   }
 
   export interface RentalRequestDTO {

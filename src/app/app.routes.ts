@@ -14,6 +14,7 @@ import { customerGuard } from './Authguard/customer.guard';
 import { CustomerhomeComponent } from './component/Customer/customerhome/customerhome.component';
 import { authGuard } from './Authguard/auth.guard';
 import { RentalComponent } from './component/Customer/rental/rental.component';
+import { RentalHistoryComponent } from './component/Customer/rental-history/rental-history.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -40,7 +41,8 @@ export const routes: Routes = [
        path:'Customer',component:CustomerDashboardComponent,children:[
          {path:'Home' , component:CustomerhomeComponent},
          {path:'Movie' , component:MovieDetailsComponent},
-         {path:'Rental/:id' , component:RentalComponent}
+         {path:'Rental/:id' , component:RentalComponent},
+         {path:'RentalHistory' , component:RentalHistoryComponent}
        ]
     }
     
