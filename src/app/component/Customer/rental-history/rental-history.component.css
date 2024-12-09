@@ -17,3 +17,13 @@
     height: 400px;
   }
   
+
+  .statusbutton{
+    background-color: #aa0691 !important;
+    border: #aa0691;
+  }
+
+  .statusbutton.active{
+    background-color: #fa22d9 !important;
+    border: #f92dda;
+  }

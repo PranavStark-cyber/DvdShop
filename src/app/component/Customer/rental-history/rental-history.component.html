@@ -1,50 +1,32 @@
 <div class="container my-4">
 
-
   <!-- Buttons for Table Selection -->
-  <div class="d-flex justify-content-center gap-3 mb-4">
-    <button
-      class="btn btn-primary"
-      [class.active]="selectedTable === RentalStatus.Request"
-      (click)="selectTable(RentalStatus.Request)"
-    >
+  <div class="d-flex justify-content-center gap-5 mb-4 ">
+    <button class="btn btn-primary statusbutton w-25" [class.active]="selectedTable === RentalStatus.Request"
+      (click)="selectTable(RentalStatus.Request)">
       {{ getStatusLabel(RentalStatus.Request) }}
     </button>
-    <button
-      class="btn btn-primary"
-      [class.active]="selectedTable === RentalStatus.Approved"
-      (click)="selectTable(RentalStatus.Approved)"
-    >
+    <button class="btn btn-primary statusbutton  w-25" [class.active]="selectedTable === RentalStatus.Approved"
+      (click)="selectTable(RentalStatus.Approved)">
       {{ getStatusLabel(RentalStatus.Approved) }}
     </button>
-    <button
-      class="btn btn-primary"
-      [class.active]="selectedTable === RentalStatus.Collected"
-      (click)="selectTable(RentalStatus.Collected)"
-    >
+    <button class="btn btn-primary statusbutton  w-25" [class.active]="selectedTable === RentalStatus.Collected"
+      (click)="selectTable(RentalStatus.Collected)">
       {{ getStatusLabel(RentalStatus.Collected) }}
     </button>
-    <button
-      class="btn btn-primary"
-      [class.active]="selectedTable === RentalStatus.Returned"
-      (click)="selectTable(RentalStatus.Returned)"
-    >
+    <button class="btn btn-primary statusbutton  w-25" [class.active]="selectedTable === RentalStatus.Returned"
+      (click)="selectTable(RentalStatus.Returned)">
       {{ getStatusLabel(RentalStatus.Returned) }}
     </button>
-    <button
-      class="btn btn-primary"
-      [class.active]="selectedTable === RentalStatus.Rejected"
-      (click)="selectTable(RentalStatus.Rejected)"
-    >
+    <button class="btn btn-primary statusbutton  w-25 " [class.active]="selectedTable === RentalStatus.Rejected"
+      (click)="selectTable(RentalStatus.Rejected)">
       {{ getStatusLabel(RentalStatus.Rejected) }}
     </button>
   </div>
 
-
-
   <!-- Rentals Table -->
   <div class="container my-5">
-    <h3 class="text-center">{{ getStatusLabel(selectedTable) }} Rentals</h3>
+    <h3 class="text-center" style="font-family:poppins;font-weight: 600;">{{ getStatusLabel(selectedTable) }} Rentals</h3>
     <div class="table-responsive">
       <table class="table table-striped table-bordered">
         <thead>
@@ -57,7 +39,13 @@
         </thead>
         <tbody>
           <tr *ngFor="let rental of tableData">
-            <td>{{ rental.dvd?.title }}</td>
+            <td>
+              <!-- Popover Trigger for DVD Title -->
+              <button type="button" class="btn btn-link text-black text-decoration-none" [popover]="dvdDetailsTemplate"
+            placement="auto" triggers="mouseenter:mouseleave" container="body" (mouseenter)="updatePopoverData(rental.dvd)">
+                {{ rental.dvd?.title }}
+              </button>
+            </td>
             <td>{{ rental.customer?.firstName }} {{ rental.customer?.lastName }}</td>
             <td>{{ rental.rentalDays }}</td>
             <td>{{ rental.requestDate | date: 'yyyy-MM-dd' }}</td>
@@ -66,21 +54,36 @@
       </table>
     </div>
   </div>
-    <!-- Dropdown for Report Type -->
-  <div class="d-flex justify-content-center gap-3 mb-4">
-    <select class="form-select" (change)="onReportTypeChange($event)">
-      <option value="daily">Daily</option>
-      <option value="weekly">Weekly</option>
-      <option value="monthly">Monthly</option>
-      <option value="yearly">Yearly</option>
-    </select>
-  </div>
-
-    <!-- Rental Report -->
-    <div class="container my-5">
-      <h3 class="text-center">Rental Status Report</h3>
-      <div style="height: 400px;">
-        <canvas id="rentalChart"></canvas>
+  <!-- DVD Details Popover Template -->
+  <ng-template #dvdDetailsTemplate>
+    <div class="d-flex align-items-start">
+      <img *ngIf="selectedDvd?.imageUrl" [src]="selectedDvd.imageUrl" alt="DVD Image" class="img-thumbnail me-3"
+        style="width: 80px; height: auto;" />
+      <div>
+        <strong>Title:</strong> {{ selectedDvd?.title }} <br />
+        <strong>Director:</strong> {{ selectedDvd?.director }} <br />
+        <strong>Genre:</strong> {{ selectedDvd?.genre }} <br />
+        <strong>Price:</strong> ${{ selectedDvd?.price }} <br />
+        <strong>Description:</strong> {{ selectedDvd?.description }}
       </div>
     </div>
+  </ng-template>
+
+  <!-- Rental Report -->
+  <div class="container my-5">
+    <h3 class="text-center "  style="font-family:poppins;font-weight: 600;">Rental Status Report</h3>
+    <!-- Dropdown for Report Type -->
+    <div class="d-flex justify-content-center gap-3 mb-4" style="width: max-content ;">
+      <select class="form-select" (change)="onReportTypeChange($event)">
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
+      </select>
+    </div>
+    
+    <div style="height: 400px;">
+      <canvas id="rentalChart"></canvas>
+    </div>
+  </div>
 </div>
