@@ -15,6 +15,8 @@ import { Chart } from 'chart.js';
 })
 export class EditProfileComponent {
   profileForm!: FormGroup;
+profileImage: any;
+isDisabled = true;
 
   constructor(private fb: FormBuilder) {}
 
@@ -23,7 +25,7 @@ export class EditProfileComponent {
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required],
+      nic:  [{value: '', disabled: true}, [Validators.required]],
       phone: [''],
       gender: ['Male'],
       language: ['English'],

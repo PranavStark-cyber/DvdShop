@@ -1,11 +1,12 @@
 .container {
-    max-width: 800px;
+    max-width:130vh;
   }
   
   img {
     object-fit: cover;
   }
   
-  .card {
-    width: 200px;
-  }
+  .disabled-section {
+    opacity: 0.5;
+    pointer-events: none; /* This makes the section unclickable */
+}
