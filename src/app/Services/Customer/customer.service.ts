@@ -9,7 +9,7 @@ export class CustomerService {
 
   constructor(private http:HttpClient) { }
 
-  customerurl:string ="https://localhost:7067/api/Customer/";
+  customerurl:string ="https://19qbxfdw-7067.asse.devtunnels.ms/api/Customer/";
 
   GetAllCustomer(){
     return this.http.post<Customer[]>(this.customerurl+"GetAllCustomer",'')

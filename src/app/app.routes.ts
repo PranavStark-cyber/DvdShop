@@ -45,7 +45,7 @@ export const routes: Routes = [
          {path:'Movie' , component:MovieDetailsComponent},
          {path:'Rental/:id' , component:RentalComponent},
          {path:'RentalHistory' , component:RentalHistoryComponent},
-         {path:'EditProfile/:id' , component:EditProfileComponent},
+         {path:'EditProfile' , component:EditProfileComponent},
          {path:'Profile' , component:ProfileSectionComponent},
        ]
     }

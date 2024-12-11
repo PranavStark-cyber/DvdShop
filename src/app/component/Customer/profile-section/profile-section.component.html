@@ -1,83 +1,86 @@
 <div class="profile-container">
-    <div *ngIf="loading" class="spinner-container">
-        <div class="spinner"></div>
-    </div>
-    <div *ngIf="error" class="error-message">
-        {{ error }}
-    </div>
+  <!-- Loading Spinner -->
+  <div *ngIf="loading" class="spinner-container">
+    <div class="spinner"></div>
+  </div>
 
-    <ng-container *ngIf="!loading && !error && rental">
-        <div class="customer-details-container">
-            <div class="customer-header">
-                <div class="profile-section">
-                    <div class="profile-image">
-                        <img src="/Background image/Profile-Picture.jpg" alt="{{ rental.customer?.firstName || 'jhon' }}">
-                    </div>
-                    <div class="profile-info gap-3">
-                        <h1>{{ rental.customer?.firstName }} {{rental.customer?.lastName}}</h1>
-                        <div class="tags">
-                            <span class="tag">Business</span>
-                            <span class="tag" style="color: rgb(0, 187, 187); background-color: rgb(201, 244, 244);">Premium</span>
-                            <span class="tag" style="color: rgb(255, 0, 0); background-color: rgb(251, 219, 219)">Verified</span>
-                        </div>
-                        <div class="details">
-                            <span><i class="far fa-calendar"></i> {{ rental.customer?.joinDate | date }}</span>
-                            <span><i class="far fa-envelope"></i> {{ rental.customer?.email }}</span>
-                            <span><i class="far fa-clock"></i>{{ rental.customer?.nic }}</span>
-                        </div>
-                        <p class="description">{{ rental.customer?.phoneNumber }}</p>
-                    </div>
-                </div>
+  <!-- Error Message -->
+  <div *ngIf="error" class="error-message">
+    {{ error }}
+  </div>
+
+  <!-- Profile Section -->
+  <ng-container *ngIf="!loading && !error && customer">
+    <div class="customer-details-container">
+      <div class="customer-header d-flex">
+        <div class="profile-section">
+          <div class="profile-image">
+            <img src="/Background image/Profile-Picture.jpg" alt="{{ customer.firstName || 'John' }}">
+          </div>
+         <div class="">
+          <div class="profile-info gap-3">
+            <h4 class="text-black" style="font-weight: 700;font-family: poppins;">{{ customer.firstName|uppercase }} {{
+              customer.lastName|uppercase }}</h4>
+            <div class="tags">
+              <span class="tag">Business</span>
+              <span class="tag" style="color: rgb(0, 187, 187); background-color: rgb(201, 244, 244);">Premium</span>
+              <span class="tag" style="color: rgb(255, 0, 0); background-color: rgb(251, 219, 219)">Verified</span>
             </div>
-
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-value">${{rental.customer?.email}}+</div>
-                    <div class="stat-label">Total Amount</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">{{ rental.customer?.rentals?.length }}</div>
-                    <div class="stat-label">Total Rental</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">{{ rental.customer?.reviews?.length || 0 }}</div>
-                    <div class="stat-label">Review Count</div>
-                </div>
-
-                <div class="stat-card">
-                    <div class="stat-value">{{ rental.customer?.notifications?.length || 0 }}</div>
-                    <div class="stat-label">Notification</div>
-                </div>
+            <div class="details gap-5">
+              <span ><i class="far fa-calendar pe-2"></i> {{ customer.joinDate | date }}</span>
+              <span><i class="far fa-envelope pe-2"></i> {{ customer.email }}</span>
+              <span><i class="bi bi-file-person pe-2"></i>{{ customer.nic }}</span>
             </div>
-
-            <div class="d-flex justify-content-start " style="width: max-content;height: max-content;">
-                <h2>Rental Status</h2>
-                <canvas id="rentalStatusChart"></canvas>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <h2>Review</h2>
-                    <div class="scrollable-card">
-                        <div *ngFor="let review of rental.customer?.reviews">
-                            <div class="review-card">
-                                <p>{{ review }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <h2>Notifications</h2>
-                    <div class="scrollable-card">
-                        <div *ngFor="let notification of rental.customer?.notifications">
-                            <div class="notification-card">
-                                <p>{{ notification.message }}</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <p class="description">{{ customer.phoneNumber || 'No phone number' }}</p>
+          </div>      
+         </div>
         </div>
-    </ng-container>
+        <div style="position: relative;left: 20%;">
+          <button type="button" class="btn btn-outline-secondary" routerLink="/Customer/EditProfile"><i class="fa-solid fa-pen-to-square fa-bounce"></i></button>
+        </div>
+      </div>
+
+      <!-- Rental Stats Section -->
+      <div class="stats-container " style="background-color: rgb(225, 231, 245);">
+        <div class="stat-card">
+          <i class="fa-solid fa-coins"></i>
+          <div class="stat-value">${{ customer.payments?.length }}+</div>
+          <div class="stat-label">Total Amount</div>
+        </div>
+
+        <div class="stat-card">
+          <i class="bi bi-film"></i>
+          <div class="stat-value">{{ customer.rentals?.length || 0 }}</div>
+          <div class="stat-label">Total Rentals</div>
+        </div>
+
+        <div class="stat-card">
+          <i class="fa-solid fa-comment fa-beat"></i>
+          <div class="stat-value">{{ customer.reviews?.length || 0 }}</div>
+          <div class="stat-label">Review Count</div>
+        </div>
+
+        <div class="stat-card">
+          <i class="fa-solid fa-bell fa-shake"></i>
+          <div class="stat-value">{{ customer.notifications?.length || 0 }}</div>
+          <div class="stat-label">Notifications</div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
+          <div class="justify-content-start" style="width: max-content; height: max-content;">
+            <h4 style="font-family: poppins;font-weight: 700;">Rental Status</h4>
+            <div class="p-0 m-0" style="width: 400px; height: 400px;">
+              <canvas id="rentalStatusChart"></canvas>
+            </div>
+          </div>
+        </div>
+       <div class="col-6">
+        <h4 style="font-family: poppins;font-weight: 700;">Reviews</h4>
+
+       </div>
+      </div>
+
+    </div>
+  </ng-container>
 </div>

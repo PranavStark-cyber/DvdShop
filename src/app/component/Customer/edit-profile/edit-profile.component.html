@@ -1,0 +1,128 @@
+<div class="container mt-5">
+    <h2 class="mb-4">My Profile > <span class="text-muted">Edit Profile</span></h2>
+    <form [formGroup]="profileForm">
+      <!-- Profile Picture and Save Button -->
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <div>
+          <img
+            src="assets/profile.jpg"
+            alt="Profile"
+            class="rounded-circle"
+            width="100"
+            height="100"
+          />
+          <button class="btn btn-link">Change Picture</button>
+        </div>
+        <div>
+          <button type="button" class="btn btn-success">Save</button>
+          <button type="button" class="btn btn-outline-secondary">Cancel</button>
+        </div>
+      </div>
+  
+      <div class="row">
+        <!-- Left Column -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="firstName" class="form-label">First Name</label>
+            <input
+              type="text"
+              id="firstName"
+              class="form-control"
+              formControlName="firstName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="lastName" class="form-label">Last Name</label>
+            <input
+              type="text"
+              id="lastName"
+              class="form-control"
+              formControlName="lastName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input
+              type="email"
+              id="email"
+              class="form-control"
+              formControlName="email"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="password" class="form-label">Password</label>
+            <input
+              type="password"
+              id="password"
+              class="form-control"
+              formControlName="password"
+            />
+            <button type="button" class="btn btn-link">Change Password</button>
+          </div>
+          <div class="mb-3">
+            <label for="phone" class="form-label">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              class="form-control"
+              formControlName="phone"
+            />
+          </div>
+        </div>
+  
+        <!-- Right Column -->
+        <div class="col-md-6">
+          <div class="mb-3">
+            <label for="gender" class="form-label">Gender</label>
+            <select id="gender" class="form-select" formControlName="gender">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="language" class="form-label">Language</label>
+            <select id="language" class="form-select" formControlName="language">
+              <option value="English">English</option>
+              <option value="Spanish">Spanish</option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label for="address" class="form-label">Address</label>
+            <input
+              type="text"
+              id="address"
+              class="form-control"
+              formControlName="address"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="country" class="form-label">Country</label>
+            <input
+              type="text"
+              id="country"
+              class="form-control"
+              formControlName="country"
+            />
+          </div>
+        </div>
+      </div>
+  
+      <!-- Payment Methods -->
+      <div>
+        <h4 class="mb-3">Payment Method</h4>
+        <div class="d-flex justify-content-between">
+          <div class="card border p-3">
+            <p>Visa ...8314</p>
+            <small>Expires 06/21</small>
+            <button class="btn btn-link">Remove</button>
+          </div>
+          <div class="card border p-3">
+            <p>MasterCard ...8314</p>
+            <small>Expires 07/19</small>
+            <button class="btn btn-link">Remove</button>
+          </div>
+          <button class="btn btn-outline-primary">Add Payment Method</button>
+        </div>
+      </div>
+    </form>
+  </div>

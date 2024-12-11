@@ -1,138 +1,203 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, ChangeDetectorRef } from '@angular/core';
 import { Customer, Rental, RentalStatus } from '../../modals/customer';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { RentalService } from '../../../Services/Customer/rental.service';
-import { catchError, finalize } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { Chart } from 'chart.js';
 import { jwtDecode } from 'jwt-decode';
+import { CustomerService } from '../../../Services/Customer/customer.service';
 
+interface ChartCanvas extends HTMLCanvasElement {
+  chart?: Chart;
+}
 @Component({
   selector: 'app-profile-section',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,RouterLink],
   templateUrl: './profile-section.component.html',
   styleUrls: ['./profile-section.component.css']
 })
 export class ProfileSectionComponent implements OnInit {
-  rental: Rental | null = null;
-  loading = false;
+  customerid: string | null = null;
+  customer: any = null;
+  loading = true;
   error: string | null = null;
-  customerid!: string;
-  rentalChartData: any[] = [];
-  rentalChartLabels: string[] = [];
-  private rentalStatusChart: Chart | null = null;
 
   constructor(
-    private route: ActivatedRoute,
-    private rentalService: RentalService
-  ) {}
+    private rentalService: RentalService,
+    private customerService: CustomerService,
+    private cdr: ChangeDetectorRef
+  ) { }
 
+  ngOnInit() {
+    this.decodeCustomerIdFromToken();
+    this.loadCustomerData();
+  }
+
+  ngAfterViewInit() {
+    // Ensure chart is generated after the view is fully initialized
+    this.generateRentalStatusChart();
+  }
+
+  /**
+   * Decode the customer ID from JWT token stored in localStorage.
+   */
   decodeCustomerIdFromToken() {
     const jwtToken = localStorage.getItem('token');
     if (jwtToken) {
-      try {
-        const decodedToken: any = jwtDecode(jwtToken);
-        this.customerid = decodedToken.Id;
-        console.log('Decoded Customer ID:', this.customerid);
-      } catch (error) {
-        console.error('Error decoding token:', error);
-        this.error = 'Invalid token.';
-        this.loading = false;
-      }
-    } else {
-      this.error = 'Token not found.';
-      this.loading = false;
+      const decodedToken: any = jwtDecode(jwtToken);
+      this.customerid = decodedToken.Id;
     }
   }
- ngOnInit() {
-  this.loading = true;
-  this.decodeCustomerIdFromToken();
-  this.loadRentalData();
-}
 
-loadRentalData() {
-  if (this.customerid) {
-    this.rentalService.getRentalBycustomerId(this.customerid).pipe(
-      finalize(() => {
+  /**
+   * Load customer data by customer ID.
+   */
+  loadCustomerData() {
+    if (!this.customerid) return;
+
+    this.customerService.GetCustomerbyId(this.customerid).subscribe(
+      (data) => {
+        this.customer = data;
         this.loading = false;
-      }),
-      catchError((error) => {
-        console.error('Error fetching rental data:', error);
-        this.error = 'Failed to load rental data.';
-        return [];
-      })
-    ).subscribe((rentals) => {
-      if (rentals && rentals.length > 0) {
-        this.rental = rentals[0];
-        this.generateRentalReport(rentals);
-      } else {
-        this.error = 'No rental data found.';
+        this.cdr.detectChanges(); // Trigger change detection to render chart
+        this.generateRentalStatusChart();  // Generate chart after data is fetched
+      },
+      (error) => {
+        this.error = "Failed to load data. Please try again later.";
+        this.loading = false;
+      }
+    );
+  }
+
+  generateRentalStatusChart() {
+    if (!this.customer || !this.customer.rentals || this.customer.rentals.length === 0) {
+      console.log("No rentals data to display on the chart.");
+      return;
+    }
+
+    // Initialize the statusCounts object to count each status type
+    const statusCounts: { [key in string]: number } = {
+      'Request': 0,
+      'Approved': 0,
+      'Collected': 0,
+      'Returned': 0,
+      'Rejected': 0
+    };
+
+    // Map the numeric rental status to human-readable status names
+    this.customer.rentals.forEach((rental: any) => {
+      if (rental.status !== undefined) {
+        switch (rental.status) {
+          case 0: // Assuming 0 means 'Request'
+            statusCounts['Request']++;
+            break;
+          case 1: // Assuming 1 means 'Approved'
+            statusCounts['Approved']++;
+            break;
+          case 2: // Assuming 2 means 'Collected'
+            statusCounts['Collected']++;
+            break;
+          case 3: // Assuming 3 means 'Returned'
+            statusCounts['Returned']++;
+            break;
+          case 4: // Assuming 4 means 'Rejected'
+            statusCounts['Rejected']++;
+            break;
+          default:
+            console.log(`Unknown rental status: ${rental.status}`);
+        }
       }
     });
-  } else {
-    this.error = 'Customer ID is missing.';
-    this.loading = false;
+
+    // Prepare the chart data
+    const chartData = {
+      labels: ['Request', 'Approved', 'Collected', 'Returned', 'Rejected'],
+      datasets: [
+        {
+          data: [
+            statusCounts['Request'],
+            statusCounts['Approved'],
+            statusCounts['Collected'],
+            statusCounts['Returned'],
+            statusCounts['Rejected']
+          ],
+          backgroundColor: this.generateGradientColors(), // Customize colors if needed
+        }
+      ]
+    };
+
+    // Get the chart canvas element
+    const chartElement = document.getElementById('rentalStatusChart') as ChartCanvas;
+
+    if (chartElement) {
+      // Destroy previous chart if it exists
+      if (chartElement.chart) {
+        chartElement.chart.destroy();
+      }
+
+      // Create a new chart instance
+      const chart = new Chart(chartElement, {
+        type: 'doughnut',
+        data: chartData,
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              position: 'right',
+              labels: {
+                boxWidth: 80, // Width of the color box in the legend
+                padding: 15, // Space between the color box and label
+                font: {
+                  size: 8, // Font size for legend labels
+                }
+              }
+            },
+            tooltip: {
+              callbacks: {
+                label: function (tooltipItem) {
+                  return tooltipItem.label + ': ' + tooltipItem.raw + ' rentals';
+                }
+              }
+            }
+          }
+        }
+      });
+
+      // Store the chart instance in the canvas element for future use
+      chartElement.chart = chart;
+    } else {
+      console.error('Chart canvas element not found!');
+    }
   }
-}
+  // Function to generate gradient colors
+  generateGradientColors() {
+    const canvas = document.createElement('canvas');
+    const ctx = canvas.getContext('2d')!;
 
-generateRentalReport(rentals: Rental[]) {
-  const statusCounts: { [key: string]: number } = {
-    [RentalStatus.Request]: 0,
-    [RentalStatus.Approved]: 0,
-    [RentalStatus.Collected]: 0,
-    [RentalStatus.Returned]: 0,
-    [RentalStatus.Rejected]: 0,
-  };
+    const gradients = [
+      ctx.createLinearGradient(0, 0, 0, 400),
+      ctx.createLinearGradient(0, 0, 0, 400),
+      ctx.createLinearGradient(0, 0, 0, 400),
+      ctx.createLinearGradient(0, 0, 0, 400),
+      ctx.createLinearGradient(0, 0, 0, 400)
+    ];
 
-  rentals.forEach((rental) => {
-    statusCounts[rental.status] = (statusCounts[rental.status] || 0) + 1;
-  });
+    gradients[0].addColorStop(0, '#FF5733'); // Red to Orange
+    gradients[0].addColorStop(1, '#FF9A8B');
 
-  this.rentalChartLabels = ['Request', 'Approved', 'Collected', 'Returned', 'Rejected'];
+    gradients[1].addColorStop(0, '#4CAF50'); // Green to Light Green
+    gradients[1].addColorStop(1, '#8BC34A');
 
-  this.rentalChartData = [
-    {
-      data: [
-        statusCounts[RentalStatus.Request],
-        statusCounts[RentalStatus.Approved],
-        statusCounts[RentalStatus.Collected],
-        statusCounts[RentalStatus.Returned],
-        statusCounts[RentalStatus.Rejected],
-      ],
-      backgroundColor: [
-        'rgba(255,99,132,0.6)', // Red for Request
-        'rgba(54,162,235,0.6)', // Blue for Approved
-        'rgba(255,206,86,0.6)', // Yellow for Collected
-        'rgba(75,192,192,0.6)', // Green for Returned
-        'rgba(153,102,255,0.6)', // Purple for Rejected
-      ],
-      label: 'Rentals by Status',
-    },
-  ];
+    gradients[2].addColorStop(0, '#2196F3'); // Blue to Light Blue
+    gradients[2].addColorStop(1, '#64B5F6');
 
-  this.createChart();
-}
+    gradients[3].addColorStop(0, '#FFC107'); // Yellow to Light Yellow
+    gradients[3].addColorStop(1, '#FFEB3B');
 
-createChart() {
-  const ctx = document.getElementById('rentalStatusChart') as HTMLCanvasElement;
+    gradients[4].addColorStop(0, '#9E9E9E'); // Grey to Light Grey
+    gradients[4].addColorStop(1, '#BDBDBD');
 
-  if (!ctx) {
-    console.error('Chart element not found.');
-    return;
+    return gradients;
   }
-
-  if (this.rentalStatusChart) {
-    this.rentalStatusChart.destroy(); // Destroy existing chart to prevent memory leaks
-  }
-
-  this.rentalStatusChart = new Chart(ctx, {
-    type: 'pie',
-    data: {
-      labels: this.rentalChartLabels,
-      datasets: this.rentalChartData,
-    },
-  });
-}
-
 }

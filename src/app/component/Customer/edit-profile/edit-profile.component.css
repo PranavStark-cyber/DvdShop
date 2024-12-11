@@ -1,0 +1,11 @@
+.container {
+    max-width: 800px;
+  }
+  
+  img {
+    object-fit: cover;
+  }
+  
+  .card {
+    width: 200px;
+  }
