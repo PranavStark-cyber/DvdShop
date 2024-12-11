@@ -47,14 +47,54 @@
         </div>
         
         <!-- Person Button with Dropdown -->
-        <div class="dropdown">
-          <button class="btn btn-circle dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <div >
+          <button class="btn btn-circle " type="button" aria-expanded="false" (click)="toggleModal()">
             <i class="bi bi-person"></i>
           </button>
-          <ul class="dropdown-menu dropdown-menu-end shadow">
-            <li><a class="dropdown-item" href="#">Profile</a></li>
-            <li><a class="dropdown-item" href="#">Logout</a></li>
-          </ul>
+          <div class="profile-modal" *ngIf="isOpen">
+            <!-- Cover and Profile Image Section -->
+            <div class="cover-section">
+              <img src="/Background image/customer background.jpg" alt="Cover" class="cover-image">
+              <div class="profile-image-container">
+                <img src="/Background image/profile picture.jpg" alt="Profile" class="profile-image">
+              </div>
+            </div>
+        
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+              <button class="btn-logout" (click)="logout()">
+                <i class="bi bi-box-arrow-right"></i>
+                Logout
+              </button>
+              <button class="btn-edit" (click)="Profile(userData.id)">
+                <i class="bi bi-person"></i>
+                Profile
+              </button>
+            </div>
+        
+            <!-- User Details -->
+            <div class="user-details">
+              <div class="user-header">
+                <h3 class="user-name">{{userData.firstName}}</h3>
+                <p class="user-city">{{userData.address?.city || "just add your Address"}}</p>
+              </div>
+              
+              <div class="user-info">
+                <div class="info-row">
+                  <span class="info-label">NIC:</span>
+                  <span class="info-value text-black">{{userData.nic}}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Phone:</span>
+                  <span class="info-value">{{userData.phoneNumber || "You didn't add that"}}</span>
+                </div>
+                <div class="info-row">
+                  <span class="info-label">Total Rentals:</span>
+                  <span class="info-value">{{userData.rentals?.length}}</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

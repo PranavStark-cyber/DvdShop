@@ -162,3 +162,147 @@
   opacity: 1;
   visibility: visible;
 }
+
+
+.profile-button-container {
+  position: relative;
+  display: inline-block;
+}
+
+.profile-button {
+  padding: 0.5rem;
+  border-radius: 50%;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s;
+
+  &:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  i {
+    font-size: 1.5rem;
+  }
+}
+
+
+.profile-modal {
+  position: absolute;
+  right: 2%;
+  top: calc(100% + 0.2rem);
+  width: 320px;
+  background: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+  z-index: 1000;
+
+}
+
+.cover-section {
+  position: relative;
+  height: 128px;
+}
+
+.cover-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.profile-image-container {
+  position: absolute;
+  bottom: -2.5rem;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.profile-image {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  border: 4px solid white;
+  object-fit: cover;
+}
+
+
+.action-buttons {
+  margin-top: 3rem;
+  padding: 0.5rem 1rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5rem;
+
+  button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 0.5rem;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: background-color 0.2s;
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  .btn-logout {
+    background-color: #ef4444;
+    &:hover {
+      background-color: #dc2626;
+    }
+  }
+
+  .btn-edit {
+    background-color: #3b82f6;
+    &:hover {
+      background-color: #2563eb;
+    }
+  }
+}
+
+
+.user-details {
+  padding: 1rem;
+}
+
+.user-header {
+  text-align: center;
+  margin-bottom: 1rem;
+
+  .user-name {
+    font-size: 1.25rem;
+    font-weight: 600;
+    margin: 0;
+  }
+
+  .user-city {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0.25rem 0 0;
+  }
+}
+
+.user-info {
+  .info-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.5rem;
+    font-size: 0.875rem;
+
+    .info-label {
+      color: #6b7280;
+    }
+
+    .info-value {
+      font-weight: 500;
+    }
+  }
+}
+
+

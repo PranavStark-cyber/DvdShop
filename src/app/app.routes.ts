@@ -15,6 +15,8 @@ import { CustomerhomeComponent } from './component/Customer/customerhome/custome
 import { authGuard } from './Authguard/auth.guard';
 import { RentalComponent } from './component/Customer/rental/rental.component';
 import { RentalHistoryComponent } from './component/Customer/rental-history/rental-history.component';
+import { EditProfileComponent } from './component/Customer/edit-profile/edit-profile.component';
+import { ProfileSectionComponent } from './component/Customer/profile-section/profile-section.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -42,7 +44,9 @@ export const routes: Routes = [
          {path:'Home' , component:CustomerhomeComponent},
          {path:'Movie' , component:MovieDetailsComponent},
          {path:'Rental/:id' , component:RentalComponent},
-         {path:'RentalHistory' , component:RentalHistoryComponent}
+         {path:'RentalHistory' , component:RentalHistoryComponent},
+         {path:'EditProfile/:id' , component:EditProfileComponent},
+         {path:'Profile' , component:ProfileSectionComponent},
        ]
     }
     

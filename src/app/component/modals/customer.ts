@@ -66,14 +66,14 @@ export interface Customer {
     firstName: string;
     lastName: string;
     email: string;
-    phoneNumber: string;
+    phoneNumber: string | null;
     joinDate: string; 
-    rentals: Rental[];  
-    payments: Payment[];
-    reviews: Review[]; 
+    rentals: Rental[]  | null;  
+    payments: Payment[]  | null;
+    reviews: Review[]  | null; 
     reservations: Reservation | null;
-    notifications: Notification[]; 
-    address: Address; 
+    notifications: Notification[]  | null; 
+    address: Address | null; 
   }
 
   export interface Rental {
