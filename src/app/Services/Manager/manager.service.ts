@@ -8,7 +8,7 @@ import { Director, Dvd, DvdRequest, genres } from '../../component/modals/custom
 export class ManagerService {
   constructor(private http:HttpClient) { }
 
-  dvdurl:string ="https://19qbxfdw-7067.asse.devtunnels.ms/api/Manager";
+  dvdurl:string ="https://localhost:7067/api/Manager";
 
   GetAllGenare(){
     return this.http.get<genres[]>(this.dvdurl+"/GetAllGenare")

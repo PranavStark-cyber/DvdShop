@@ -59,10 +59,20 @@
     padding: 1rem;
   }
   .stat-card {
-    background: white;
+    display: flex;
     padding: 1rem;
+    gap: 20px;
     border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    text-align: start;
+    
+  }
+  .icon{
+    background-color: #d8e6fe;
+    color: #7499fd;
+    padding: 20px;
+    border-radius: 50px;
+
   }
   h3 {
     color: #666;
@@ -84,12 +94,22 @@
   }
   
   .profile-image img {
-    width: 200px;
-    height: 200px;
+    width: 150px;
+    height: 150px;
     border-radius: 8px;
     object-fit: cover;
   }
-  
+  .customer-name {
+    display: inline-block;
+    position: relative;
+}
+
+.name-icon {
+    position: absolute;
+    top: -10px; /* Adjust to position the icon at the top */
+    right: -25px; /* Adjust to move the icon to the right */
+}
+
   .profile-info h1 {
     margin: 0 0 12px 0;
     font-size: 24px;
@@ -103,8 +123,8 @@
   }
   
   .tag {
-    padding: 1px 7px;
-    border-radius: 30px;
+    padding: 3px 10px;
+    border-radius: 10px;
     font-size: 8px;
     background-color: #f0f4ff;
     color: #4070f4;
@@ -132,12 +152,7 @@
     margin-bottom: 24px;
   }
   
-  .stat-card {
-    background-color: #f8fafc;
-    padding: 24px;
-    border-radius: 8px;
-    text-align: center;
-  }
+ 
   
   .stat-value {
     font-size: 24px;

@@ -49,7 +49,10 @@ export class ProfileSectionComponent implements OnInit {
       this.customerid = decodedToken.Id;
     }
   }
-
+  Back():void{
+    window.history.back();
+   }
+  
   /**
    * Load customer data by customer ID.
    */

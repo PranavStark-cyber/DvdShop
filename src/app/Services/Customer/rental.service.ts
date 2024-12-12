@@ -9,7 +9,7 @@ export class RentalService {
 
   constructor(private http:HttpClient) { }
 
-  rentalurl:string ="https://19qbxfdw-7067.asse.devtunnels.ms/api/Rental/";
+  rentalurl:string ="https://localhost:7067/api/Rental/";
 
   RequestRental(rentalrequest:RentalRequestDTO){
     return this.http.post(this.rentalurl+"request",rentalrequest)

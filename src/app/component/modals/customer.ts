@@ -75,7 +75,14 @@ export interface Customer {
     notifications: Notification[]  | null; 
     address: Address | null; 
   }
-
+  export interface UpdateCustomer {
+    id: string;
+    nic: string;
+    firstName: string;
+    lastName: string;
+    phoneNumber: string | null;
+    address: Address | null; 
+  }
   export interface Rental {
     id: string; 
     dvdId: string;
