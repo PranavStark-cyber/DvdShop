@@ -32,8 +32,8 @@ export class LoginComponent {
       Email: ['', [Validators.required, Validators.email]],
       password: ['', [
         Validators.required,
-        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/), // Default pattern for password
-        Validators.minLength(8)
+        Validators.pattern(/^(?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{6,})/), // Default pattern for password
+        Validators.minLength(6)
       ]],
       rememberMe: ['']
     });
@@ -65,8 +65,8 @@ export class LoginComponent {
           progressBar: true,
           timeOut: 4000
         });
-        if(decode.Role == "Admin"){
-          this.rout.navigate(['/Manager']);
+        if(decode.Role == "Manager"){
+          this.rout.navigate(['/Manager/DashBoard']);
         }else if(decode.Role == "Customer"){
           this.rout.navigate(['/Customer/Home']);
         }

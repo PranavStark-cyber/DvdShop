@@ -17,6 +17,8 @@ import { RentalComponent } from './component/Customer/rental/rental.component';
 import { RentalHistoryComponent } from './component/Customer/rental-history/rental-history.component';
 import { EditProfileComponent } from './component/Customer/edit-profile/edit-profile.component';
 import { ProfileSectionComponent } from './component/Customer/profile-section/profile-section.component';
+import { RentalManagerComponent } from './component/Manager/rental-manager/rental-manager.component';
+import { RentalTableComponent } from './component/Manager/rental-table/rental-table.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -34,8 +36,8 @@ export const routes: Routes = [
        {path:'Dvd-Details/:id' , component:DvdDetailsComponent},
        {path:'Customer' , component:CustomerComponent},
        {path:'Customer-Details/:id' , component:CustomerDetailsComponent},
-
- 
+       {path:'Rental' , component:RentalManagerComponent},
+       { path: 'Rental/:status', component: RentalTableComponent }
       ]
    },
 

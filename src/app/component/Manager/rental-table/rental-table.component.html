@@ -1,0 +1,59 @@
+<div class="container-fluid mt-4">
+    <h2>Rental Table</h2>
+  
+    <!-- Wrapping table in a scrollable container for small screens -->
+    <div class="table-responsive">
+      <table class="table table-hover custom-table">
+        <thead>
+          <tr class="table-dark">
+            <th>Customer</th>
+            <th>DVD</th>
+            <th>Request Date</th>
+            <th *ngIf="status === RentalStatus.Approved || status === RentalStatus.Collected || status === RentalStatus.Returned">Approved Date</th>
+            <th *ngIf="status === RentalStatus.Collected || status === RentalStatus.Returned">Collected Date</th>
+            <th *ngIf="status === RentalStatus.Returned">Return Date</th>
+            <th *ngIf="status === RentalStatus.Request||status === RentalStatus.Approved || status === RentalStatus.Collected">Actions</th> <!-- Conditional header for actions -->
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let rental of rentals">
+            <td>{{ rental.customer?.firstName }}</td>
+            <td>{{ rental.dvd?.title }}</td>
+            <td>{{ rental.requestDate | date: 'shortDate' }}</td>
+  
+            <!-- Show approved date for Approved status -->
+            <td *ngIf="rental.status === RentalStatus.Approved ||rental.status === RentalStatus.Collected||rental.status === RentalStatus.Returned">
+              {{ rental.approvedDate | date: 'shortDate' }}
+            </td>
+  
+            <!-- Show collected date for Collected status -->
+            <td *ngIf="rental.status === RentalStatus.Collected||rental.status === RentalStatus.Returned">
+              {{ rental.collectedDate | date: 'shortDate' }}
+            </td>
+  
+            <!-- Show return date for Returned status -->
+            <td *ngIf="rental.status === RentalStatus.Returned">
+              {{ rental.returnDate | date: 'shortDate' }}
+            </td>
+  
+            <!-- Show actions for Request status -->
+            <td *ngIf="rental.status === RentalStatus.Request">
+              <button class="btn btn-success custom-btn me-3" (click)="onApprove(rental.id)">Approve</button>
+              <button class="btn btn-danger custom-btn" (click)="onReject(rental.id)">Reject</button>
+            </td>
+  
+            <!-- Show Collect button for Approved status -->
+            <td *ngIf="rental.status === RentalStatus.Approved">
+              <button class="btn btn-warning custom-btn" (click)="onCollect(rental.id)">Collect</button>
+            </td>
+  
+            <!-- Show Return button for Collected status -->
+            <td *ngIf="rental.status === RentalStatus.Collected">
+              <button class="btn btn-success custom-btn" (click)="onReturn(rental.id)">Return</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  

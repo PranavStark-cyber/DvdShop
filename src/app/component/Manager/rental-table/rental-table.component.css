@@ -1,0 +1,30 @@
+/* Styling for the custom table */
+.custom-table {
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    overflow: hidden; /* Ensures the content stays inside rounded corners */
+  }
+  
+  /* Optional: Make sure the table is scrollable horizontally on smaller screens */
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+   .table td {
+    border-radius: 5px; /* Rounded corners for each table cell */
+  }
+  
+  /* Styling for the "Approve" button */
+  .custom-btn {
+    border-radius: 5px; /* Rounded corners for the button */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: all 0.3s ease; /* Smooth transition on hover */
+  }
+  
+  /* Optional: Add a hover effect to the button */
+  .custom-btn:hover {
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2); /* Darker shadow on hover */
+    transform: translateY(-2px); /* Slight lift on hover */
+  }
+  

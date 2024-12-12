@@ -8,7 +8,7 @@ export const authGuard: CanActivateFn = (route, state) => {
 
   if(authService.isLoggedin()){
     const role = localStorage.getItem("Role")
-    if(role == "Admin"){
+    if(role == "Manager"){
       return true
     }else if(role == "Customer"){
       return false

@@ -11,7 +11,7 @@ export const customerGuard: CanActivateFn = (route, state) => {
     if (authService.isLoggedin()) {
       const role = localStorage.getItem('Role');
       
-      if (role === 'Admin') {
+      if (role === 'Manager') {
         // Redirect to manager dashboard if the user is an admin
         router.navigate(['/Manager']);
       } else if (role === 'Customer') {

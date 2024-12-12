@@ -6,6 +6,16 @@ export interface User {
     password: string;
 }
 
+export interface Manager {
+  firstName: string;
+  lastName: string;
+  email: string;
+  nic: string;
+  password: string;
+  Id:string;
+}
+
+
 export interface Login {
     nic: string;
     password: string;

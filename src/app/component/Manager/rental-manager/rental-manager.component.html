@@ -1,0 +1,18 @@
+<div class="container-fluid">
+    <div class="row">
+      <!-- Loop through rental status labels -->
+      <div *ngFor="let status of statusLabels" class="col-12 col-sm-6 col-md-4 col-lg-3 mb-4" (click)="onCardClick(status.value)">
+        <div class="card custom-card">
+          <div class="card-body">
+            <h5 class="card-title">{{ status.label }} Status</h5>
+            <h6 class="card-subtitle mb-3 text-muted">{{ getRentalsByStatus(status.value).length }} Rentals</h6>
+            <p class="card-text">
+              Click to view all rentals with the "{{ status.label }}" status.
+            </p>
+            <a class="card-link view-details-link" (click)="onCardClick(status.value)">View Details</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

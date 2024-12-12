@@ -1,0 +1,80 @@
+/* Basic styling for the cards */
+.custom-card {
+    border-radius: 15px; /* Rounded corners for the card */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Soft shadow for 3D effect */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth hover effect */
+    height: auto; /* Let height adjust based on content */
+  }
+  
+  .card-body {
+    padding: 20px;
+  }
+  
+  .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+  }
+  
+  .card-subtitle {
+    font-size: 1.1rem;
+    color: #6c757d;
+  }
+  
+  .card-text {
+    font-size: 1rem;
+    color: #495057;
+  }
+  
+  .view-details-link {
+    display: inline-block;
+    margin-top: 15px;
+    text-decoration: none;
+    color: #007bff;
+    font-weight: bold;
+    transition: color 0.3s ease;
+  }
+  
+  .view-details-link:hover {
+    color: #0056b3; /* Darker blue on hover */
+    text-decoration: underline;
+  }
+  
+  /* Hover effects for the card */
+  .custom-card:hover {
+    transform: translateY(-5px); /* Lift the card on hover */
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15); /* Darker shadow on hover */
+  }
+  
+  @media (min-width: 576px) {
+    .custom-card {
+      height: 250px; /* Adjust height for small devices */
+    }
+  }
+  
+  @media (min-width: 992px) {
+    .custom-card {
+      height: 300px; /* Adjust height for medium devices */
+    }
+  }
+  
+  @media (min-width: 1200px) {
+    .custom-card {
+      height: 350px; /* Adjust height for large devices */
+    }
+  }
+  
+  /* Styling for the container and row for proper layout */
+  .container-fluid {
+    padding: 20px;
+  }
+  
+  .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+  .col-12, .col-sm-6, .col-md-4, .col-lg-3 {
+    display: flex;
+    justify-content: center;
+  }
+  
