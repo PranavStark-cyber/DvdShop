@@ -14,9 +14,9 @@ import { ChartCardComponent } from './chart-card/chart-card.component';
 })
 export class DashboardDetailsComponent {
   statCards: StatCard[] = [
-    { title: 'Projects', value: '125', percentage: 24.7, color: 'primary' },
-    { title: 'New Employee', value: '213', percentage: 5.28, color: 'info' },
-    { title: 'Running Tasks', value: '10,225', percentage: 16, color: 'success' },
+    { title: 'Total Dvds', value: '125', percentage: 24.7, color: 'primary' },
+    { title: 'Available Dvds', value: '213', percentage: 5.28, color: 'info' },
+    { title: 'Renatls', value: '10,225', percentage: 16, color: 'success' },
     { title: 'Earning', value: '$2,658', percentage: 5.07, color: 'warning' },
   ];
 

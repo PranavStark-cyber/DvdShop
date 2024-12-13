@@ -1,169 +1,187 @@
-<div class="container-fluid"
-    style="background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url(./Img/movie-collection-2k1.jpg); background-size: cover; background-attachment: fixed; background-position: center;">
-    <div class="container d-flex justify-content-center align-items-center vh-100  ">
-        <div class="card shadow-sm p-4 bg-transparent text-white border-White animate__animated animate__fadeInDown "
-            style="border-radius: 12px;backdrop-filter: blur(13px); width: 75vh;box-shadow:0 8px 32px 0 rgba(0,0,0,0.37);height:max-content;">
-            <div class="d-flex gap-3">
-                <div style="width:100%;">
-                    <!-- Registration Form -->
-                    <div *ngIf="!isVerificationMode">
-                        <h4 class="mb-3 " style="text-align: center;">Sign up</h4>
-                        <form [formGroup]="signupForm" (ngSubmit)="Registeruser()">
-                            <div class="d-flex gap-3">
-                                <div class="form-group mb-3" style="width: 50%;">
-                                    <div class="input-group">
-                                        <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person"></i>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Enter your First Name"
-                                            aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                            formControlName="FirstName">
-                                    </div>
-                                    <div *ngIf="signupForm.get('FirstName')?.touched && signupForm.get('FirstName')?.invalid"
-                                        class="text-danger">
-                                        <small *ngIf="signupForm.get('FirstName')?.errors?.['required']">First name is
-                                            required.</small>
-                                    </div>
-                                </div>
-
-                                <div class="form-group mb-3" style="width: 50%;">
-                                    <div class="input-group">
-                                        <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-person"></i>
-                                        </div>
-                                        <input type="text" class="form-control" placeholder="Enter your Last Name"
-                                            aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                            formControlName="LastName">
-                                    </div>
-                                    <div *ngIf="signupForm.get('LastName')?.touched && signupForm.get('LastName')?.invalid"
-                                        class="text-danger">
-                                        <small *ngIf="signupForm.get('LastName')?.errors?.['required']">Last name is
-                                            required.</small>
-                                    </div>
-                                </div>
-                            </div>
-
-
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i>
-                                    </div>
-                                    <input type="email" class="form-control" placeholder="Your Email"
-                                        aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                        formControlName="email">
-                                </div>
-                                <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
-                                    class="text-danger">
-                                    <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is
-                                        required.</small>
-                                    <small *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email
-                                        address.</small>
-                                </div>
-                            </div>
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-envelope"></i>
-                                    </div>
-                                    <input type="text" class="form-control" placeholder="Your NIC"
-                                        aria-label="Input group example" aria-describedby="btnGroupAddon"
-                                        formControlName="Nic">
-                                </div>
-                                <div *ngIf="signupForm.get('Nic')?.touched && signupForm.get('Nic')?.invalid"
-                                    class="text-danger">
-                                    <small *ngIf="signupForm.get('Nic')?.errors?.['required']">NIC is required.</small>
-                                    <small *ngIf="signupForm.get('Nic')?.errors?.['pattern']">Please enter a valid NIC
-                                        number.</small>
-                                </div>
-                            </div>
-
-                            <div class="form-group mb-3 mt-4">
-                                <div class="input-group">
-                                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
-                                    <input [type]="showPassword ? 'text' : 'password'" class="form-control"
-                                        style="box-shadow: none; border: none;" placeholder="Password"
-                                        aria-label="Password input" aria-describedby="btnGroupAddon"
-                                        formControlName="password" (input)="onPasswordChange()">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                        (click)="togglePasswordVisibility()">
-                                        <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                                    </button>
-                                </div>
-                                <div *ngIf="passwordStrength">
-                                    <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
-                                    <small>{{ passwordStrength.message }}</small>
-                                </div>
-                                <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
-                                    class="text-danger">
-                                    <small>Password must be at least 8 characters long, contain an uppercase letter, a
-                                        number, and a special character.</small>
-                                </div>
-
-
-                            </div>
-
-                            <div class="form-group mb-3 mt-4">
-                                <div class="input-group">
-                                    <div class="input-group-text" id="btnGroupAddon"><i class="bi bi-lock"></i></div>
-                                    <input [type]="showPassword ? 'text' : 'password'" class="form-control"
-                                        style="box-shadow: none; border: none;" placeholder="confirmPassword"
-                                        aria-label="Password input" aria-describedby="btnGroupAddon"
-                                        formControlName="confirmPassword">
-                                    <button type="button" class="btn btn-outline-secondary"
-                                        (click)="togglePasswordVisibility()">
-                                        <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-                                    </button>
-                                </div>
-
-                                <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
-                                    class="text-danger">
-                                    <small>Password mis match</small>
-                                </div>
-
-
-                            </div>
-
-
-
-                            <div class="form-check mb-3">
-                                <input type="checkbox" id="terms" formControlName="terms" class="form-check-input">
-                                <label for="terms" class="form-check-label">
-                                    I agree to all statements in <a href="#">Terms of service</a>
-                                </label>
-                            </div>
-
-                            <button type="submit" class="btn btn-primary w-100"
-                                [disabled]="signupForm.invalid">Register</button>
-
-
-                            <p class="text-center  mt-3">
-                                <a href="#" class="text-white" routerLink="/Dvd/Login">I am already a member</a>
-                            </p>
-                        </form>
-                    </div>
-
-                    <!-- Verification Form -->
-                    <div *ngIf="isVerificationMode">
-                        <h4 class="mb-3 text-center">Email Verification</h4>
-                        <form [formGroup]="verificationForm" (ngSubmit)="verifyEmail()">
-                            <div class="form-group mb-3">
-                                <div class="input-group">
-                                    <div class="input-group-text" id="btnGroupAddon"><i
-                                            class="bi bi-envelope-check"></i></div>
-                                    <input type="text" class="form-control" placeholder="Enter Verification Code"
-                                        formControlName="verificationCode">
-                                </div>
-                                <div *ngIf="verificationForm.get('verificationCode')?.touched && verificationForm.get('verificationCode')?.invalid"
-                                    class="text-danger">
-                                    <small>Verification code is required.</small>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="button" class="btn btn-outline-secondary"
-                                 >Resend Code</button>
-                                <button type="submit" class="btn btn-primary">Verify</button>
-                            </div>
-                        </form>
-                    </div>
+<div class="container-fluid vh-100 d-flex flex-column">
+    <!-- Main Content -->
+    <div class="row flex-grow-1">
+        <!-- Left Section -->
+        <div class="col-md-6 d-none d-md-flex flex-column justify-content-center bg-purple text-white">
+            <div style="width: 50%; position: relative; left: 10%;">
+                <h1 class="fw-bold mb-4">Start your new journey.</h1>
+                <p class="text-start">
+                    Use these awesome forms to login or create a new account in your project for free.
+                </p>
+                <div class="d-flex align-items-center mt-4">
+                    <img src="https://i.imgur.com/2Tnd3DC.png" alt="Users" class="rounded-circle me-2"
+                        style="width: 30px; height: 30px;" />
+                    <img src="https://i.imgur.com/2Tnd3DC.png" alt="Users" class="rounded-circle me-2"
+                        style="width: 30px; height: 30px;position: relative;right: 5%;" />
+                    <img src="https://i.imgur.com/2Tnd3DC.png" alt="Users" class="rounded-circle me-2"
+                        style="width: 30px; height: 30px;position: relative;right: 10%;" />
+                    <span style="position: relative;right: 10%;">Join 2.5M+ users</span>
                 </div>
             </div>
+        </div>
+
+        <!-- Right Section (Form with 2 Fields Per Row) -->
+        <div class="col-12 col-md-6 d-flex justify-content-center align-items-center bg-white">
+            <div style="width: 100%; max-width: 600px;" *ngIf="!isVerificationMode">
+                <h2 class="fw-bold">Sign up</h2>
+                <p class="text-muted">Nice to meet you! Please enter your details.</p>
+
+                <form [formGroup]="signupForm" (ngSubmit)="Registeruser()">
+                    <!-- First Name and Last Name Row -->
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6">
+                            <label for="firstName" class="form-label">First Name</label>
+                            <input type="text" id="firstName" formControlName="FirstName"
+                                class="form-control form-control-lg" placeholder="Enter your first name"
+                                style="height: 45px; font-size: 18px;" />
+                            <div *ngIf="signupForm.get('FirstName')?.touched && signupForm.get('FirstName')?.invalid"
+                                class="text-danger">
+                                <small *ngIf="signupForm.get('FirstName')?.errors?.['required']">First name is
+                                    required.</small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="lastName" class="form-label">Last Name</label>
+                            <input type="text" id="lastName" formControlName="LastName"
+                                class="form-control form-control-lg" placeholder="Enter your last name"
+                                style="height: 45px; font-size: 18px;" />
+                            <div *ngIf="signupForm.get('LastName')?.touched && signupForm.get('LastName')?.invalid"
+                                class="text-danger">
+                                <small *ngIf="signupForm.get('LastName')?.errors?.['required']">Last name is
+                                    required.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Email and NIC Row -->
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" formControlName="email" class="form-control form-control-lg"
+                                placeholder="Enter your email address" style="height: 45px; font-size: 18px;" />
+                            <div *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.invalid"
+                                class="text-danger">
+                                <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is
+                                    required.</small>
+                                <small *ngIf="signupForm.get('email')?.errors?.['email']">Please enter a valid email
+                                    address.</small>
+                            </div>
+                        </div>
+                        <div class="col-12 col-md-6">
+                            <label for="nic" class="form-label">NIC</label>
+                            <input type="text" id="nic" formControlName="Nic" class="form-control form-control-lg"
+                                placeholder="Enter your NIC" style="height: 45px; font-size: 18px;" />
+                            <div *ngIf="signupForm.get('Nic')?.touched && signupForm.get('Nic')?.invalid"
+                                class="text-danger">
+                                <small *ngIf="signupForm.get('Nic')?.errors?.['required']">NIC is required.</small>
+                                <small *ngIf="signupForm.get('Nic')?.errors?.['pattern']">Please enter a valid NIC
+                                    number.</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password and Confirm Password Row -->
+                    <div class="row mb-4">
+                        <div class="col-12 col-md-6">
+                            <label for="password" class="form-label">Password</label>
+                            <div class="input-group">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="password"
+                                    id="password" class="form-control form-control-lg" placeholder="Create a password"
+                                    (input)="onPasswordChange()" style="height: 45px; font-size: 18px;" />
+                                <button type="button" class="btn btn-outline-secondary"
+                                    (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="passwordStrength">
+                                <div [ngClass]="passwordStrength.level" class="password-strength-meter"></div>
+                                <small>{{ passwordStrength.message }}</small>
+                            </div>
+                            <div *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.invalid"
+                                class="text-danger">
+                                <small>Password must be at least 8 characters long, contain an uppercase letter, a
+                                    number, and a special character.</small>
+                            </div>
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            <label for="confirmPassword" class="form-label">Confirm Password</label>
+                            <div class="input-group">
+                                <input [type]="showPassword ? 'text' : 'password'" formControlName="confirmPassword"
+                                    id="confirmPassword" class="form-control form-control-lg"
+                                    placeholder="Confirm your password" style="height: 45px; font-size: 18px;" />
+                                <button type="button" class="btn btn-outline-secondary"
+                                    (click)="togglePasswordVisibility()">
+                                    <i [ngClass]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+                                </button>
+                            </div>
+                            <div *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.invalid"
+                                class="text-danger">
+                                <small>Password mismatch</small>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!-- Terms Checkbox -->
+                    <div class="form-check mb-4">
+                        <input type="checkbox" formControlName="terms" id="terms" class="form-check-input"
+                            style="height: 20px; width: 20px;" />
+                        <label for="terms" class="form-check-label" style="font-size: 18px;">
+                            I agree to the <a href="#" class="text-primary">Terms and Conditions</a>.
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" [disabled]="signupForm.invalid" class="btn btn-primary w-100 btn-lg"
+                            style="height: 50px; font-size: 18px;">Sign up</button>
+                    </div>
+
+                    <div class="d-flex justify-content-center">
+                        <!-- Google Sign-Up -->
+                        <button type="button" class="btn btn-outline-dark w-100 mt-3 btn-lg"
+                            style="height: 50px; font-size: 18px;">
+                            <img src="https://img.icons8.com/color/16/000000/google-logo.png" alt="Google"
+                                class="me-2" />
+                            Sign up with Google
+                        </button>
+                    </div>
+
+
+                    <!-- Footer -->
+                    <p class="text-center mt-3" style="font-size: 18px;">
+                        Already have an account? <a routerLink="/Dvd/Login" class="text-primary">Sign in</a>
+                    </p>
+                </form>
+            </div>
+
+            <div style="width: 100%; max-width: 400px;" *ngIf="isVerificationMode">
+                <h2 class="fw-bold">Email Verification</h2>
+                <form [formGroup]="verificationForm" (ngSubmit)="verifyEmail()">
+                    <div class="mb-4">
+                        <label for="name" class="form-label">OTP</label>
+                        <input type="text" id="name" formControlName="verificationCode"
+                            class="form-control form-control-lg" placeholder="Enter your name"
+                            style="height: 45px; font-size: 18px;" />
+                        <div *ngIf="verificationForm.get('verificationCode')?.touched && verificationForm.get('verificationCode')?.invalid"
+                            class="text-danger">
+                            <small>Verification code is required.</small>
+                        </div>
+                    </div>
+
+                    <!-- <div class="mb-4">
+                            <label for="email" class="form-label">Email Address</label>
+                            <input type="email" id="email" class="form-control form-control-lg" placeholder="Enter your email address" style="height: 45px; font-size: 18px;" />
+                        </div> -->
+                    <!-- <div class="d-flex justify-content-between">
+                            <button type="button" class="btn btn-outline-secondary"
+                             >Resend Code</button>
+                            <button type="submit" class="btn btn-primary">Verify</button>
+                        </div> -->
+                </form>
+            </div>
+
         </div>
     </div>
 </div>

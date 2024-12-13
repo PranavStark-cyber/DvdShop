@@ -10,7 +10,7 @@ import { PasswordStrengthService } from '../../../Services/password-strength.ser
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [ReactiveFormsModule, FormsModule, CommonModule,RouterLink,RouterLinkActive],
+  imports: [ReactiveFormsModule, FormsModule, CommonModule,RouterLink],
   templateUrl: './register.component.html',
   styleUrl: './register.component.css'
 })export class RegisterComponent {

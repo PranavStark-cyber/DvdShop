@@ -9,7 +9,7 @@ export class RentalService {
 
   constructor(private http:HttpClient) { }
 
-  rentalurl:string ="http://localhost:5092/api/Rental";
+  rentalurl:string ="https://localhost:7067/api/Rental";
 
   RequestRental(rentalrequest:RentalRequestDTO){
     return this.http.post(this.rentalurl+"/request",rentalrequest)

@@ -1,4 +1,4 @@
-.password-strength-meter {
+/* .password-strength-meter {
     height: 5px;
     width: 100%;
     border-radius: 5px;
@@ -7,22 +7,22 @@
   
   .weak {
     background-color: red;
-    width: 25%; /* Weak meter width */
+    width: 25%; 
   }
   
   .medium {
     background-color: orange;
-    width: 50%; /* Medium meter width */
+    width: 50%; 
   }
   
   .strong {
     background-color: rgb(6, 255, 6);
-    width: 75%; /* Strong meter width */
+    width: 75%; 
   }
   
   .strongest {
     background-color: rgb(2, 129, 2);
-    width: 100%; /* Strong meter width */
+    width: 100%; 
   }
   
   
@@ -119,4 +119,68 @@
   .icon-container:hover .tooltip {
     display: block;
   }
+   */
+
+
+/* Purple Background */
+
+* {
+  font-family: Noto Sans !important;
+}
+
+.bg-purple {
+  background-image: url(/pic8.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;  /* Ensures the image covers the container */
+  height: 100%;
+}
+
+/* Styling for Buttons */
+.btn-primary {
+  background-color: #1c1e21;
+  border-color: #1c1e21;
+}
+
+.btn-primary:hover {
+  background-color: #000;
+  border-color: #000;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* Form Fields */
+.form-control {
+  border-radius: 5px;
+}
+
+.password-strength-meter {
+    height: 5px;
+    width: 100%;
+    border-radius: 5px;
+    transition: width 0.3s ease-in-out;
+  }
+  
+  .weak {
+    background-color: red;
+    width: 25%; 
+  }
+  
+  .medium {
+    background-color: orange;
+    width: 50%; 
+  }
+  
+  .strong {
+    background-color: rgb(6, 255, 6);
+    width: 75%; 
+  }
+  
+  .strongest {
+    background-color: rgb(2, 129, 2);
+    width: 100%; 
+  }
+  
   

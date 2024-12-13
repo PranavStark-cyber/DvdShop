@@ -8,7 +8,7 @@ import { Director, Dvd, DvdRequest, Manager, genres } from '../../component/moda
 export class ManagerService {
   constructor(private http: HttpClient) { }
 
-  dvdurl: string = "http://localhost:5092/api/Manager";
+  dvdurl: string = "https://localhost:7067/api/Manager";
 
   GetAllGenare() {
     return this.http.get<genres[]>(this.dvdurl + "/GetAllGenare")

@@ -9,7 +9,7 @@ export class LoginandregisterService {
 
   constructor(private http:HttpClient) { }
 
-  useurl:string ="http://localhost:5092/api/User";
+  useurl:string ="https://localhost:7067/api/User";
 
   register(user:User){
     return this.http.post<User>(this.useurl+"/register",user
