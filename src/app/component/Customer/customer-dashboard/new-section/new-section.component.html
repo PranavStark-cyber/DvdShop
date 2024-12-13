@@ -19,8 +19,8 @@
           ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
           : 'col-12 col-sm-6 col-md-4 col-lg-3'"
         (click)="onMovieClick(dvd.id)">
-        <div class="news-card">
-          <img [src]="dvd.imageUrl" [alt]="dvd.title" [ngStyle]="{ 'height': isLatestSection ? '100%' : ' 100%' }"
+        <div class="news-card" style="height: 80%;">
+          <img [src]="dvd.backgroundImageurl" [alt]="dvd.title" [ngStyle]="{ 'height': isLatestSection ? '100%' : ' 100%' }"
           class="card-image" style=" 
         object-position: top;
         ;
@@ -37,7 +37,7 @@
   <!-- Second Section -->
   <div class="section-header">
     <div class="d-flex justify-content-between">
-      <h2 class="section-title">Trending</h2> 
+      <h2 class="section-title">Top 10</h2> 
       <h4 class="section-title text-secondary"  style="cursor: pointer;" routerLink="/Customer/Movie">See more</h4>
     </div>
     <div class="arrows d-flex justify-content-end">
@@ -45,16 +45,16 @@
       <button class="arrow-btn" (click)="scrollRight(1)">&gt;</button>
     </div>
   </div>
-  <div id="section-1" class="scroll-container">
+  <div id="section-1" class="scroll-container"  >
     <div class="row">
-      <div
+      <div 
         *ngFor="let dvd of rows[1]"
         [ngClass]="isLatestSection 
           ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
           : 'col-12 col-sm-6 col-md-4 col-lg-3'"
         (click)="onMovieClick(dvd.id)">
-        <div class="news-card">
-          <img [src]="dvd.imageUrl" [alt]="dvd.title" [ngStyle]="{ 'height': isLatestSection ? '100%' : ' 100%' }"
+        <div class="news-card" style="height: 100%;">
+          <img [src]="dvd.backgroundImageurl" [alt]="dvd.title" [ngStyle]="{ 'height': isLatestSection ? '100%' : ' 100%' }"
           class="card-image" style=" 
         object-position: top;
         ;

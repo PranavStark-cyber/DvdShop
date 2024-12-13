@@ -24,6 +24,7 @@ export class DvdsComponent implements OnInit {
   // @ViewChild('modal', { static: false }) modal: ModalDirective;
   dvdForm: FormGroup;
   imagePreview: string | null = null;
+  backgroundImagePreview: string | null = null;
   dvds: Dvd[] = [];
   genres: any[] = [];
   directors: any[] = [];
@@ -64,6 +65,8 @@ export class DvdsComponent implements OnInit {
       price: [0, Validators.required],
       description: ['', [Validators.required, Validators.minLength(10)]],
       imageUrl: ['', Validators.required], // Store the uploaded image URL
+      backgroundImageUrl: ['', Validators.required], // Store the uploaded image URL
+      trailerUrl: ['', Validators.required], // Store the uploaded image URL
       totalCopies: [0, Validators.required]
     });
   }
@@ -79,6 +82,8 @@ export class DvdsComponent implements OnInit {
       price: ['', [Validators.required, Validators.min(0)]],
       description: ['', Validators.required],
       imageUrl: ['', Validators.required],
+      backgroundImageUrl: ['', Validators.required], // Store the uploaded image URL
+      trailerUrl: ['', Validators.required], // Store the uploaded image URL
       totalCopies: ['', [Validators.required, Validators.min(1)]],
       genreId: [''],
       genreName: [''],
@@ -157,122 +162,141 @@ export class DvdsComponent implements OnInit {
     if (event.target.value) this.showAddDirector = false;
   }
 
-  triggerFileInput(): void {
-    document.getElementById('imageUpload')?.click();
+  triggerFileInput(inputId: string): void {
+    const inputElement = document.getElementById(inputId) as HTMLInputElement;
+    if (inputElement) {
+      inputElement.click();
+    }
   }
-
-  onFileChange(event: Event): void {
+  
+  
+  onFileChange(event: Event, isBackground: boolean = false): void {
     const file = (event.target as HTMLInputElement).files?.[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = () => {
-        this.imagePreview = reader.result as string;
+        if (isBackground) {
+          this.backgroundImagePreview = reader.result as string;  // Update background image preview
+        } else {
+          this.imagePreview = reader.result as string;  // Update regular image preview
+        }
       };
       reader.readAsDataURL(file);
   
       this.cloudinaryService.uploadImage(file).subscribe({
         next: (response: any) => {
-          this.dvdForm.patchValue({ imageUrl: response.secure_url }); 
-          console.log('Image uploaded:', response.secure_url);
+          if (isBackground) {
+            // Background image upload
+            this.dvdForm.patchValue({ backgroundImageUrl: response.secure_url });
+            console.log('Background Image uploaded:', response.secure_url);
+          } else {
+            // Regular image (DVD cover) upload
+            this.dvdForm.patchValue({ imageUrl: response.secure_url });
+            console.log('DVD Cover Image uploaded:', response.secure_url);
+          }
         },
-        error: (err) => {
+        error: (err: any) => {
           console.error('Image upload failed:', err);
         },
       });
     }
   }
+  
+  
+  
 
 
- Dvdadd(): void {
-  if (this.dvdForm.valid) {
-    const formData = this.dvdForm.value;
-
-    console.log(formData);
-
-
-    const payload: DvdRequest = {
-      title: formData.title,
-      releaseDate: formData.releaseDate,
-      price: formData.price,
-      description: formData.description,
-      imageUrl: formData.imageUrl,
-      totalCopies: formData.totalCopies,
-      ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
-      ...(formData.directorId
-        ? { directorId: formData.directorId }
-        : {
-            directorName: formData.directorName,
-            directorDescription: formData.directorDescription,
-          }),
-    };
-
-    this.managerService.AddDvd(payload).subscribe(
-      () => {
-        this.toastr.success('DVD added successfully!', 'Success');
-        this.loadDvds();
-        this.toggleAddDvdModal();
-      },
-      (error) => this.toastr.error('Failed to add DVD.', 'Error')
-    );
-  } else {
-    this.toastr.warning('Please fill out all required fields.', 'Warning');
+  Dvdadd(): void {
+    if (this.dvdForm.valid) {
+      const formData = this.dvdForm.value;
+  
+      const payload: DvdRequest = {
+        title: formData.title,
+        releaseDate: formData.releaseDate,
+        price: formData.price,
+        description: formData.description,
+        imageUrl: formData.imageUrl,
+        backgroundImageurl: formData.backgroundImageUrl,  // Include background image URL
+        trailers: formData.trailerUrl,  // Include trailer URL
+        totalCopies: formData.totalCopies,
+        ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
+        ...(formData.directorId
+          ? { directorId: formData.directorId }
+          : {
+              directorName: formData.directorName,
+              directorDescription: formData.directorDescription,
+            }),
+      };
+  
+      this.managerService.AddDvd(payload).subscribe(
+        () => {
+          this.toastr.success('DVD added successfully!', 'Success');
+          this.loadDvds();
+          this.toggleAddDvdModal();
+        },
+        (error) => this.toastr.error('Failed to add DVD.', 'Error')
+      );
+    } else {
+      this.toastr.warning('Please fill out all required fields.', 'Warning');
+    }
   }
-}
+  
 
 
-UpdateDvd(): void {
-  if (this.dvdForm.valid) {
-    const formData = this.dvdForm.value;
-
-    
-    const payload: DvdRequest = {
-      title: formData.title,
-      releaseDate: formData.releaseDate,
-      price: formData.price,
-      description: formData.description,
-      imageUrl: formData.imageUrl,
-      totalCopies: formData.totalCopies,
-      ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
-      ...(formData.directorId
-        ? { directorId: formData.directorId }
-        : {
-            directorName: formData.directorName,
-            directorDescription: formData.directorDescription,
-          }),
-    };
-   
-
-    this.managerService.updateDvd(this.DID!,payload).subscribe(
-      () => {
-        this.toastr.success('DVD updated successfully!', 'Success');
-     this.loadDvds();
-      },
-      (error) => this.toastr.error('Failed to update DVD.', 'Error')
-    );
-  } else {
-    this.toastr.warning('Please fill out all required fields.', 'Warning');
+  UpdateDvd(): void {
+    if (this.dvdForm.valid) {
+      const formData = this.dvdForm.value;
+  
+      const payload: DvdRequest = {
+        title: formData.title,
+        releaseDate: formData.releaseDate,
+        price: formData.price,
+        description: formData.description,
+        imageUrl: formData.imageUrl,
+        backgroundImageurl: formData.backgroundImageUrl,  // Include background image URL
+        trailers: formData.trailerUrl,  // Include trailer URL
+        totalCopies: formData.totalCopies,
+        ...(formData.genreId ? { genreId: formData.genreId } : { genreName: formData.genreName }),
+        ...(formData.directorId
+          ? { directorId: formData.directorId }
+          : {
+              directorName: formData.directorName,
+              directorDescription: formData.directorDescription,
+            }),
+      };
+  
+      this.managerService.updateDvd(this.DID!, payload).subscribe(
+        () => {
+          this.toastr.success('DVD updated successfully!', 'Success');
+          this.loadDvds();
+        },
+        (error) => this.toastr.error('Failed to update DVD.', 'Error')
+      );
+    } else {
+      this.toastr.warning('Please fill out all required fields.', 'Warning');
+    }
   }
-}
+  
 
 
 loadDvdForUpdate(dvdId: string): void {
   this.managerService.getDvdById(dvdId).subscribe(
     (dvdData) => {
-      // Populate the form with the DVD data
-      this.imagePreview = dvdData.imageUrl
+      this.imagePreview = dvdData.imageUrl;
       this.dvdForm.patchValue({
         title: dvdData.title,
         releaseDate: new Date(dvdData.releaseDate).toLocaleDateString('en-CA'),
         price: dvdData.price,
         description: dvdData.description,
         imageUrl: dvdData.imageUrl,
+        backgroundImageUrl: dvdData.backgroundImageurl,  // Populate background image URL
+        trailerUrl: dvdData.trailers,  // Populate trailer URL
         genreId: dvdData.genreId,
         genreName: dvdData.genre.name,
         directorId: dvdData.directorId,
         directorName: dvdData.director.name,
         directorDescription: dvdData.director.decriptions,
       });
-      // Set the DVD ID for updating
       this.DID = dvdId;
       this.toggleAddDvdModal();
     },
@@ -281,6 +305,7 @@ loadDvdForUpdate(dvdId: string): void {
     }
   );
 }
+
 
     
   resetForm(): void {

@@ -47,6 +47,8 @@ export interface Dvd {
     price: number;
     description: string;
     imageUrl: string;
+    backgroundImageurl:string;
+    trailers:string;
     genre: genres;
     director: Director;
     // rentals: Rental[];    
@@ -66,6 +68,8 @@ export interface DvdRequest {
     price: number;
     description: string;
     imageUrl: string;
+    backgroundImageurl:string;
+    trailers:string;
     totalCopies: number;
 }
 

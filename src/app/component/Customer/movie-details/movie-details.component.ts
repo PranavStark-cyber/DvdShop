@@ -4,6 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { NewSectionComponent } from '../customer-dashboard/new-section/new-section.component';
 import { Dvd } from '../../modals/customer';
 import { ManagerService } from '../../../Services/Manager/manager.service';
+import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+declare global {
+  interface Window {
+    bootstrap: any;
+  }
+}
 
 
 @Component({
@@ -24,16 +30,28 @@ export class MovieDetailsComponent  {
   //   BackgroundUrl: 'default-image.jpg'
   // };
 
+  trailerUrl: SafeResourceUrl | null = null;
 
-
-  constructor(private router: Router, private dvdService: ManagerService) {}
+  constructor(private router: Router, private dvdService: ManagerService,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     const id = history.state.id;
     if (id) {
       this.fetchDvdById(id);
     }
+
+    if (this.dvd?.trailers) {
+      // Sanitize the URL using DomSanitizer
+      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(this.dvd.trailers);
+    }
   }
+  showTrailer() {
+    const trailerModal = new window.bootstrap.Modal(
+      document.getElementById('trailerModal') as HTMLElement
+    );
+    trailerModal.show();
+  }
+  
 
   fetchDvdById(id: string): void {
     this.dvdService.getDvdById(id).subscribe({
