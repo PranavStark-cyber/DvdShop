@@ -31,6 +31,7 @@ export class MovieDetailsComponent  {
   // };
 
   trailerUrl: SafeResourceUrl | null = null;
+  isModalVisible: boolean = false;
 
   constructor(private router: Router, private dvdService: ManagerService,private sanitizer: DomSanitizer) {}
 
