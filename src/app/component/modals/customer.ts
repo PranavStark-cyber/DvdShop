@@ -102,6 +102,9 @@ export interface Customer {
     dvdId: string;
     customerId: string;
     rentalDays: number;
+    copies:number;
+    totalAmount:number;
+    overdueAmount:number;
     status: RentalStatus; 
     requestDate: Date;
     approvedDate?: Date; 
@@ -110,7 +113,12 @@ export interface Customer {
     dvd?: Dvd; 
     customer?: Customer; 
   }
-  
+  export interface Review {
+    customerId: string;  // Guid as a string
+    dvdId: string;       // Guid as a string
+    comment: string;
+    rating: number;      // Rating from 1 to 5
+  }
   export enum RentalStatus {
     Request = 0,
     Approved = 1,
@@ -133,13 +141,6 @@ export interface Customer {
     amount: number;
     paymentDate: string;
     paymentMethod: string;  // e.g. "Credit Card", "PayPal"
-  }
-  
-  export interface Review {
-    reviewId: string;
-    rating: number;
-    comment: string;
-    reviewDate: string;
   }
   
   export interface Reservation {
@@ -167,4 +168,27 @@ export interface Inventory{
   totalCopies:number;
   availableCopies:number;
   lastRestock:string;
+}
+
+export interface CustomerReport {
+  fullName: string;
+  totalRentals: number;
+  totalAmountSpent: number;
+}
+
+export interface DvdReport {
+  title: string;
+  totalInventory: number;
+  rentedOut: number;
+}
+
+export interface RentalSummary {
+  TotalRentals: number;
+  TotalRevenue: number;
+}
+
+export interface ReportSummary {
+  CustomerReports: CustomerReport[];
+  DvdReports: DvdReport[];
+  RentalSummary: RentalSummary;
 }

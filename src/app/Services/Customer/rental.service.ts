@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Rental, RentalRequestDTO } from '../../component/modals/customer';
+import { Rental, RentalRequestDTO, Review } from '../../component/modals/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -15,6 +15,9 @@ export class RentalService {
     return this.http.post(this.rentalurl+"/request",rentalrequest)
   }
 
+  addReview(rentalrequest:Review){
+    return this.http.post('https://localhost:7067/api/Review',rentalrequest)
+  }
   ApproveRental(rentalid:string){
     return this.http.put(this.rentalurl+"/approve/"+rentalid,rentalid)
   }

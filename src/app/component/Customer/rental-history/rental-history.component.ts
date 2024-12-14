@@ -5,13 +5,14 @@ import { jwtDecode } from 'jwt-decode';
 import { CommonModule } from '@angular/common';
 import { Chart } from 'chart.js';
 import { PopoverModule } from 'ngx-bootstrap/popover';
+import { FormsModule } from '@angular/forms';
 
 declare var bootstrap: any; // Add this to access Bootstrap's popover
 
 @Component({
   selector: 'app-rental-history',
   standalone: true,
-  imports: [CommonModule,PopoverModule ],
+  imports: [CommonModule,PopoverModule,FormsModule],
   templateUrl: './rental-history.component.html',
   styleUrls: ['./rental-history.component.css']
 })
@@ -21,11 +22,20 @@ export class RentalHistoryComponent implements OnInit {
   tableData: Rental[] = [];
   customerId: string | null = null;
   selectedDvd: any = null;
+  selectedRental: Rental | null = null;
 
+  reviewData = {
+    dvdId: '',
+    customerId: '',
+    comment: '',
+    rating: 0,
+    reviewDate: ''
+  };
   // Chart Data
   public rentalChartData: any[] = [];
   public rentalChartLabels: string[] = [];
   private chart: Chart | null = null;
+  modalService: any;
 
   constructor(private rentalService: RentalService) { }
 
@@ -66,6 +76,29 @@ export class RentalHistoryComponent implements OnInit {
     this.fetchRentals(); // Fetch rentals when the table status is changed
   }
 
+  // Open review modal for the selected rental
+  openReviewModal(content: any, rental: Rental): void {
+    this.selectedRental = rental;  // Set the selected rental
+    this.reviewData.dvdId = rental.dvd?.id || '';  // Set DVD ID
+    this.reviewData.customerId = this.customerId || '';  // Set customer ID from token
+    this.reviewData.reviewDate = new Date().toISOString();  // Set current date
+    this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' });  // Open modal
+  }
+
+
+  submitReview(): void {
+    if (!this.reviewData.comment || this.reviewData.rating === 0) {
+      alert("Please fill in the comment and rating.");
+      return;
+    }
+
+    this.rentalService.addReview(this.reviewData).subscribe(response => {
+      console.log('Review submitted successfully', response);
+      this.selectedRental = null;  // Reset selected rental
+    }, error => {
+      console.error('Error submitting review', error);
+    });
+  }
 
   // Update the selected DVD for the popover
   updatePopoverData(dvd: any) {

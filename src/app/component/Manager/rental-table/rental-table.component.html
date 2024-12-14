@@ -9,6 +9,7 @@
             <th>Customer</th>
             <th>DVD</th>
             <th>Request Date</th>
+            <th>Price</th>
             <th *ngIf="status === RentalStatus.Approved || status === RentalStatus.Collected || status === RentalStatus.Returned">Approved Date</th>
             <th *ngIf="status === RentalStatus.Collected || status === RentalStatus.Returned">Collected Date</th>
             <th *ngIf="status === RentalStatus.Returned">Return Date</th>
@@ -20,6 +21,7 @@
             <td>{{ rental.customer?.firstName }}</td>
             <td>{{ rental.dvd?.title }}</td>
             <td>{{ rental.requestDate | date: 'shortDate' }}</td>
+            <td>${{ rental.totalAmount  }}</td> 
   
             <!-- Show approved date for Approved status -->
             <td *ngIf="rental.status === RentalStatus.Approved ||rental.status === RentalStatus.Collected||rental.status === RentalStatus.Returned">

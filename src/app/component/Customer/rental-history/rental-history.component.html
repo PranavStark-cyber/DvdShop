@@ -32,9 +32,10 @@
         <thead>
           <tr>
             <th scope="col">DVD Title</th>
-            <th scope="col">Customer Name</th>
+            <th scope="col">Number of Copies</th>
             <th scope="col">Rental Days</th>
             <th scope="col">Request Date</th>
+            <th scope="col">Price</th>
           </tr>
         </thead>
         <tbody>
@@ -46,9 +47,14 @@
                 {{ rental.dvd?.title }}
               </button>
             </td>
-            <td>{{ rental.customer?.firstName }} {{ rental.customer?.lastName }}</td>
+            <td>{{ rental.customer?.firstName }}</td>
             <td>{{ rental.rentalDays }}</td>
             <td>{{ rental.requestDate | date: 'yyyy-MM-dd' }}</td>
+            <td>{{ rental.totalAmount }}</td>
+              <!-- Action Button for Review -->
+              <button *ngIf="rental.status === RentalStatus.Returned" class="btn btn-warning" (click)="openReviewModal(reviewModal, rental)">
+                Add Review
+              </button>
           </tr>
         </tbody>
       </table>
@@ -87,3 +93,35 @@
     </div>
   </div>
 </div>
+
+
+
+
+<!-- Review Modal -->
+<ng-template #reviewModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Review</h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <form>
+      <div class="form-group">
+        <label for="comment">Comment</label>
+        <textarea id="comment" class="form-control" [(ngModel)]="reviewData.comment" name="comment" required></textarea>
+      </div>
+      <div class="form-group">
+        <label for="rating">Rating</label>
+        <select id="rating" class="form-control" [(ngModel)]="reviewData.rating" name="rating" required>
+          <option value="0">Select Rating</option>
+          <option *ngFor="let rate of [1,2,3,4,5]" [value]="rate">{{ rate }}</option>
+        </select>
+      </div>
+    </form>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.dismiss('Close click')">Close</button>
+    <button type="button" class="btn btn-primary" (click)="submitReview()">Submit Review</button>
+  </div>
+</ng-template>

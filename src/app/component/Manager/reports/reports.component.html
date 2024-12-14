@@ -1,0 +1,100 @@
+<div class="container">
+    <h2 class="text-center mb-4">Rental System Reports</h2>
+  
+    <!-- Button to Generate Report -->
+    <div class="text-center mb-3">
+      <button class="btn btn-primary" (click)="generateReport()">Generate Report</button>
+    </div>
+  
+    <!-- Report Section (Visible After Clicking Generate) -->
+    <div *ngIf="reportGenerated" #reportContent>
+      
+      <!-- Customer Report -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>Customer Report</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>Nic</th>
+                <th>Phone Number</th>
+                <th>Address</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let customer of customers">
+                <td>{{ customer.firstName }}</td>
+                <td>{{ customer.nic }}</td>
+                <td>{{ customer.phoneNumber }}</td>
+                <td>{{ customer.address?.city }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- DVD Report -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>DVD Report</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Title</th>
+                <th>Genre</th>
+                <th>Release Year</th>
+                <th>Director</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let dvd of dvds">
+                <td>{{ dvd.title }}</td>
+                <td>{{ dvd.genre.name }}</td>
+                <td>{{ dvd.releaseDate }}</td>
+                <td>{{ dvd.director.name }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Rental Report -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h4>Rental Report</h4>
+        </div>
+        <div class="card-body">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>Customer Name</th>
+                <th>DVD Title</th>
+                <th>Rental Date</th>
+                <th>Return Date</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let rental of rentals">
+                <td>{{ getCustomerNameById(rental.customerId) }}</td>
+                <td>{{ rental.dvd?.title }}</td>
+                <td>{{ rental.collectedDate| date }}</td>
+                <td>{{ rental.returnDate | date }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+  
+      <!-- Print and Download Buttons -->
+      <div class="mt-3 text-center">
+        <button class="btn btn-primary" (click)="printReport()">Print Report</button>
+        <button class="btn btn-success" (click)="downloadReport()">Download Report</button>
+      </div>
+    </div>
+  </div>
+  

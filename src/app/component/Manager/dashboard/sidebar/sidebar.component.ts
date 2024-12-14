@@ -32,10 +32,10 @@ export class SidebarComponent implements OnInit {
     { path: '/Manager/Dvd', icon: 'bi-people', label: 'Dvd' },
     { path: '/Manager/Customer', icon: 'bi-folder', label: 'Customer' },
     { path: '/Manager/Rental', icon: 'bi-clock-history', label: 'Rental' },
-    { path: '/some', icon: 'bi-person-badge', label: 'Clients' },
-    { path: '/leave-management', icon: 'bi-calendar-check', label: 'Leave Management' },
-    { path: '/holidays', icon: 'bi-calendar-event', label: 'Holidays' },
-    { path: '/accounts', icon: 'bi-wallet2', label: 'Accounts' },
+    { path: '/Manager/Reports', icon: 'bi-person-badge', label: 'Reports' },
+    // { path: '/leave-management', icon: 'bi-calendar-check', label: '' },
+    // { path: '/holidays', icon: 'bi-calendar-event', label: '' },
+    // { path: '/accounts', icon: 'bi-wallet2', label: '' },
   ];
 
   constructor(

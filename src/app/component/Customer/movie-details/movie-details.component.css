@@ -1,35 +1,39 @@
 /* Hero Section */
 
 .hero-section {
-    height: 100vh;
-    position: relative;
-    background: url('/Background image/The Batman.jpg') no-repeat center center;
-    background-size: cover; /* Scale the image to cover the container */
-    background-position: top center; /* Align the top of the image */
-    background-repeat: no-repeat; /* Prevent the image from repeating */
-  }
-  
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(to right, rgba(0,0,0,0.8) 30%, transparent);
-  }
-  
-  .hero-section .container {
-    position: relative;
-    z-index: 10;
-  }
-  
-  .year-badge {
-    background-color: var(--primary-color);
-    /* padding: 0.25rem 1rem; */
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    display: inline-block;
-  }
-  
+  height: 100vh;
+  position: relative;
+  background: url('/Background image/The Batman.jpg') no-repeat center center;
+  background-size: cover;
+  /* Scale the image to cover the container */
+  background-position: top center;
+  /* Align the top of the image */
+  background-repeat: no-repeat;
+  /* Prevent the image from repeating */
+}
 
-  
+a:hover {
+  color: white;
+}
+
+.hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0.8) 30%, transparent);
+}
+
+.hero-section .container {
+  position: relative;
+  z-index: 10;
+}
+
+.year-badge {
+  background-color: var(--primary-color);
+  /* padding: 0.25rem 1rem; */
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  display: inline-block;
+}

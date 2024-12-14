@@ -19,6 +19,7 @@ import { EditProfileComponent } from './component/Customer/edit-profile/edit-pro
 import { ProfileSectionComponent } from './component/Customer/profile-section/profile-section.component';
 import { RentalManagerComponent } from './component/Manager/rental-manager/rental-manager.component';
 import { RentalTableComponent } from './component/Manager/rental-table/rental-table.component';
+import { ReportsComponent } from './component/Manager/reports/reports.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -37,7 +38,8 @@ export const routes: Routes = [
        {path:'Customer' , component:CustomerComponent},
        {path:'Customer-Details/:id' , component:CustomerDetailsComponent},
        {path:'Rental' , component:RentalManagerComponent},
-       { path: 'Rental/:status', component: RentalTableComponent }
+       { path: 'Rental/:status', component: RentalTableComponent },
+       { path: 'Reports', component: ReportsComponent }
       ]
    },
 

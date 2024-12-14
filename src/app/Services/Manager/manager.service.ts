@@ -44,7 +44,13 @@ export class ManagerService {
     return this.http.get<Manager>(this.dvdurl+'/'+managerid)
 
   }
+  getAllInventory(){
+    return this.http.get<any>('https://localhost:7067/api/Inventory/available-and-total')
+  }
 
+  getTotalEarnings(){
+    return this.http.get<any>('https://localhost:7067/api/Payment/total-earnings')
+  }
 }
 
 
