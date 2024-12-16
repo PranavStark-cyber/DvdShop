@@ -86,7 +86,7 @@ export interface Customer {
     payments: Payment[]  | null;
     reviews: Review[]  | null; 
     reservations: Reservation | null;
-    notifications: Notification[]  | null; 
+    notifications: CustomerNotifications[]  | null; 
     address: Address | null; 
   }
   export interface UpdateCustomer {
@@ -135,6 +135,16 @@ export interface Customer {
     copySofDvd:number;
   }
   
+
+  export interface CustomerNotifications {
+    id: string;
+    title: string;
+    message: string;
+    viewStatus: 'Read' | 'Unread'; // Using union type for stricter type checking
+    type: 'Info' | 'Warning' | 'Error'; // Assuming predefined types for notification
+    date: string; // ISO 8601 date format as a string
+  }
+  
   
   export interface Payment {
     paymentId: string;
@@ -149,12 +159,6 @@ export interface Customer {
     item: string;  // e.g. "DVD", "Book"
   }
   
-  export interface Notification {
-    notificationId: string;
-    message: string;
-    date: string;
-  }
-
 export interface Address{
     id:string;
     street:string;

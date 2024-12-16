@@ -6,11 +6,13 @@ import { RentalService } from '../../../Services/Customer/rental.service';
 import { ManagerService } from '../../../Services/Manager/manager.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-rental',
   standalone: true,
-  imports: [CommonModule,FormsModule],
+  imports: [CommonModule,FormsModule,MatSnackBarModule],
   templateUrl: './rental.component.html',
   styleUrl: './rental.component.css'
 })
@@ -19,11 +21,14 @@ export class RentalComponent {
     customerId: string = '';
     copiesOfDvd: number = 1;
     rentalDays: number = 1; // Default to 1 day
+    successMessage: string = '';
+    errorMessage: string = '';
   
     constructor(
       private route: ActivatedRoute,
       private dvdService: ManagerService,
-      private rentalService: RentalService
+      private rentalService: RentalService,
+      private snackBar: MatSnackBar
     ) {}
   
     ngOnInit(): void {
@@ -50,26 +55,33 @@ export class RentalComponent {
   
     rentDvd(): void {
       if (!this.customerId) {
-        console.error('Customer ID is missing');
+        this.snackBar.open('Customer ID is missing.', 'Close', {
+          duration: 3000,
+          panelClass: ['mat-snack-bar-error'],
+        });
         return;
       }
   
       const rentalRequest: RentalRequestDTO = {
         dvdId: this.dvd.id,
         customerId: this.customerId,
-        rentalDays: this.rentalDays, // Pass the selected rental days
+        rentalDays: this.rentalDays,
         requestDate: new Date().toISOString(),
         copySofDvd: this.copiesOfDvd
       };
-      console.log(rentalRequest);
-      
- 
+  
       this.rentalService.RequestRental(rentalRequest).subscribe(
         (response) => {
-          console.log('Rental request successful:', response);
+          this.snackBar.open('Rental request successful! Your DVD is on the way.', 'Close', {
+            duration: 3000,
+            panelClass: ['mat-snack-bar-success'],
+          });
         },
         (error) => {
-          console.error('Error sending rental request:', error);
+          this.snackBar.open('Error sending rental request. Please try again later.', 'Close', {
+            duration: 3000,
+            panelClass: ['mat-snack-bar-error'],
+          });
         }
       );
     }

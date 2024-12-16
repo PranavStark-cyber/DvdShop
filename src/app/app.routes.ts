@@ -20,6 +20,7 @@ import { ProfileSectionComponent } from './component/Customer/profile-section/pr
 import { RentalManagerComponent } from './component/Manager/rental-manager/rental-manager.component';
 import { RentalTableComponent } from './component/Manager/rental-table/rental-table.component';
 import { ReportsComponent } from './component/Manager/reports/reports.component';
+import { CustomernotificationComponent } from './component/Customer/customernotification/customernotification.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -51,6 +52,7 @@ export const routes: Routes = [
          {path:'RentalHistory' , component:RentalHistoryComponent},
          {path:'EditProfile' , component:EditProfileComponent},
          {path:'Profile' , component:ProfileSectionComponent},
+         {path:'Notifications' , component:CustomernotificationComponent},
        ]
     }
     

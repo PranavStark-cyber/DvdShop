@@ -3,13 +3,14 @@ import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CustomerService } from '../../../../Services/Customer/customer.service';
 import { jwtDecode } from 'jwt-decode';
 import { PopoverModule } from 'ngx-bootstrap/popover';
-import { Customer } from '../../../modals/customer';
-import { Router } from '@angular/router';
+import { Customer, CustomerNotifications } from '../../../modals/customer';
+import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '../../../../Services/Customer/notification.service';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, PopoverModule],
+  imports: [CommonModule, PopoverModule,RouterLink],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -25,7 +26,7 @@ export class NavbarComponent implements OnInit {
   isOpen = false;
   userData!: Customer
   customerId!: string
-  constructor(private customerservice: CustomerService, private router: Router) { }
+  constructor(private customerservice: CustomerService, private router: Router,private notificationService: NotificationService) { }
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
     if (jwtToken) {
@@ -57,6 +58,26 @@ export class NavbarComponent implements OnInit {
   Profile(id:string): void {
    this.router.navigate(['/Customer/Profile/']);
    this.isOpen = false;
+  }
+
+  notifications: CustomerNotifications[] = [];
+  hoveredNotification: CustomerNotifications | null = null;
+  popupPosition = { left: 0, top: 0 };
+
+
+  fetchNotifications(): void {
+    this.notificationService.GetNotficationById(this.customerId).subscribe((data: CustomerNotifications[]) => {
+      this.notifications = data;
+    });
+  }
+
+  showDetails(notification: CustomerNotifications, event: MouseEvent): void {
+    this.hoveredNotification = notification;
+    this.popupPosition = { left: event.pageX + 10, top: event.pageY + 10 };
+  }
+
+  hideDetails(): void {
+    this.hoveredNotification = null;
   }
 
 }

@@ -32,4 +32,13 @@
   }
   
 
+  .mat-snack-bar-success {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .mat-snack-bar-error {
+    background-color: #f44336;
+    color: white;
+  }
   

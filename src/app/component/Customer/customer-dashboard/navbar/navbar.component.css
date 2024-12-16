@@ -53,6 +53,42 @@
   left: 50%; /* Center align the underline */
 }
 
+/* Styling for the hover popup */
+.notification-popup {
+  position: absolute;
+  width: 300px;
+  z-index: 1050;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+/* Notification badge style */
+.btn-circle .badge {
+  font-size: 0.75rem;
+  padding: 0.3em 0.6em;
+}
+
+/* Hover effect for dropdown items */
+.dropdown-item:hover {
+  background-color: #f8f9fa;
+}
+
+/* Icon styling for notifications */
+.bi {
+  font-size: 1.25rem;
+}
+
+/* Animation for hover modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 
 .btn-circle {
   width: 40px;
