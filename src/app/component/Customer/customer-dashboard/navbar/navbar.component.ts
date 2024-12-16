@@ -6,11 +6,13 @@ import { PopoverModule } from 'ngx-bootstrap/popover';
 import { Customer, CustomerNotifications } from '../../../modals/customer';
 import { Router, RouterLink } from '@angular/router';
 import { NotificationService } from '../../../../Services/Customer/notification.service';
+import { FormsModule } from '@angular/forms';
+import { SearchdvdPipe } from '../../../../pipe/searchdvd.pipe';
 
 @Component({
   selector: 'app-navbar',
   standalone: true,
-  imports: [CommonModule, PopoverModule,RouterLink],
+  imports: [CommonModule, PopoverModule,RouterLink,FormsModule,SearchdvdPipe],
   templateUrl: './navbar.component.html',
   styleUrl: './navbar.component.css'
 })
@@ -22,11 +24,19 @@ export class NavbarComponent implements OnInit {
     { label: 'Anime', link: '#', active: false },
     { label: 'Rental', link: '/Customer/RentalHistory', active: false }
   ];
+  searchTerm: string = ''; // The search term from the input field
+  @Output() searchTermChanged = new EventEmitter<string>(); // Emit search term to parent component
   isSearchHovered = false;
   isOpen = false;
   userData!: Customer
   customerId!: string
   constructor(private customerservice: CustomerService, private router: Router,private notificationService: NotificationService) { }
+
+
+
+  onSearchChange() {
+    this.searchTermChanged.emit(this.searchTerm); // Emit the search term whenever it changes
+  }
   ngOnInit(): void {
     const jwtToken = localStorage.getItem('token');
     if (jwtToken) {

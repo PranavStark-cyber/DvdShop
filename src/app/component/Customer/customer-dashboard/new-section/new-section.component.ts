@@ -4,11 +4,12 @@ import { Router, RouterLink } from '@angular/router';
 import { ManagerService } from '../../../../Services/Manager/manager.service';
 import { Dvd } from '../../../modals/customer';
 import { ToastrService } from 'ngx-toastr';
+import { SearchdvdPipe } from '../../../../pipe/searchdvd.pipe';
 
 @Component({
   selector: 'app-new-section',
   standalone: true,
-  imports: [CommonModule,RouterLink],
+  imports: [CommonModule,RouterLink,SearchdvdPipe],
   templateUrl: './new-section.component.html',
   styleUrl: './new-section.component.css'
 })
@@ -17,6 +18,8 @@ export class NewSectionComponent implements OnInit {
   dvdsPerRow: number = 10;
   rows: Dvd[][] = []; // Each section will hold one row of DVDs
   @Input() isLatestSection: boolean = false; // Default is false
+  @Input() searchTerm: string = '';
+  
 
 
   constructor(
@@ -27,6 +30,7 @@ export class NewSectionComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadDvds(); // Load DVDs when the component initializes
+   this.getFilteredDvds()
   }
 
   // Load DVDs from the service
@@ -72,4 +76,13 @@ onMovieClick(id: string): void {
   this.movieSelected.emit(id);  // Emit the movie ID when clicked
 }
 
+// Method to apply search filter (in case you want to filter manually)
+getFilteredDvds(): Dvd[] {
+  if (!this.searchTerm) {
+    return this.DVDs;
+  }
+  return this.DVDs.filter(dvd =>
+    dvd.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+}
 }

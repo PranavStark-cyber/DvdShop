@@ -18,7 +18,7 @@
         <div class="search-container">
           <input type="text" placeholder="Search..." class="form-control search-input"
             [ngClass]="{ 'search-expanded': isSearchHovered }" (mouseenter)="isSearchHovered = true"
-            (mouseleave)="isSearchHovered = false" />
+            (mouseleave)="isSearchHovered = false" [(ngModel)]="searchTerm" (ngModelChange)="onSearchChange()" />
           <button class="btn btn-circle search-btn" type="button">
             <i class="bi bi-search"></i>
           </button>
