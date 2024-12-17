@@ -30,6 +30,8 @@ export class MovieDetailsComponent  {
   //   BackgroundUrl: 'default-image.jpg'
   // };
 
+  
+
   trailerUrl: SafeResourceUrl | null = null;
   isModalVisible: boolean = false;
 

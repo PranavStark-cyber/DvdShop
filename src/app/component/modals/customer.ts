@@ -113,6 +113,21 @@ export interface Customer {
     dvd?: Dvd; 
     customer?: Customer; 
   }
+
+  export interface RentalRespons {
+    rentalId: string;
+    rentalDays: number;
+    copies:number;
+    rentalPrice:number;
+    overdueAmount:number;
+    status: RentalStatus; 
+    requestDate: Date;
+    approvedDate?: Date; 
+    collectedDate?: Date;
+    returnDate?: Date;
+    dvd?: Dvd; 
+    customer?: Customer; 
+  }
   export interface Review {
     customerId: string;  // Guid as a string
     dvdId: string;       // Guid as a string

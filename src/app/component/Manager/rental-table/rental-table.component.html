@@ -21,7 +21,7 @@
             <td>{{ rental.customer?.firstName }}</td>
             <td>{{ rental.dvd?.title }}</td>
             <td>{{ rental.requestDate | date: 'shortDate' }}</td>
-            <td>${{ rental.totalAmount  }}</td> 
+            <td>${{ rental.rentalPrice  }}</td> 
   
             <!-- Show approved date for Approved status -->
             <td *ngIf="rental.status === RentalStatus.Approved ||rental.status === RentalStatus.Collected||rental.status === RentalStatus.Returned">
@@ -40,18 +40,18 @@
   
             <!-- Show actions for Request status -->
             <td *ngIf="rental.status === RentalStatus.Request">
-              <button class="btn btn-success custom-btn me-3" (click)="onApprove(rental.id)">Approve</button>
-              <button class="btn btn-danger custom-btn" (click)="onReject(rental.id)">Reject</button>
+              <button class="btn btn-success custom-btn me-3" (click)="onApprove(rental.rentalId)">Approve</button>
+              <button class="btn btn-danger custom-btn" (click)="onReject(rental.rentalId)">Reject</button>
             </td>
   
             <!-- Show Collect button for Approved status -->
             <td *ngIf="rental.status === RentalStatus.Approved">
-              <button class="btn btn-warning custom-btn" (click)="onCollect(rental.id)">Collect</button>
+              <button class="btn btn-warning custom-btn" (click)="onCollect(rental.rentalId)">Collect</button>
             </td>
   
             <!-- Show Return button for Collected status -->
             <td *ngIf="rental.status === RentalStatus.Collected">
-              <button class="btn btn-success custom-btn" (click)="onReturn(rental.id)">Return</button>
+              <button class="btn btn-success custom-btn" (click)="onReturn(rental.rentalId)">Return</button>
             </td>
           </tr>
         </tbody>

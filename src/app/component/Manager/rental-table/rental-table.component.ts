@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { RentalService } from '../../../Services/Customer/rental.service';
-import { Rental, RentalStatus } from '../../modals/customer';
+import { Rental, RentalRespons, RentalStatus } from '../../modals/customer';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
 
@@ -12,7 +12,7 @@ import { CommonModule } from '@angular/common';
   styleUrl: './rental-table.component.css'
 })
 export class RentalTableComponent {
-  @Input() rentals: Rental[] = [];
+  @Input() rentals: RentalRespons[] = [];
   status: RentalStatus | null = null;
   RentalStatus = RentalStatus; // Pass RentalStatus to the template
 
@@ -26,7 +26,7 @@ export class RentalTableComponent {
     this.status = statusParam ? parseInt(statusParam) as RentalStatus : null;
 
     if (this.status !== null) {
-      this.rentalService.getAllRentals().subscribe(data => {
+      this.rentalService.getAllRental().subscribe(data => {
         this.rentals = data.filter(rental => rental.status === this.status);
         
       });
@@ -35,19 +35,19 @@ export class RentalTableComponent {
 
   onApprove(rentalId: string): void {
     this.rentalService.ApproveRental(rentalId).subscribe(() => {
-      this.rentals = this.rentals.filter(rental => rental.id !== rentalId);
+      this.rentals = this.rentals.filter(rental => rental.rentalId !== rentalId);
     });
   }
 
   onReject(rentalId: string): void {
     this.rentalService.RejectRental(rentalId).subscribe(() => {
-      this.rentals = this.rentals.filter(rental => rental.id !== rentalId);
+      this.rentals = this.rentals.filter(rental => rental.rentalId !== rentalId);
     });
   }
 
   onCollect(rentalId: string): void {
     this.rentalService.CollectedRental(rentalId).subscribe(() => {
-      this.rentals = this.rentals.filter(rental => rental.id !== rentalId);
+      this.rentals = this.rentals.filter(rental => rental.rentalId !== rentalId);
   
       
     });
@@ -55,7 +55,7 @@ export class RentalTableComponent {
 
   onReturn(rentalId: string): void {
     this.rentalService.ReturnRental(rentalId).subscribe(() => {
-      this.rentals = this.rentals.filter(rental => rental.id !== rentalId);
+      this.rentals = this.rentals.filter(rental => rental.rentalId !== rentalId);
     });
   }
 }

@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Rental, RentalRequestDTO, Review } from '../../component/modals/customer';
+import { Rental, RentalRequestDTO, RentalRespons, Review } from '../../component/modals/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -37,6 +37,11 @@ export class RentalService {
     return this.http.get<Rental[]>(this.rentalurl+ '/customer/' +id);
   }
 
+  getAllRental(){
+    return this.http.get<RentalRespons[]>(this.rentalurl)
+  }
+
+  
   getAllRentals(){
     return this.http.get<Rental[]>(this.rentalurl)
   }
