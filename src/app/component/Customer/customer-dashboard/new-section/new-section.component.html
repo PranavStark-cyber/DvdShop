@@ -14,9 +14,9 @@
   <div id="section-0" class="scroll-container">
     <div class="row">
       <div
-        *ngFor="let dvd of rows[0]"
+        *ngFor="let dvd of rows[0]| searchdvd: searchTerm"
         [ngClass]="isLatestSection 
-          ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
+          ? 'col-12 col-sm-6 col-md-3 col-lg-3' 
           : 'col-12 col-sm-6 col-md-4 col-lg-3'"
         (click)="onMovieClick(dvd.id)">
         <div class="news-card" style="height: 80%;">
@@ -50,7 +50,7 @@
       <div 
         *ngFor="let dvd of rows[1]| searchdvd: searchTerm"
         [ngClass]="isLatestSection 
-          ? 'col-12 col-sm-6 col-md-3 col-lg-2' 
+          ? 'col-12 col-sm-6 col-md-3 col-lg-3' 
           : 'col-12 col-sm-6 col-md-4 col-lg-3'"
         (click)="onMovieClick(dvd.id)">
         <div class="news-card" style="height: 100%;">

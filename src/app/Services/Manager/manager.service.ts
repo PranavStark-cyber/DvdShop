@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Director, Dvd, DvdRequest, Manager, genres } from '../../component/modals/customer';
+import { Customer, Director, Dvd, DvdRequest, Manager, Watchlist, genres } from '../../component/modals/customer';
 
 @Injectable({
   providedIn: 'root'
@@ -51,6 +51,24 @@ export class ManagerService {
   getTotalEarnings(){
     return this.http.get<any>('https://localhost:7067/api/Payment/total-earnings')
   }
+
+  addWatchlist(AddWatchlist:Watchlist){
+    return this.http.post("https://localhost:7067/api/AddWatchlist",AddWatchlist)
+  }
+
+  getWatchlist(customerId:string){
+    return this.http.get<watchlists[]>("https://localhost:7067/api/AddWatchlist/by-customer/"+customerId)
+  }
 }
 
+
+
+export interface watchlists{
+  id:string;
+  customerId:string;
+  dvdId:string;
+  customer:Customer;
+  dvd:Dvd;
+
+}
 

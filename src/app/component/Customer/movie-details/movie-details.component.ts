@@ -2,9 +2,10 @@ import { CommonModule } from '@angular/common';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { NewSectionComponent } from '../customer-dashboard/new-section/new-section.component';
-import { Dvd } from '../../modals/customer';
+import { Dvd, Watchlist } from '../../modals/customer';
 import { ManagerService } from '../../../Services/Manager/manager.service';
 import { SafeResourceUrl, DomSanitizer } from '@angular/platform-browser';
+import { jwtDecode } from 'jwt-decode';
 declare global {
   interface Window {
     bootstrap: any;
@@ -30,7 +31,7 @@ export class MovieDetailsComponent  {
   //   BackgroundUrl: 'default-image.jpg'
   // };
 
-  
+  customerId!:string
 
   trailerUrl: SafeResourceUrl | null = null;
   isModalVisible: boolean = false;
@@ -38,6 +39,12 @@ export class MovieDetailsComponent  {
   constructor(private router: Router, private dvdService: ManagerService,private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
+     const jwtToken = localStorage.getItem('token');
+          if (jwtToken) {
+            const decodedToken: any = jwtDecode(jwtToken);
+            this.customerId = decodedToken.Id;
+            console.log('Customer ID:', this.customerId);
+          }
     const id = history.state.id;
     if (id) {
       this.fetchDvdById(id);
@@ -55,7 +62,19 @@ export class MovieDetailsComponent  {
     trailerModal.show();
   }
   
+  AddWatchlist(dvdId: string): void {
+    const watchlist: Watchlist = {
+      customerId: this.customerId,
+      dvdId: dvdId
+    };
 
+    // Send the watchlist data to the service
+    this.dvdService.addWatchlist(watchlist).subscribe(response => {
+      console.log('Watchlist added successfully', response);
+    }, error => {
+      console.error('Error adding to watchlist', error);
+    });
+  }
   fetchDvdById(id: string): void {
     this.dvdService.getDvdById(id).subscribe({
       next: (data) => {

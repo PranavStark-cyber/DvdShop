@@ -21,7 +21,7 @@ export class NavbarComponent implements OnInit {
     { label: 'Home', link: '/Customer/Home', active: false },
     { label: 'Movies', link: '/Customer/Movie', active: false },
     { label: 'Series', link: '#', active: false },
-    { label: 'Anime', link: '#', active: false },
+    { label: 'Watchlist', link: '/Customer/Watchlist', active: false },
     { label: 'Rental', link: '/Customer/RentalHistory', active: false }
   ];
   searchTerm: string = ''; // The search term from the input field

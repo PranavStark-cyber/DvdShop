@@ -21,7 +21,7 @@
             <a style="color: green; text-decoration: none;" class="trailers" href="{{dvd.trailers}}" target="_blank">Play Now</a>
           </button>
           
-          <button class="btn btn-outline-light px-4">
+          <button class="btn btn-outline-light px-4" (click)="AddWatchlist(dvd.id)">
             <i class="bi bi-plus"></i> Add to Watchlist
           </button>
         </div>

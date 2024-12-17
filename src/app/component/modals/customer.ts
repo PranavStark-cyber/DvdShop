@@ -22,6 +22,12 @@ export interface Login {
 }
 
 
+export interface Watchlist {
+  customerId: string;
+  dvdId: string;
+}
+
+
 export interface Verifyemail {
     email: string;
     otp: number;

@@ -21,6 +21,7 @@ import { RentalManagerComponent } from './component/Manager/rental-manager/renta
 import { RentalTableComponent } from './component/Manager/rental-table/rental-table.component';
 import { ReportsComponent } from './component/Manager/reports/reports.component';
 import { CustomernotificationComponent } from './component/Customer/customernotification/customernotification.component';
+import { WatchlistComponent } from './component/Customer/watchlist/watchlist.component';
 
 export const routes: Routes = [
     {path:'' , component:LandingpageComponent},
@@ -53,6 +54,7 @@ export const routes: Routes = [
          {path:'EditProfile' , component:EditProfileComponent},
          {path:'Profile' , component:ProfileSectionComponent},
          {path:'Notifications' , component:CustomernotificationComponent},
+         {path:'Watchlist' , component:WatchlistComponent},
        ]
     }
     

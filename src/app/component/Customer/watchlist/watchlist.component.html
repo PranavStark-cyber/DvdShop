@@ -1,0 +1,17 @@
+<div class="watchlist-container">
+    <h2>Your Watchlist</h2>
+    
+    <div *ngIf="watchlist.length === 0" class="empty-message">
+      Your watchlist is empty. Add DVDs to your watchlist!
+    </div>
+  
+    <div *ngFor="let item of watchlist" class="watchlist-item">
+      <div class="dvd-info">
+        <img src="{{item.dvd.imageUrl}}" alt="" style="width: 150px;height: 150px;">
+        <p><strong>DVD ID:</strong> {{ item.dvdId }}</p>
+        <p><strong>Customer ID:</strong> {{ item.customerId }}</p>
+      </div>
+      <!-- <button (click)="removeFromWatchlist(item.dvdId)">Remove</button> -->
+    </div>
+  </div>
+  
